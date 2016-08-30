@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
+
+Route::get('login', array('before' => 'csrf', 'uses' => 'WelcomeController@login'));
+Route::post('login', array('before' => 'csrf', 'uses' => 'WelcomeController@doLogin'));
+Route::get('register', array('before' => 'csrf', 'uses' => 'WelcomeController@register'));
+Route::post('register', array('before' => 'csrf', 'uses' => 'WelcomeController@doRegister'));
