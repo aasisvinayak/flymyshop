@@ -5,11 +5,9 @@
 </head>
 <body>
 <div class="container">
-
     <header class="row">
         @include('includes.header')
     </header>
-
 
     <div class="col-md-3">
         <div class="profile-sidebar">
