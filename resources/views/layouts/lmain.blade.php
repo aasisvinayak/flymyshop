@@ -46,6 +46,12 @@
                             Settings </a>
                     </li>
 
+                    <li>
+                        <a href="/logout">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            Logout </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
