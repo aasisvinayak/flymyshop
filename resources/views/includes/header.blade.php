@@ -28,7 +28,13 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/login" class="fa fa-cog">Login</a>
+
+                    @if (Auth::check())
+                        <a href="/login" class="fa fa-cog">Login</a>
+                    @else
+                        <a href="/account" class="fa fa-cog">My Account</a>
+                    @endif
+
                 </li>
             </ul>
 
