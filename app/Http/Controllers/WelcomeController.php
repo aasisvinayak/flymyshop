@@ -13,7 +13,6 @@ class WelcomeController extends Controller
 
     public function login()
     {
-        var_dump(Auth::user());
         return View::make('pages.login');
     }
 

@@ -25,8 +25,3 @@ Route::get('logout', array('uses' => 'WelcomeController@logout'));
 Route::group(array('prefix' => 'user', 'middleware' => 'auth'), function () {
     Route::get('address', 'StoreController@address');
 });
-
-
-Route::group(array('middleware' => ['web', 'auth']), function () {
-    Route::get('addresses', array('uses' => 'StoreController@address'));
-});
