@@ -15,4 +15,10 @@ class StoreController extends Controller
         return View::make('account.address');
 
     }
+
+    public function addAddress()
+    {
+        return View::make('account.addressadd');
+      //  echo env('IDME_CLIENT_ID');
+    }
 }

@@ -42,6 +42,7 @@ class WelcomeController extends Controller
             $user->email = Input::get('email');
             $user->password = Hash::make(Input::get('password'));
             $user->save();
+            
             Session::flash('message', 'Registered!');
             return Redirect::to('/login');
 
