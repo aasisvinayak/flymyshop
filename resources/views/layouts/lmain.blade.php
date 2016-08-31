@@ -16,7 +16,7 @@
 
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">
-                    {{--{{Auth::user()->email }}--}}
+                    {{Auth::user()->email }}
                 </div>
                 <div class="profile-usertitle-job">
                     Welcome
