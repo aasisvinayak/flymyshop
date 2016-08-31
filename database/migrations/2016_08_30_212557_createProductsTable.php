@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('details',255);
             $table->string('image',255);
             $table->double('price');
+            $table->smallInteger('is_featured');
             $table->smallInteger('status');
             $table->timestamps();
 //            $table->foreign('category_id')

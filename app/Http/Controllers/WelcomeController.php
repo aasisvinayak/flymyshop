@@ -13,6 +13,7 @@ class WelcomeController extends Controller
 
     public function login()
     {
+        var_dump(Auth::user());
         return View::make('pages.login');
     }
 
@@ -74,6 +75,8 @@ class WelcomeController extends Controller
             if (Auth::attempt($userdata)) {
 
                 echo 'Welcome to our shop!';
+                //   return redirect()->intended('/');
+
 
             } else {
 

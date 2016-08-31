@@ -19,3 +19,14 @@ Route::get('login', array('before' => 'csrf', 'uses' => 'WelcomeController@login
 Route::post('login', array('before' => 'csrf', 'uses' => 'WelcomeController@doLogin'));
 Route::get('register', array('before' => 'csrf', 'uses' => 'WelcomeController@register'));
 Route::post('register', array('before' => 'csrf', 'uses' => 'WelcomeController@doRegister'));
+Route::get('logout', array('uses' => 'WelcomeController@logout'));
+
+
+Route::group(array('prefix' => 'user', 'middleware' => 'auth'), function () {
+    Route::get('address', 'StoreController@address');
+});
+
+
+Route::group(array('middleware' => ['web', 'auth']), function () {
+    Route::get('addresses', array('uses' => 'StoreController@address'));
+});
