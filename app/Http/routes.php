@@ -21,7 +21,7 @@ Route::get('register', array('before' => 'csrf', 'uses' => 'WelcomeController@re
 Route::post('register', array('before' => 'csrf', 'uses' => 'WelcomeController@doRegister'));
 Route::get('logout', array('uses' => 'WelcomeController@logout'));
 
-
-Route::group(array('prefix' => 'user', 'middleware' => 'auth'), function () {
+//'middleware' => 'auth'
+Route::group(array('prefix' => 'user',), function () {
     Route::get('address', 'StoreController@address');
 });

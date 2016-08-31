@@ -74,7 +74,7 @@ class WelcomeController extends Controller
             if (Auth::attempt($userdata)) {
 
                 echo 'Welcome to our shop!';
-                //   return redirect()->intended('/');
+                return redirect()->intended('/');
 
 
             } else {

@@ -12,7 +12,7 @@ class StoreController extends Controller
     public function address()
     {
 
-        View::make('account.address');
+        return View::make('account.address');
 
     }
 }
