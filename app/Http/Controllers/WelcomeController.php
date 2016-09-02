@@ -105,7 +105,6 @@ class WelcomeController extends Controller
     public function sendEmail(ContactFormRequest $request)
     {
 
-
         Mail::send('emails.contact',
             array(
                 'name' => $request->get('name'),
@@ -117,7 +116,7 @@ class WelcomeController extends Controller
                 $message->to(env('MAIL_TO'), env('MAIL_NAME'))->subject('Contact Form');
             });
 
-        return Redirect::route('contact')->with('message', 'Thanks for contacting us!');
+        return Redirect::to('contact')->with('message', 'Thanks for contacting us!');
 
 
     }
