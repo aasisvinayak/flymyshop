@@ -25,5 +25,7 @@ Route::get('logout', array('uses' => 'WelcomeController@logout'));
 //Route::group(array('prefix' => 'account', 'middleware' => 'auth'), function () {
     Route::get('address', 'StoreController@address');
     Route::get('add_address', 'StoreController@addAddress');
+Route::get('update_address', 'StoreController@updateAddress');
+
 
 //});

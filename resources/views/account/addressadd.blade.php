@@ -3,6 +3,6 @@
 
 
 
-    <a class="btn btn-default" href="{{env('CLIENT_AUTH_CODE_URL')}}">Update address</a>
+    <a class="btn btn-default" href="{{$url}}">Update address</a>
 
 @stop
