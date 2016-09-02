@@ -12,9 +12,7 @@ class StoreController extends Controller
 
     public function address()
     {
-
         return View::make('account.address');
-
     }
 
     public function addAddress()
@@ -96,6 +94,15 @@ class StoreController extends Controller
 
     public function authUserDetails()
     {
+
+    }
+
+    public function productDetails(Request $request, $id)
+    {
+
+           // echo $id;
+
+       return View::make('shop.product');
 
     }
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests, View, Validator, Input, Session, Redirect, Auth, Hash;
+use App\Http\Requests\ContactFormRequest;
+
+use App\Http\Requests, View, Validator, Input, Session, Redirect, Auth, Hash,Mail;
 use App\User;
 
 class WelcomeController extends Controller
@@ -92,5 +94,35 @@ class WelcomeController extends Controller
         Auth::logout();
         return Redirect::to('login');
     }
+
+    public function contact()
+    {
+
+        return View::make('pages.contact');
+
+    }
+
+    public function sendEmail(ContactFormRequest $request)
+    {
+
+
+        Mail::send('emails.contact',
+            array(
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'message' => $request->get('message')
+            ), function($message)
+            {
+                $message->from(env('MAIL_FROM'));
+                $message->to(env('MAIL_TO'), env('MAIL_NAME'))->subject('Contact Form');
+            });
+
+        return Redirect::route('contact')->with('message', 'Thanks for contacting us!');
+
+
+    }
+
+
+
 
 }
