@@ -12,10 +12,7 @@
         @endforeach
     </ul>
 
-
     {{ Form::open(array('url' => 'contact')) }}
-    <h1>Login</h1>
-
 
     <p style="color: red">
         {{ $errors->first('email') }} <br>

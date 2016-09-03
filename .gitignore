@@ -1,3 +1,4 @@
+.env
 vendor/
 node_modules/
 
@@ -9,7 +10,7 @@ app/storage/
 bootstrap/cache/compiled.php
 .env.*.php
 .env.php
-.env
+
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests, App\Http\Models\Category;
+use \Illuminate\Http\Request, View, Validator, Input, Session, Redirect, Auth, Hash,Mail;
 
-use App\Http\Requests;
 
 class CategoryController extends Controller
 {
@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Category::all();
+        return $categories;
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('shop.add-category');
     }
 
     /**
@@ -34,9 +35,27 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $rules = array(
+            'title'       => 'required',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            return Redirect::to('shop/categories/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        else{
+            $data=Input::all();
+            $data['status']=1;
+            $data['category_id']="ayayoaDEahFAl0154VCShbSJ";
+            $data['parent_id']="";
+            Category::create($data);
+        }
+
     }
 
     /**
@@ -47,7 +66,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category= Category::findorFail($id);
+        return $category;
     }
 
     /**
@@ -58,7 +78,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category=Category::findorFail($id);
+         return view('shop.edit-category', compact('category'));
     }
 
     /**
@@ -70,7 +91,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Category::findorFail($id)->update($request->all());
     }
 
     /**
@@ -81,6 +102,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findorFail($id)->delete();
     }
 }

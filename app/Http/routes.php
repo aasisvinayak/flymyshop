@@ -27,6 +27,8 @@ Route::post('contact', 'WelcomeController@sendEmail');
 
 
 
+
+
 //'middleware' => 'auth'
 //Route::group(array('prefix' => 'account', 'middleware' => 'auth'), function () {
 Route::get('address', 'StoreController@address');
@@ -39,4 +41,5 @@ Route::get('update_address', 'StoreController@updateAddress');
 
 Route::group(array('prefix' => 'shop',), function () {
     Route::get('product/{id}', 'StoreController@productDetails');
+    Route::resource('categories', 'CategoryController');
 });

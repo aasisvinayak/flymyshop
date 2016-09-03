@@ -1,11 +1,11 @@
 <p>
-    Name: {{ $name }}
+    Name: {{$name}}
 </p>
 
 <p>
-    {{ $email }}
+    {{$email}}
 </p>
 
 <p>
-    {{ $message }}
+    {{$message}}
 </p>
