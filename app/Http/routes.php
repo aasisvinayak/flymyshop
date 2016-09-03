@@ -18,7 +18,8 @@ Route::get('/', function () {
 
 Route::get('images/{filename}', function ($filename)
 {
-    $path = storage_path() . '/' . $filename;
+   // $path = storage_path()  . $filename; // for private files
+    $path = 'public/upload/' . $filename;
     if(!File::exists($path)) abort(404);
     $file = File::get($path);
     $type = File::mimeType($path);
@@ -36,9 +37,6 @@ Route::post('register', array('before' => 'csrf', 'uses' => 'WelcomeController@d
 Route::get('logout', array('uses' => 'WelcomeController@logout'));
 Route::get('contact', 'WelcomeController@contact');
 Route::post('contact', 'WelcomeController@sendEmail');
-
-
-
 
 
 //'middleware' => 'auth'

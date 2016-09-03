@@ -1,59 +1,101 @@
 @extends('layouts.main')
 @section('content')
 
+    <style>
+        .btn-product{
+            width: 100%;
+        }
+    </style>
+
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" >
+                        <h4 class="text-center"><span class="label label-info">Category 1</span></h4>
+                        <img src="http://placehold.it/650x450&text=Image 1" class="img-responsive">
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <h3>Proudct Name</h3>
+                                </div>
+                                <div class="col-md-6 col-xs-6 price">
+                                    <h3>
+                                        <label>$100.00</label></h3>
+                                </div>
+                            </div>
+                            <p>Product Description</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-heart"></span> Favourite</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                            </div>
 
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" >
+                        <h4 class="text-center"><span class="label label-info">Category 2</span></h4>
+                        <img src="http://placehold.it/650x450&text=Image 2" class="img-responsive">
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <h3>Product Name 2</h3>
+                                </div>
+                                <div class="col-md-6 col-xs-6 price">
+                                    <h3>
+                                        <label>$99.00</label></h3>
+                                </div>
+                            </div>
+                            <p>Product Description</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-heart"></span> Favourite</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                            </div>
 
-            <a href="/shop/product/1">
+                            <p> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" >
+                        <h4 class="text-center"><span class="label label-info">Category 3</span></h4>
+                        <img src="http://placehold.it/650x450&text=Image 3" class="img-responsive">
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <h3>Product Name </h3>
+                                </div>
+                                <div class="col-md-6 col-xs-6 price">
+                                    <h3>
+                                        <label>$100.00</label></h3>
+                                </div>
+                            </div>
+                            <p>Product Description </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-heart"></span> Favourite</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                            </div>
 
-                <div class="col-sm-4">
-                    <h3>Item 1 </h3>
-
-                    <img src="http://placehold.it/300x300" class="img-responsive img-radio">
-
-                    <br>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet deserunt dolore dolores dolorum
-                        ea
-                        in itaque labore laboriosam laborum natus neque nisi non omnis quae quasi, sequi ullam
-                        velit!</p>
-
+                            <p> </p>
+                        </div>
+                    </div>
                 </div>
 
-            </a>
+            </div>
 
-            <a href="/shop/product/2">
-
-                <div class="col-sm-4">
-                    <h3>Item 2 </h3>
-
-
-                    <img src="http://placehold.it/300x300" class="img-responsive img-radio">
-
-                    <br>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur atque culpa
-                        cupiditate, deserunt dignissimos dolorum ducimus enim excepturi in officiis omnis porro quam quo
-                        quod, repellat saepe ullam voluptas.</p>
-                </div>
-            </a>
-
-            <a href="/shop/product/3">
-
-                <div class="col-sm-4">
-                    <h3>Item 3 </h3>
-
-                    <img src="http://placehold.it/300x300" class="img-responsive img-radio">
-
-                    <br>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur atque culpa
-                        cupiditate, deserunt dignissimos dolorum ducimus enim excepturi in officiis omnis porro quam quo
-                        quod, repellat saepe ullam voluptas.</p>
-                </div>
-
-            </a>
         </div>
     </div>
+
+
 @stop
