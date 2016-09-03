@@ -33,6 +33,7 @@ class ProductRequest extends Request
             "image" => 'required',
             "price" => 'required',
             "is_featured" => 'required',
+
         ];
     }
 }

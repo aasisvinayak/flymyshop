@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('description',255);
             $table->string('details',255);
             $table->string('image',255);
+            $table->string('image_name',255);
             $table->double('price');
             $table->smallInteger('is_featured');
             $table->smallInteger('status');

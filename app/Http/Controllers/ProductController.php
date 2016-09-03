@@ -44,21 +44,23 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $request['product_id']="gaoBEma26719pJeqarBSl1";
+        $request['product_id']=  str_random(50);
         $request['status']=1;
-        $fileName="";
+        $randomFileName=str_random(50);
+        $extension="";
+
 
         if ($request->file('image')->isValid()) {
             $destinationPath = 'uploads';
             $extension =  $request->file('image')->getClientOriginalExtension();
-            $fileName = rand(11111, 99999) . '.' . $extension;
+            $fileName = $randomFileName . '.' . $extension;
             $request->file('image')->move($destinationPath, $fileName);
         }
 
-        $request['image']=$fileName;
+        $request ['image']=$randomFileName;
+        $request ['image_name']=$randomFileName. '.' .$extension;
         Product::create($request->all());
         return redirect('shop/products/');
-
     }
 
     /**
@@ -109,4 +111,7 @@ class ProductController extends Controller
     {
         Product::findorFail($id)->delete();
     }
+
+
+
 }

@@ -51,7 +51,7 @@ class CategoryController extends Controller
         else{
             $data=Input::all();
             $data['status']=1;
-            $data['category_id']="ayayoaDEahFAl0154VCShbSJ";
+            $data['category_id']=str_random(50);
             $data['parent_id']="";
             Category::create($data);
         }
