@@ -42,4 +42,5 @@ Route::get('update_address', 'StoreController@updateAddress');
 Route::group(array('prefix' => 'shop',), function () {
     Route::get('product/{id}', 'StoreController@productDetails');
     Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController');
 });

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
+use App\Http\Requests\ProductRequest;
+
+use  App\Http\Models\Product;
+
 
 class ProductController extends Controller
 {
@@ -15,7 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product= Product::all();
+        return $product;
     }
 
     /**
@@ -25,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories_list=Category::lists('title','category_id');
+        return view('shop/add-product',compact('categories_list'));
     }
 
     /**
@@ -34,9 +42,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $request['product_id']="gaoBEma01BUalpBharBSl1";
+        $request['status']=1;
+        Product::create($request->all());
+        return redirect('shop/products/');
+
     }
 
     /**
@@ -47,7 +59,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product=Product::findorFail($id);
+        return $product;
     }
 
     /**
@@ -58,7 +71,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product=Product::findorFail($id);
+        $categories_list=Category::lists('title','category_id');
+        return view('shop.edit-product',compact('product','categories_list'));
     }
 
     /**
@@ -70,7 +85,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Product::findorFail($id)->update($request->all());
+        return redirect('shop/products');
     }
 
     /**
@@ -81,6 +97,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::findorFail($id)->delete();
     }
 }

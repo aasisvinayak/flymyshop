@@ -23,8 +23,16 @@ class ProductRequest extends Request
      */
     public function rules()
     {
+
         return [
-            //
+            "title" => 'required',
+            "make" => 'required',
+            "category_id" => 'required',
+            "description" => 'required',
+            "details" => 'required',
+            "image" => 'required',
+            "price" => 'required',
+            "is_featured" => 'required',
         ];
     }
 }
