@@ -1,6 +1,7 @@
 .env
 vendor/
 node_modules/
+files/
 
 # Laravel 4 specific
 bootstrap/compiled.php

@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+
+Route::get('images/{filename}', function ($filename)
+{
+    $path = storage_path() . '/' . $filename;
+    if(!File::exists($path)) abort(404);
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+});
+
 Route::pattern('id', '[a-z0-9-]+');
 
 Route::get('login', array('before' => 'csrf', 'uses' => 'WelcomeController@login'));

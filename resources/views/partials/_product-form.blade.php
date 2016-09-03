@@ -40,8 +40,7 @@
 
 <div class="form-group">
     {{Form::label('image','Upload Product Image')}}
-    {{Form::text('image',null,array('class'=>'form-controller'))}}
-
+    {{ Form::file('image','',array('id'=>'','class'=>'form-controller')) }}
 </div>
 
 

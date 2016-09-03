@@ -44,8 +44,18 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $request['product_id']="gaoBEma01BUalpBharBSl1";
+        $request['product_id']="gaoBEma26719pJeqarBSl1";
         $request['status']=1;
+        $fileName="";
+
+        if ($request->file('image')->isValid()) {
+            $destinationPath = 'uploads';
+            $extension =  $request->file('image')->getClientOriginalExtension();
+            $fileName = rand(11111, 99999) . '.' . $extension;
+            $request->file('image')->move($destinationPath, $fileName);
+        }
+
+        $request['image']=$fileName;
         Product::create($request->all());
         return redirect('shop/products/');
 
