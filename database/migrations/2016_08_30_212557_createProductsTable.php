@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('details',255);
             $table->string('image',255);
             $table->string('image_name',255);
-            $table->double('price');
+            $table->decimal('price',10,2);
             $table->integer('stock');
             $table->integer('sold_count');
             $table->smallInteger('is_featured');

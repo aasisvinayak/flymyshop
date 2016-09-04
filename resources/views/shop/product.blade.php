@@ -88,7 +88,7 @@
                         <div class="col-md-6">
                             <div class="product col-md-3 service-image-left">
 
-                                    <img id="item-display" src="" alt=""></img>
+                                    <img style="width: 100%" id="item-display" src="/uploads/{{$product->image_name}}" alt=""></img>
                             </div>
 
                             <div class="container display-items col-sm-2 col-md-2 pull-left">

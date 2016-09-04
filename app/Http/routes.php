@@ -19,10 +19,12 @@ Route::get('/', 'StoreController@home');
 
 
 
-Route::get('images/{filename}', function ($filename)
+Route::get('images/{slug}', function ($slug)
 {
    // $path = storage_path()  . $filename; // for private files
-    $path = 'public/upload/' . $filename;
+
+
+   $path = 'public/uploads/' . $slug;
     if(!File::exists($path)) abort(404);
     $file = File::get($path);
     $type = File::mimeType($path);

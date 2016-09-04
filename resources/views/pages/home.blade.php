@@ -49,7 +49,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail" >
                         <h4 class="text-center"><span class="label label-info">Featured</span></h4>
-                        <img src="http://placehold.it/650x450&text=Image 1" class="img-responsive">
+                        <img style="height: 250px" src="/uploads/{{$product->image_name}}" class="img-responsive">
                         <div class="caption">
                             <div class="row">
                                 <div class="col-md-6 col-xs-6">
