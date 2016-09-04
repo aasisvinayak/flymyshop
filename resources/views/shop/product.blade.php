@@ -108,13 +108,13 @@
 
 
                         <div class="col-md-6">
-                            <div class="product-title">Product Name</div>
-                            <div class="product-desc">Product Descriptions - Tag Line</div>
+                            <div class="product-title"> {{$product->title}}  </div>
+                            <div class="product-desc">{{$product->description}}</div>
                             <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i>
                                 <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> <i
                                         class="fa fa-star-o"></i></div>
                             <hr>
-                            <div class="product-price">$ 1000.00</div>
+                            <div class="product-price">{{$product->price}}</div>
                             <div class="product-stock">In Stock</div>
                             <hr>
                             <div class="btn-group cart">
@@ -149,7 +149,7 @@
 
                             <section class="container product-info">
 
-                                Details of the product
+                                {{$product->details}}
 
                             </section>
 

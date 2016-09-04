@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+//Route::get('/', function () {
+//    return view('pages.home');
+//});
+
+Route::get('/', 'StoreController@home');
+
 
 
 Route::get('images/{filename}', function ($filename)
@@ -44,13 +47,13 @@ Route::post('contact', 'WelcomeController@sendEmail');
 Route::get('address', 'StoreController@address');
 Route::get('add_address', 'StoreController@addAddress');
 Route::get('update_address', 'StoreController@updateAddress');
-
+Route::get('listing/{slug}', 'StoreController@category');
 
 //});
 
 
 Route::group(array('prefix' => 'shop',), function () {
-    Route::get('product/{id}', 'StoreController@productDetails');
+    Route::get('product/{slug}', 'StoreController@productDetails');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
 });

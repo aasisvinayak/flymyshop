@@ -13,7 +13,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "5.2.*",
         "guzzlehttp/guzzle": "~6.0",
-        "league/oauth2-client": "1.4.*"
+        "league/oauth2-client": "1.4.*",
+        "gloudemans/shoppingcart":"2.1.*"
 
     },
     "require-dev": {

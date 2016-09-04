@@ -73,6 +73,3 @@
 </nav>
 
 
-<div class="jumbotron text-center">
-    <h1>Welcome to Laravel Shop</h1>
-</div>

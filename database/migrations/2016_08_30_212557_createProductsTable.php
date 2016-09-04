@@ -17,18 +17,18 @@ class CreateProductsTable extends Migration
             $table->string('product_id',255);
             $table->string('title',255);
             $table->string('make',255);
-            $table->string('category_id',255);
+            $table->integer('category_id')->unsigned();
             $table->string('description',255);
             $table->string('details',255);
             $table->string('image',255);
             $table->string('image_name',255);
             $table->double('price');
+            $table->integer('stock');
+            $table->integer('sold_count');
             $table->smallInteger('is_featured');
             $table->smallInteger('status');
             $table->timestamps();
-//            $table->foreign('category_id')
-//                ->references('category_id')->on('categories')
-//                ->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

@@ -22,7 +22,9 @@ class ProductController extends Controller
     public function index()
     {
         $product= Product::all();
-        return $product;
+         return $product;
+
+
     }
 
     /**
@@ -44,8 +46,17 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+
+        $category_id=Category::select('id')
+        ->where('category_id', '=', $request['category_id'])
+        ->get()->toArray();
+
+        $category_id= $category_id[0]['id'];
+        $request['category_id']=$category_id;
         $request['product_id']=  str_random(50);
         $request['status']=1;
+        $request['stock']=0;
+        $request['sold_count']=0;
         $randomFileName=str_random(50);
         $extension="";
 

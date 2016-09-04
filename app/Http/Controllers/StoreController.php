@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Models\Category;
+use App\Http\Models\Product;
 use Illuminate\Http\Request;
 use \League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use \League\OAuth2\Client\Provider\GenericProvider;
-use App\Http\Requests, View, Input;
+use App\Http\Requests, View, Input, Cart;
 
 
 class StoreController extends Controller
@@ -13,6 +15,14 @@ class StoreController extends Controller
     public function address()
     {
         return View::make('account.address');
+    }
+
+    public function home()
+    {
+
+        $products=Product::featured();
+        return view('pages/home',compact('products'));
+
     }
 
     public function addAddress()
@@ -97,12 +107,37 @@ class StoreController extends Controller
 
     }
 
-    public function productDetails(Request $request, $id)
+    public function productDetails( $slug)
+    {
+        $product_id= Product::GetID($slug)->get()->toArray();
+        $product=Product::findorFail($product_id[0]['id']);
+        return View::make('shop.product',compact('product'));
+
+    }
+
+    public function category($slug)
     {
 
-           // echo $id;
+        $category_id= Category::GetID($slug)->get()->toArray();
 
-       return View::make('shop.product');
+        $products="";
+        if(count($category_id)>0){
+            $category_id= $category_id[0]['id'];
+            $products=Product::Category($category_id)->paginate(12);
+        }
+
+        return view('shop/products',compact('products'));
+
+
+
+    }
+
+    public function cart()
+    {
+
+
+        //  Cart::add('293ad', 'Product 1', 1, 9.99);
+        return Cart::content();
 
     }
 
