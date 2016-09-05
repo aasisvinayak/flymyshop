@@ -65,7 +65,7 @@ class ProductController extends Controller
             $destinationPath = 'uploads';
             $extension =  $request->file('image')->getClientOriginalExtension();
             $fileName = $randomFileName . '.' . $extension;
-            $request->file('image')->move($destinationPath, $fileName);
+            $request->file('image')->move(public_path($destinationPath), $fileName);
         }
 
         $request ['image']=$randomFileName;
