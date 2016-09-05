@@ -63,6 +63,11 @@ Route::group(array('prefix' => 'shop',), function () {
 });
 
 
+Route::group(array('prefix' => 'admin',), function () {
+    Route::get('/', 'AdminController@welcome');
+});
+
+
 Route::post('cart', 'StoreController@addCart');
 Route::post('favourite', 'StoreController@addFavourite');
 
