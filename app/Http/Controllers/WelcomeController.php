@@ -76,13 +76,14 @@ class WelcomeController extends Controller
 
             if (Auth::attempt($userdata)) {
 
+                Session::save();
                 echo 'Welcome to our shop!';
                 return redirect()->intended('/');
 
 
             } else {
 
-                Session::flash('message', 'Login failed! Please check your credentials');
+                Session::flash('alert-danger', 'Login failed! Please check your credentials');
                 return Redirect::to('login');
             }
         }

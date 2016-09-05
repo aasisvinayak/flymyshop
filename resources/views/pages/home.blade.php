@@ -61,19 +61,39 @@
                                 </div>
                             </div>
                             <p>{{$product->description}}</p>
+
+                        </a>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-heart"></span> Favourite</a>
+
+                                    {{Form::open(array('action' => "StoreController@addFavourite"))}}
+
+                                    <input type="hidden" name="product-id" value="{{$product->product_id}}">
+
+                                    {{--<span class="glyphicon glyphicon-heart"></span>--}}
+                                    {{Form::submit(' Favourite', array("class" =>"btn btn-primary btn-product") )}}
+                                    <input type="hidden" name="product_id" value="{{$product->product_id}}">
+
+                                    {{Form::close()}}
+
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+
+                                {{Form::open(array('action' => "StoreController@addCart"))}}
+
+                                    <input type="hidden" name="product_id" value="{{$product->product_id}}">
+
+                                    {{--<span class="glyphicon glyphicon-shopping-cart"></span>--}}
+                                {{Form::submit('  Buy', array("class" =>"btn btn-success btn-product") )}}
+
+                                {{Form::close()}}
                             </div>
 
                             <p> </p>
                         </div>
                     </div>
                 </div>
-                        </a>
+
 
 
                         <?php

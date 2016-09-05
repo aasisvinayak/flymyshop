@@ -37,10 +37,22 @@ class Product extends Model
 
     public function scopeFeatured($query)
     {
-
         return $query->select('product_id','id',
             'title','price','image_name','description')->where('is_featured', '=', "1")
             ->orderBy('id', 'DESC')->take(9)->skip(0)->get();
+    }
+
+    public function scopePriceFromProductID($query,$product_id)
+    {
+        return $query->select('price')
+            ->where('product_id', '=', $product_id);
+
+    }
+
+    public function scopeProductSummaryProductID($query,$product_id)
+    {
+        return $query->select('title','price','image_name','description')
+            ->where('product_id', '=', $product_id);
 
     }
 

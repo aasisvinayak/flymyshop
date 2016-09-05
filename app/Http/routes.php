@@ -58,4 +58,13 @@ Route::group(array('prefix' => 'shop',), function () {
     Route::get('product/{slug}', 'StoreController@productDetails');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
+    Route::get('cart', 'StoreController@cart');
+    Route::get('empty_cart', 'StoreController@emptyCart');
 });
+
+
+Route::post('cart', 'StoreController@addCart');
+Route::post('favourite', 'StoreController@addFavourite');
+
+Route::post('update_cart', 'StoreController@updateCart');
+Route::post('remove_from_cart', 'StoreController@removeFromCart');

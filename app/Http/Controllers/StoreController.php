@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Category;
 use App\Http\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use \League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use \League\OAuth2\Client\Provider\GenericProvider;
 use App\Http\Requests, View, Input, Cart;
@@ -134,11 +135,58 @@ class StoreController extends Controller
 
     public function cart()
     {
+        $cart_content= Cart::content();
+        if(count($cart_content)<1){
+            Session::flash('alert-warning', 'Empty Cart!');
+              return   redirect('/');
+        }
+        else{
+
+            return view('shop/cart',compact('cart_content'));
+        }
+
+    }
+
+    public function addCart()
+    {
+        $item=Input::get('product_id');
+        $product_summary=Product::ProductSummaryProductID($item)
+            ->get()->toArray()[0];
+      Cart::add($item, $product_summary['title'], 1,$product_summary['price'], $product_summary);
+        return redirect('/shop/cart');
+    }
+
+    public function removeFromCart()
+    {
+        $rowId=Input::get('row_id');
+        Cart::remove($rowId);
+        return redirect('/shop/cart');
+    }
+
+    public function updateCart()
+    {
+        $rowId=Input::get('row_id');
+        $qty=Input::get('qty');
+        Cart::update($rowId,$qty);
+        return redirect('/shop/cart');
+    }
+
+    public function addFavourite()
+    {
+        $item=Input::get('product_id');
+        $product_summary=Product::ProductSummaryProductID($item)
+            ->get()->toArray()[0];
+        Cart::instance('favourites')->add($item, $product_summary['title'], 1,$product_summary['price'], $product_summary);
+        return Cart::instance('favourites')->content();
+
+    }
 
 
-        //  Cart::add('293ad', 'Product 1', 1, 9.99);
-        return Cart::content();
 
+    public function emptyCart()
+    {
+        Cart::destroy();
+        return redirect('/');
     }
 
 }
