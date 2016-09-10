@@ -148,6 +148,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        \Torann\Currency\CurrencyServiceProvider::class,
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
 
         /*
@@ -158,6 +161,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
+        Lavary\Menu\ServiceProvider::class,
+
 
 
     ],
@@ -208,7 +215,16 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        'Cart'            => \Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Cart'   => \Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
+        'Menu'       => Lavary\Menu\Facade::class,
+        'Currency' => Torann\Currency\Facades\Currency::class,
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+
+
+
 
 
 

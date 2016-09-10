@@ -25,8 +25,20 @@ class PasswordController extends Controller
      *
      * @return void
      */
+
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'g-recaptcha-response' => 'required|recaptcha',
+        ]);
+    }
+    
     public function __construct()
     {
         $this->middleware('guest');
     }
+
 }

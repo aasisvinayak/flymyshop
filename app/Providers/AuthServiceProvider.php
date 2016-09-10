@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Models\Address;
+use App\Http\Models\PaymentCard;
+use App\Http\Models\UserDetail;
+use App\Policies\AddressPolicy;
+use App\Policies\PaymentCardPolicy;
+use App\Policies\UserDetailsPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -14,6 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        Address::class => AddressPolicy::class,
+        PaymentCard::class => PaymentCardPolicy::class,
+        UserDetail::class => UserDetailPolicy::class,
     ];
 
     /**

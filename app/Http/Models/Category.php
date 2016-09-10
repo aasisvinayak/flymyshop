@@ -14,9 +14,15 @@ class Category extends Model
     ];
 
 
-    public function scopeGetID($query,$slug)
+    public function scopeGetInfo($query,$slug)
     {
        return $query->where('category_id', '=', $slug);
+    }
+
+
+    public function products()
+    {
+        return $this->hasMany('App\Http\Models\Product');
     }
 
 

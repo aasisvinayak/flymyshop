@@ -21,10 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product= Product::all();
-         return $product;
-
-
+        $products= Product::paginate(10);
+        return view('admin/products',compact('products'));
     }
 
     /**
@@ -35,7 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories_list=Category::lists('title','category_id');
-        return view('shop/add-product',compact('categories_list'));
+        return view('admin/add-product',compact('categories_list'));
     }
 
     /**
@@ -71,7 +69,7 @@ class ProductController extends Controller
         $request ['image']=$randomFileName;
         $request ['image_name']=$randomFileName. '.' .$extension;
         Product::create($request->all());
-        return redirect('shop/products/');
+        return redirect('admin/products/');
     }
 
     /**
@@ -96,7 +94,7 @@ class ProductController extends Controller
     {
         $product=Product::findorFail($id);
         $categories_list=Category::lists('title','category_id');
-        return view('shop.edit-product',compact('product','categories_list'));
+        return view('admin.edit-product',compact('product','categories_list'));
     }
 
     /**
@@ -109,7 +107,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         Product::findorFail($id)->update($request->all());
-        return redirect('shop/products');
+        return redirect('admin/products');
     }
 
     /**

@@ -1,1 +1,0 @@
-{{ HTML::ul($errors->all()) }}

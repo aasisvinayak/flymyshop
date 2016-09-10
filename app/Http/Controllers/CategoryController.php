@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
-        return $categories;
+        $categories=Category::paginate(10);
+        return view('admin/categories',compact('categories'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('shop.add-category');
+        return view('admin.add-category');
     }
 
     /**
@@ -56,6 +56,8 @@ class CategoryController extends Controller
             Category::create($data);
         }
 
+        return redirect('admin/categories/');
+
     }
 
     /**
@@ -79,7 +81,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category=Category::findorFail($id);
-         return view('shop.edit-category', compact('category'));
+         return view('admin.edit-category', compact('category'));
     }
 
     /**

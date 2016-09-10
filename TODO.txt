@@ -1,0 +1,5 @@
+Un-publish categories
+Promo codes
+Separate admin partials and includes to admin folder
+"Danger Zone" implementation (admin menu)
+Localization support (+remove messages from code)
