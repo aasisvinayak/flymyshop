@@ -23,10 +23,10 @@ class ShopTest extends TestCase
 //             ->see('Shop');
 //    }
 
-    public function testHomePageListing()
-    {
-        $this->visit('/')->assertViewHas('products');
-    }
+//    public function testHomePageListing()
+//    {
+//        $this->visit('/')->assertViewHas('products');
+//    }
 
 
 
