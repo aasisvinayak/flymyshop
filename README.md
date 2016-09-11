@@ -32,7 +32,20 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 
 # Installation 
 
-To be added 
+Automated installation will be added soon. In the mean time you can deploy this application by following the steps below:
+
+  - cp .env.example .env
+  - complete .env values 
+  - composer install
+  - chmod -R 777 storage
+  - php artisan key:generate 
+  - php artisan migrate 
+  - php artisan key:generate
+  - php artisan db:seed --no-interaction --class=UsersTableSeeder
+  - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
+  - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
+  - php artisan db:seed --no-interaction --class=ProductsTableSeeder
+  - php artisan serve --port=8000 --host=localhost &
 
 
 # How to contribute
