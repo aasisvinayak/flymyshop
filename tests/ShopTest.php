@@ -17,11 +17,11 @@ class ShopTest extends TestCase
         $this->assertTrue(true);
     }
 
-//    public function testHomePage()
-//    {
-//        $this->visit('/')
-//             ->see('Shop');
-//    }
+    public function testHomePage()
+    {
+        $this->visit('/')
+             ->see('Shop');
+    }
 
 //    public function testHomePageListing()
 //    {

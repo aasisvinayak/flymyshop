@@ -1,5 +1,4 @@
 language: php
-sudo: required
 
 php:
   - 5.6
@@ -16,18 +15,19 @@ before_script:
   - mysql -e 'create database homestead_test;'
   - composer self-update
   - composer install --no-interaction
-  - sudo chmod -R 777 storage
+  - chmod -R 777 storage
   - php artisan key:generate --no-interaction
   - php artisan migrate:install --env=testing --no-interaction -vvv
 
 
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan key:generate
   - php artisan db:seed --no-interaction --class=UsersTableSeeder
   - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
   - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
 
 
-  - php artisan serve >/dev/null 2>&1 &
+  - php artisan serve --port=8000 --host=localhost &
   - vendor/bin/phpunit
