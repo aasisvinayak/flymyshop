@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use \League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use \League\OAuth2\Client\Provider\GenericProvider;
-use App\Http\Requests, View, Input, Cart;
+use App\Http\Requests, View, Input, Cart,Validator;
 
 /**
  * Class ShopController

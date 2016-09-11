@@ -168,7 +168,7 @@ $now = $now->year;
                 <p>
                 <div class="input-group">
 
-                    {{Form::open(array("action"=>"WelcomeController@newsletter"))}}
+                    {{Form::open(array("action"=>"ShopController@newsletter"))}}
                     <input type="email" name="email" class="form-control" placeholder="Enter Email">
                       <span style="display: initial" class="input-group-btn">
                         {{Form::submit('Join',array('class'=>"form-control"))}}

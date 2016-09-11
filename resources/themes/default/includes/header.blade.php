@@ -74,7 +74,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
                         {{--</div>--}}
 
 
-                        {{Form::open(array('action'=>'WelcomeController@search'))}}
+                        {{Form::open(array('action'=>'ShopController@search'))}}
                         <input type="hidden" name="search_query" value="all" id="search_query">
                         <input type="text" class="form-control" name="q" placeholder="Search">
                 <span style="display: inherit" class="input-group-btn">

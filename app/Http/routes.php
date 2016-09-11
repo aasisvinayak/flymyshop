@@ -25,7 +25,7 @@ Route::group(
             Route::get('contact', 'ShopController@contact');
             Route::post('contact', 'ShopController@sendEmail');
             Route::post('newsletter', 'ShopController@newsletter');
-            Route::post('search', 'WelcomeController@search');
+            Route::post('search', 'ShopController@search');
             Route::get('listing/{slug}', 'ShopController@category');
 
             Route::group(
