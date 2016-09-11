@@ -13,12 +13,12 @@ class AdminAccessTest extends TestCase
         $this->assertTrue(true);
     }
 
-//    public function testAccessAdminPageForAdmin()
-//    {
-//        $this->adminLogin();
-//        $this->visit('/admin/users')
-//            ->assertViewHas('users') ;
-//    }
+    public function testAccessAdminPageForAdmin()
+    {
+        $this->adminLogin();
+        $this->visit('/admin/users')
+            ->assertViewHas('users') ;
+    }
 //
 //    public function testAccessAdminPageForUser()
 //    {
