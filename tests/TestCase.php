@@ -2,14 +2,11 @@
 
 use App\User;
 use \Illuminate\Foundation\Testing\DatabaseTransactions;
-use \Illuminate\Auth\Authenticatable;
-use \Illuminate\Foundation\Auth\Access\Authorizable;
 
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
 
-    use Authenticatable, Authorizable;
 
     /**
      * The base URL to use while testing the application.
@@ -36,7 +33,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function adminLogin()
     {
-        $user = User::first();
+        $user = User::findorFail(1);
         $this->be($user);
     }
 
