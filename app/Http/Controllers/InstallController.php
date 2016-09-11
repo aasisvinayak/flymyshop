@@ -11,6 +11,6 @@ class InstallController extends Controller
 
     public function save()
     {
-
+        echo 'Saved!';
     }
 }
