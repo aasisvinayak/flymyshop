@@ -6,6 +6,9 @@ use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+
+    use Authenticatable, Authorizable;
+
     /**
      * The base URL to use while testing the application.
      *
