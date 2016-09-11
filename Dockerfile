@@ -28,7 +28,7 @@ RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
 RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 
 COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-RUN a2ensite 001-default-ssl.conf
+#RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
 
