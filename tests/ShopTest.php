@@ -19,7 +19,7 @@ class ShopTest extends TestCase
 
     public function testHomePage()
     {
-        $this->visit(env('APP_URL'.'/'))
+        $this->visit('/')
              ->see('Shop');
     }
 
