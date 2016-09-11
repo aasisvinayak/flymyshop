@@ -78,10 +78,14 @@ use Gloudemans\Shoppingcart\Facades\Cart;
                         <input type="hidden" name="search_query" value="all" id="search_query">
                         <input type="text" class="form-control" name="q" placeholder="Search">
                 <span style="display: inherit" class="input-group-btn">
+
+
+                    {{Form::button('<span class="glyphicon glyphicon-search"></span>', array('type' => 'submit', 'class' => 'btn btn-default sbutton', 'id'=>'searchButton'))}}
                     {{Form::close()}}
 
 
-                    {{Form::button('<span class="glyphicon glyphicon-search"></span>', array('type' => 'submit', 'class' => 'btn btn-default sbutton'))}}
+
+
 
 
 

@@ -1,5 +1,9 @@
 <?php
 
+use App\User;
+use \Illuminate\Foundation\Testing\DatabaseTransactions;
+
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -7,7 +11,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://127.0.0.1';
+    protected $baseUrl = 'http://localhost';
+    use DatabaseTransactions;
+
 
     /**
      * Creates the application.
@@ -21,5 +27,17 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function adminLogin()
+    {
+        $user = User::first();
+        $this->be($user);
+    }
+
+    public function userLogin()
+    {
+        $user = User::findorFail(2);
+        $this->be($user);
     }
 }
