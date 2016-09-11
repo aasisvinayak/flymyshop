@@ -16,7 +16,7 @@ class AdminAccessTest extends TestCase
     public function testAccessAdminPageForAdmin()
     {
         $this->adminLogin();
-        $this->visit('/rest/admin/users')
+        $this->visit('/admin/users')
             ->assertViewHas('users') ;
     }
 //

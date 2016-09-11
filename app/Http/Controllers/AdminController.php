@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests, Validator, Input, Session, Auth, Hash, Mail;
+use App\Http\Requests, Validator,View, Input, Session, Auth, Hash, Mail;
 use App\Http\Models\UserType;
 use App\User;
 use Stripe\Charge;
@@ -26,7 +26,8 @@ class AdminController extends Controller
     public function restUsers()
     {
         $users=User::all();
-        return $users;
+        return View::make($users)->render();
+        // return $users;
     }
 
     public function sales()
