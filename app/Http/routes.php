@@ -12,7 +12,7 @@ Route::group(
         Route::get(
               'images/{slug}', function ($slug) {
                   $path = 'public/uploads/'.$slug;
-                  if (!File::exists($path)) {
+                  if (! File::exists($path)) {
                       abort(404);
                   }
                   $file = File::get($path);

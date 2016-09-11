@@ -20,7 +20,7 @@ class CheckUserType
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect('/login');
         } elseif (Auth::check()) {
             $id = Auth::user()->id;
