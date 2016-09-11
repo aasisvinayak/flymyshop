@@ -240,7 +240,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Update quanity of product in cart.
+     * Update quantity of product in cart.
      *
      * @return mixed
      */
