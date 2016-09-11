@@ -21,11 +21,11 @@ class AdminAccessTest extends TestCase
     }
 
 
-//    public function testAccessAdminPageForUser()
-//    {
-//        $this->userLogin();
-//        $this->visit('/admin/users')
-//            ->assertViewMissing('users') ;
-//    }
+    public function testAccessAdminPageForUser()
+    {
+        $this->userLogin();
+        $this->visit('/admin/users')
+            ->assertViewMissing('users') ;
+    }
 
 }
