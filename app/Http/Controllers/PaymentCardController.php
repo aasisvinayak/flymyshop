@@ -10,10 +10,23 @@ use App\User;
 use Stripe\Stripe;
 use Stripe\Customer as StripeCustomer;
 
+/**
+ * Class PaymentCardController
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class PaymentCardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fetch all payment cards
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,32 +37,8 @@ class PaymentCardController extends Controller
         return view('account.payment.index', compact("payment_cards"));
     }
 
-
-    public function orderPost(Request $request)
-    {
-
-//        $token = $input['stripeToken'];
-
-//        try {
-//            $user = User::find(1);
-//            $user->newSubscription('main', 'monthly')->create($token);
-//            return back()->with('success','Subscription is completed.');
-//        } catch (Exception $e) {
-//            return back()->with('success',$e->getMessage());
-//        }
-
-    }
-
-
-    public function pay()
-    {
-        $user = User::find(1);
-        return $user;
-
-    }
-
     /**
-     * Show the form for creating a new resource.
+     * Add a new payment method
      *
      * @return \Illuminate\Http\Response
      */
@@ -59,17 +48,17 @@ class PaymentCardController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a payment method
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request Payment Method Add Request
+     *
+     * @return Response
      */
     public function store(Request $request)
     {
 
         $user=Auth::user();
-
-       $input = $request->all();
+        $input = $request->all();
         $token = $input['stripeToken'];
         $token = StripeToken::retrieve($token, ['api_key' =>  env('STRIPE_SECRET')]);
         $options = array('description' => $user->email,
@@ -89,30 +78,31 @@ class PaymentCardController extends Controller
         $payment_card->country=$token->card->country;
         $payment_card->customer_id=$customer->id;
         $payment_card->save();
-
         $user->stripe_id=$customer->id;
         $user->card_brand=$token->card->brand;
         $user->card_last_four=$token->card->last4;
         $user->save();
 
-        if($request->next_page){
+        if ($request->next_page) {
             return redirect('shop/check_out');
         }
 
         redirect('/account/payment_cards');
-
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param string $slug payment_card_id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $address = PaymentCard::GetInfo($slug);
+        $address[0]->delete();
+        Session::flash('message', 'Successfully deleted the entry!');
+        return Redirect::to('account/addresses');
     }
 
 

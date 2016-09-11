@@ -7,10 +7,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
 use App\Http\Requests;
 
+/**
+ * Class PageController
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class PageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Paginated listing of all shop pages
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +35,7 @@ class PageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,8 +47,9 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PageRequest $request New Page Request
+     *
+     * @return Response
      */
     public function store(PageRequest $request)
     {
@@ -47,34 +61,37 @@ class PageController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Fetch page by id
      *
-     * @param  int  $id
+     * @param int $id page id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $page= Page::findorFail($id);
-        return view('shop/page',compact('page'));
+        return view('shop/page', compact('page'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the page.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id page id
+     *
+     * @return Response
      */
     public function edit($id)
     {
         $page=Page::findorFail($id);
-        return view('admin/edit-page',compact('page'));
+        return view('admin/edit-page', compact('page'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param PageRequest $request page update request
+     * @param int         $id      page id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(PageRequest $request, $id)
@@ -85,9 +102,10 @@ class PageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified page from storage.
      *
-     * @param  int  $id
+     * @param int $id page id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

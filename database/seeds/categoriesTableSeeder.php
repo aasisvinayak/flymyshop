@@ -16,15 +16,14 @@ class CategoriesTableSeeder extends Seeder
     {
 
         for ($i = 1; $i < 11; $i++) {
-            DB::table('categories')->insert([
+            DB::table('categories')->insert(
+                [
                 'category_id' => str_random(50),
                 'title' => "Cat ".$i,
                 'parent_id' => "",
                 'status' => 1,
-            ]);
+                ]
+            );
         }
-
-
-
     }
 }

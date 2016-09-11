@@ -9,10 +9,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class OrderController
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all the orders/invoices.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,10 +33,17 @@ class OrderController extends Controller
     {
         $user= Auth::user();
         $invoices=Invoice::ByUser($user->id)->paginate(10);
-        return view('account/order-list',compact('invoices'));
+        return view('account/order-list', compact('invoices'));
     }
 
 
+    /**
+     * View specific invoice/order
+     *
+     * @param string $slug invoice_id
+     *
+     * @return mixed
+     */
     public function view($slug)
     {
 
@@ -40,17 +60,17 @@ class OrderController extends Controller
         $invoice_date=$invoice_details->get()[0]['created_at'];
 
 
-        foreach ($invoice_items as $item){
+        foreach ($invoice_items as $item) {
             $product= Product::findorFail($item->product_id);
             $product['qty']=$item->qty;
-            array_push($products,$product);
+            array_push($products, $product);
         }
 
 
-        return view ('account/order',compact('products',
-            'order_no','sub_total','shipping','tax','invoice_date'));
-
+        return view(
+            'account/order',compact(
+                'products', 'order_no', 'sub_total', 'shipping', 'tax', 'invoice_date'
+            )
+        );
     }
-
-
 }

@@ -81,7 +81,7 @@
         <td data-th="Price">{{$item->options->price}}</td>
         <td data-th="Quantity">
 
-            {{Form::open(array('action' => "StoreController@updateCart"))}}
+            {{Form::open(array('action' => "ShopController@updateCart"))}}
             <input type="number" name="qty" class="form-control text-center" value="{{$item->qty}}">
             <input type="hidden" name="row_id" value="{{$item->rowId}}">
             {{Form::button('<i class="fa fa-refresh"></i>', array("class" =>"btn btn-info btn-sm", 'type'=>'submit') )}}
@@ -94,7 +94,7 @@
 
 
 
-            {{Form::open(array('action' => "StoreController@removeFromCart"))}}
+            {{Form::open(array('action' => "ShopController@removeFromCart"))}}
 
             <input type="hidden" name="row_id" value="{{$item->rowId}}">
 

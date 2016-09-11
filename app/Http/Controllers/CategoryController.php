@@ -5,22 +5,35 @@ namespace App\Http\Controllers;
 use App\Http\Requests, App\Http\Models\Category;
 use \Illuminate\Http\Request, View, Validator, Input, Session, Redirect, Auth, Hash,Mail;
 
-
+/**
+ * Class CategoryController
+ * CRUD for category (/admin/categories)
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Paginated listing of shop categories
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $categories=Category::paginate(10);
-        return view('admin/categories',compact('categories'));
+        return view('admin/categories', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,9 +44,9 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * TODO: Change to CategoryRequest
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
@@ -42,13 +55,11 @@ class CategoryController extends Controller
         );
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return Redirect::to('shop/categories/create')
                 ->withErrors($validator)
                 ->withInput();
-        }
-
-        else{
+        } else {
             $data=Input::all();
             $data['status']=1;
             $data['category_id']=str_random(50);
@@ -61,9 +72,10 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified category.
      *
-     * @param  int  $id
+     * @param int $id category id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,9 +85,10 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified category.
      *
-     * @param  int  $id
+     * @param int $id category id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,8 +100,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request update request
+     * @param int                      $id      category id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,7 +113,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id category id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

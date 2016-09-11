@@ -6,24 +6,20 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SearchTest extends TestCase
 {
+    use DatabaseTransactions;
+
+
     /**
-     * A basic test example.
+     * Search for seed entry
+     *
+     * @test
      *
      * @return void
      */
-
-    use DatabaseTransactions;
-
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
-
     public function testShopSearch()
     {
         $this->visit('/')
-            ->type('98','q')
+            ->type('98', 'q')
             ->press('searchButton')
             ->seePageIs('/search')
             ->see('98');

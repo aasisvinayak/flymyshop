@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-6">
 
-                                {{Form::open(array('action' => "StoreController@addFavourite"))}}
+                                {{Form::open(array('action' => "ShopController@addFavourite"))}}
 
                                 <input type="hidden" name="product-id" value="{{$product->product_id}}">
 
@@ -45,7 +45,7 @@
 
                             </div>
                             <div class="col-md-6">
-                                {{Form::open(array('action' => "StoreController@addCart"))}}
+                                {{Form::open(array('action' => "ShopController@addCart"))}}
 
                                 <input type="hidden" name="product_id" value="{{$product->product_id}}">
 

@@ -10,10 +10,24 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Validator,Session,Redirect, Input, View ;
 
+/**
+ * Class AddressController
+ * CRUD controller for user address
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all the addresses
      *
      * @return Response
      */
@@ -27,7 +41,7 @@ class AddressController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating new address
      *
      * @return Response
      */
@@ -37,7 +51,9 @@ class AddressController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Save new address entry to database
+     *
+     * @param AddressRequest $request Address Request from user
      *
      * @return Response
      */
@@ -48,9 +64,11 @@ class AddressController extends Controller
         $address->address_id = str_random(50);
         $address->save();
 
-         if($request->next_page){
-             return Redirect::to('shop/check_out');
-         }
+        if (isset($request)) {
+            if($request->next_page) {
+                 return Redirect::to('shop/check_out');
+            }
+        }
 
         Session::flash('message', 'Successfully added address');
         return Redirect::to('account/addresses');
@@ -60,23 +78,23 @@ class AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param string $slug address_id
+     *
      * @return Response
      */
     public function edit($slug)
     {
         $address = Address::GetInfo($slug);
-       // return ;
-        // show the view and pass the nerd to it
-
         return View::make('account.address.edit')
             ->with('address', $address[0]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified address in storage.
      *
-     * @param  int  $id
+     * @param AddressRequest $request request
+     * @param string         $slug    address_id
+     *
      * @return Response
      */
     public function update(AddressRequest $request, $slug)
@@ -91,7 +109,8 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param string $slug address_id
+     *
      * @return Response
      */
     public function destroy($slug)

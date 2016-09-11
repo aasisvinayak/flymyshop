@@ -3,14 +3,14 @@
 
 
     <style>
-        .custab{
+        .shop_tab{
             border: 1px solid #ccc;
             padding: 5px;
             margin: 5% 0;
             box-shadow: 3px 3px 2px #ccc;
             transition: 0.5s;
         }
-        .custab:hover{
+        .shop_tab:hover{
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
@@ -18,7 +18,7 @@
 
     <div class="container">
         <div class="row col-md-8  custyle">
-            <table class="table table-striped custab">
+            <table class="table table-striped shop_tab">
                 <thead>
                 <tr>
                     <th>Order Number</th>

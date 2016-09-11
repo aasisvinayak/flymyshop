@@ -52,5 +52,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\CheckUserType::class,
         'menu' => \App\Http\Middleware\MakeMenu::class,
         'checkout' => \App\Http\Middleware\VerifyCheckOut::class,
+        'install' => \App\Http\Middleware\CheckSettings::class,
+
     ];
 }

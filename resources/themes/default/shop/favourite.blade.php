@@ -83,7 +83,7 @@
 
 
 
-                        {{Form::open(array('action' => "StoreController@removeFavourite"))}}
+                        {{Form::open(array('action' => "ShopController@removeFavourite"))}}
 
                         <input type="hidden" name="row_id" value="{{$item->rowId}}">
 

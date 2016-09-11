@@ -11,44 +11,55 @@ use App\Http\Requests\ProductRequest;
 
 use  App\Http\Models\Product;
 
-
+/**
+ * Class ProductController
+ *
+ * @category Main
+ *
+ * @package App\Http\Controllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ *
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Paginated listing of all products.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $products= Product::paginate(10);
-        return view('admin/products',compact('products'));
+        return view('admin/products', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $categories_list=Category::lists('title','category_id');
-        return view('admin/add-product',compact('categories_list'));
+        $categories_list=Category::lists('title', 'category_id');
+        return view('admin/add-product', compact('categories_list'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param ProductRequest $request Product Request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
     {
-
         $category_id=Category::select('id')
         ->where('category_id', '=', $request['category_id'])
         ->get()->toArray();
-
         $category_id= $category_id[0]['id'];
         $request['category_id']=$category_id;
         $request['product_id']=  str_random(50);
@@ -57,7 +68,6 @@ class ProductController extends Controller
         $request['sold_count']=0;
         $randomFileName=str_random(50);
         $extension="";
-
 
         if ($request->file('image')->isValid()) {
             $destinationPath = 'uploads';
@@ -73,35 +83,38 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
-     * @param  int  $id
+     * @param int $id page id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $product=Product::findorFail($id);
-        return $product;
+        return $product; // TODO display in view
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
-     * @param  int  $id
+     * @param int $id product id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $product=Product::findorFail($id);
-        $categories_list=Category::lists('title','category_id');
-        return view('admin.edit-product',compact('product','categories_list'));
+        $categories_list=Category::lists('title', 'category_id');
+        return view('admin.edit-product', compact('product', 'categories_list'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request product request
+     * @param int                      $id      product id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -111,9 +124,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      *
-     * @param  int  $id
+     * @param int $id product id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

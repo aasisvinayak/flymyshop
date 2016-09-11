@@ -132,7 +132,7 @@
                             <hr>
                             <div class="btn-group cart">
 
-                                {{Form::open(array('action' => "StoreController@addCart"))}}
+                                {{Form::open(array('action' => "ShopController@addCart"))}}
 
                                 <input type="hidden" name="product_id" value="{{$product->product_id}}">
 
@@ -142,7 +142,7 @@
                                 {{Form::close()}}
                             </div>
                             <div class="btn-group wishlist">
-                                {{Form::open(array('action' => "StoreController@addFavourite"))}}
+                                {{Form::open(array('action' => "ShopController@addFavourite"))}}
 
                                 <input type="hidden" name="product-id" value="{{$product->product_id}}">
 
