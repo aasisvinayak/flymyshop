@@ -11,7 +11,7 @@ class LoginTest extends TestCase
     protected $user;
 
     /**
-     * See login page is viewable
+     * See login page is viewable.
      *
      * @return void
      */
