@@ -75,6 +75,17 @@ Route::group(['middleware' => 'menu'], function () {
 
     });
 
+
+    Route::group(array('prefix' => 'rest/admin','middleware' => array('auth','admin') ), function () {
+        Route::get('/', 'AdminController@welcome');
+        Route::get('/sales', 'AdminController@sales');
+        Route::resource('categories', 'CategoryController');
+        Route::resource('products', 'ProductController');
+        Route::resource('pages', 'PageController');
+        Route::get('/users', 'AdminController@restUsers');
+
+    });
+
     Route::post('cart', 'StoreController@addCart');
     Route::post('favourite', 'StoreController@addFavourite');
     Route::post('update_cart', 'StoreController@updateCart');

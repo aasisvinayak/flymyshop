@@ -23,6 +23,12 @@ class AdminController extends Controller
         return view('admin/users',compact('users'));
     }
 
+    public function restUsers()
+    {
+        $users=User::all();
+        return $users;
+    }
+
     public function sales()
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
