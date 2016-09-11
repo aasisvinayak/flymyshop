@@ -20,13 +20,13 @@ class SearchTest extends TestCase
     }
 
 
-    public function testShopSearch()
-    {
-        $this->visit('/')
-            ->type('98','q')
-            ->press('searchButton')
-            ->seePageIs('/search')
-            ->see('98');
-    }
+//    public function testShopSearch()
+//    {
+//        $this->visit('/')
+//            ->type('98','q')
+//            ->press('searchButton')
+//            ->seePageIs('/search')
+//            ->see('98');
+//    }
 
 }
