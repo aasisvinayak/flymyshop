@@ -10,11 +10,6 @@ class LoginTest extends TestCase
      */
     protected $user;
 
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testLoginPage()
     {
         $this->visit('/login')
