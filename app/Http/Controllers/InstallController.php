@@ -8,4 +8,9 @@ class InstallController extends Controller
     {
         echo 'Welcome to FlyMyCloud Installation Wizard';
     }
+
+    public function save()
+    {
+
+    }
 }
