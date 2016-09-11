@@ -1,5 +1,3 @@
-
-
 [![Build Status](https://travis-ci.org/aasisvinayak/shop.svg?branch=master)](https://travis-ci.org/aasisvinayak/shop)
 [![Latest Stable Version](https://poser.pugx.org/aasisvinayak/shop/v/stable)](https://packagist.org/packages/aasisvinayak/shop)
 [![License](https://poser.pugx.org/aasisvinayak/shop/license)](https://packagist.org/packages/aasisvinayak/shop)
