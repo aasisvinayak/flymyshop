@@ -2,6 +2,8 @@
 
 use App\User;
 use \Illuminate\Foundation\Testing\DatabaseTransactions;
+use \Illuminate\Auth\Authenticatable;
+use \Illuminate\Foundation\Auth\Access\Authorizable;
 
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
