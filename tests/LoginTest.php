@@ -10,6 +10,11 @@ class LoginTest extends TestCase
      */
     protected $user;
 
+    /**
+     * See login page is viewable
+     *
+     * @return void
+     */
     public function testLoginPage()
     {
         $this->visit('/login')
