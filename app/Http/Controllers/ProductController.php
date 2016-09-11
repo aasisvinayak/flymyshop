@@ -3,23 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Category;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
+use App\Http\Models\Product;
 use App\Http\Requests\ProductRequest;
-
-use  App\Http\Models\Product;
+use  Illuminate\Http\Request;
 
 /**
- * Class ProductController
+ * Class ProductController.
  *
  * @category Main
  *
- * @package App\Http\Controllers
- *
  * @author acev <aasisvinayak@gmail.com>
- *
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
@@ -33,7 +26,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products= Product::paginate(10);
+        $products = Product::paginate(10);
+
         return view('admin/products', compact('products'));
     }
 
@@ -44,7 +38,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories_list=Category::lists('title', 'category_id');
+        $categories_list = Category::lists('title', 'category_id');
+
         return view('admin/add-product', compact('categories_list'));
     }
 
@@ -57,28 +52,29 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $category_id=Category::select('id')
+        $category_id = Category::select('id')
         ->where('category_id', '=', $request['category_id'])
         ->get()->toArray();
-        $category_id= $category_id[0]['id'];
-        $request['category_id']=$category_id;
-        $request['product_id']=  str_random(50);
-        $request['status']=1;
-        $request['stock']=0;
-        $request['sold_count']=0;
-        $randomFileName=str_random(50);
-        $extension="";
+        $category_id = $category_id[0]['id'];
+        $request['category_id'] = $category_id;
+        $request['product_id'] = str_random(50);
+        $request['status'] = 1;
+        $request['stock'] = 0;
+        $request['sold_count'] = 0;
+        $randomFileName = str_random(50);
+        $extension = '';
 
         if ($request->file('image')->isValid()) {
             $destinationPath = 'uploads';
-            $extension =  $request->file('image')->getClientOriginalExtension();
-            $fileName = $randomFileName . '.' . $extension;
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $fileName = $randomFileName.'.'.$extension;
             $request->file('image')->move(public_path($destinationPath), $fileName);
         }
 
-        $request ['image']=$randomFileName;
-        $request ['image_name']=$randomFileName. '.' .$extension;
+        $request ['image'] = $randomFileName;
+        $request ['image_name'] = $randomFileName.'.'.$extension;
         Product::create($request->all());
+
         return redirect('admin/products/');
     }
 
@@ -91,7 +87,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product=Product::findorFail($id);
+        $product = Product::findorFail($id);
+
         return $product; // TODO display in view
     }
 
@@ -104,8 +101,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product=Product::findorFail($id);
-        $categories_list=Category::lists('title', 'category_id');
+        $product = Product::findorFail($id);
+        $categories_list = Category::lists('title', 'category_id');
+
         return view('admin.edit-product', compact('product', 'categories_list'));
     }
 
@@ -120,6 +118,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         Product::findorFail($id)->update($request->all());
+
         return redirect('admin/products');
     }
 
@@ -134,7 +133,4 @@ class ProductController extends Controller
     {
         Product::findorFail($id)->delete();
     }
-
-
-
 }

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -17,22 +16,19 @@ class Invoice extends Model
         return $this->hasMany('App\Http\Models\InvoiceItem');
     }
 
-    public function scopeByUser($query,$user_id)
+    public function scopeByUser($query, $user_id)
     {
-        return $query->select("*")
+        return $query->select('*')
             ->where('user_id', '=', $user_id);
     }
 
-    public function scopeGetID($query,$slug)
+    public function scopeGetID($query, $slug)
     {
         return $query->where('invoice_id', '=', $slug);
-
     }
 
     public function getCreatedAtAttribute($value)
     {
-
-       return  date('F d, Y', strtotime($value));
+        return  date('F d, Y', strtotime($value));
     }
-    
 }

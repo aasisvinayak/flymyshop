@@ -13,7 +13,7 @@ class UserTypesTableSeeder extends Seeder
     {
         DB::table('user_types')->insert([
             'user_id' => 1,
-            'type' => 'admin',
+            'type'    => 'admin',
         ]);
     }
 }

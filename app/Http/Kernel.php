@@ -44,15 +44,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth'       => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'admin' => \App\Http\Middleware\CheckUserType::class,
-        'menu' => \App\Http\Middleware\MakeMenu::class,
-        'checkout' => \App\Http\Middleware\VerifyCheckOut::class,
-        'install' => \App\Http\Middleware\CheckSettings::class,
+        'can'        => \Illuminate\Foundation\Http\Middleware\Authorize::class,
+        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin'      => \App\Http\Middleware\CheckUserType::class,
+        'menu'       => \App\Http\Middleware\MakeMenu::class,
+        'checkout'   => \App\Http\Middleware\VerifyCheckOut::class,
+        'install'    => \App\Http\Middleware\CheckSettings::class,
 
     ];
 }

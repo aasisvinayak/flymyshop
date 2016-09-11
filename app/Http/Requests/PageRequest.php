@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class PageRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class PageRequest extends Request
     public function rules()
     {
         return [
-            'title'       => 'required',
+            'title'         => 'required',
             'content'       => 'required',
         ];
     }

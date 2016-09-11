@@ -1,20 +1,11 @@
 <?php
 
 /**
- * Class Sample
- *
- *
- *
+ * Class Sample.
  */
-
-class Sample{
-
+class Sample
+{
     public function __construct()
     {
-
-
     }
-
-    
-
 }

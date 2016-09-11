@@ -1,14 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use \Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
 {
-    /**
+    /*
      * A basic test example.
      *
      * @return void
@@ -17,7 +14,6 @@ class AuthTest extends TestCase
     use DatabaseTransactions;
 
     protected $user;
-
 
     public function setUp()
     {
@@ -31,7 +27,4 @@ class AuthTest extends TestCase
     }
 
 //  te
-
-
-
 }

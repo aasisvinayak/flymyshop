@@ -5,20 +5,17 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 
-
 class User extends Authenticatable
 {
-
     use Billable;
 
     /**
-     *
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','facebook_id', 'avatar','stripe_id',"card_brand","card_last_four"
+        'name', 'email', 'password', 'facebook_id', 'avatar', 'stripe_id', 'card_brand', 'card_last_four',
     ];
 
     /**
@@ -29,7 +26,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
 
     public function addresses()
     {
@@ -53,9 +49,6 @@ class User extends Authenticatable
 
     public function scopeGetEmailFromCustomerId($query, $customer_id)
     {
-       return $query->select('email')->where('stripe_id','=',$customer_id)->get();
-
+        return $query->select('email')->where('stripe_id', '=', $customer_id)->get();
     }
-
-
 }

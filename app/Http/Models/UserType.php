@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserType extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
 
     ];
 
@@ -14,9 +14,8 @@ class UserType extends Model
         'type' => 'string',
     ];
 
-    public function scopeGetType($query,$user_id)
+    public function scopeGetType($query, $user_id)
     {
-       return  $query->select('type')->where('user_id',"=",$user_id)->get();
+        return  $query->select('type')->where('user_id', '=', $user_id)->get();
     }
-    
 }

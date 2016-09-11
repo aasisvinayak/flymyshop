@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests, Validator,View, Input, Session, Auth, Hash, Mail;
-use App\Http\Models\UserType;
 use App\User;
 use Stripe\Charge;
 use Stripe\Stripe;
+use View;
 
 /**
  * Class AdminController
- * Controller for admin area
+ * Controller for admin area.
  *
  * @category Main
  *
- * @package App\Http\Controllers
- *
  * @author acev <aasisvinayak@gmail.com>
- *
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
 class AdminController extends Controller
 {
-
     /**
-     * Display admin dashboard
+     * Display admin dashboard.
      *
      * @return View
      */
@@ -37,33 +31,33 @@ class AdminController extends Controller
     }
 
     /**
-     * Return paginated list of users
+     * Return paginated list of users.
      *
      * @return View
      */
     public function users()
     {
-        $users=User::paginate(10);
+        $users = User::paginate(10);
+
         return view('admin/users', compact('users'));
     }
 
-
     /**
-     * Return list of sales from stripe
+     * Return list of sales from stripe.
      *
      * @return View
      */
     public function sales()
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        $charges=Charge::all();
-        $charges= $charges['data'];
+        $charges = Charge::all();
+        $charges = $charges['data'];
 
         foreach ($charges as $charge) {
-            $email=User::GetEmailFromCustomerId($charge->customer);
-            $charge->customer=$email;
+            $email = User::GetEmailFromCustomerId($charge->customer);
+            $charge->customer = $email;
         }
+
         return view('admin/sales', compact('charges'));
-        
     }
 }

@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\User;
 
 class LoginTest extends TestCase
 {
@@ -12,7 +8,6 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-
     protected $user;
 
     public function testExample()
@@ -20,8 +15,7 @@ class LoginTest extends TestCase
         $this->assertTrue(true);
     }
 
-
-        public function testLoginPage()
+    public function testLoginPage()
     {
         $this->visit('/login')
         ->see('email')
@@ -32,13 +26,9 @@ class LoginTest extends TestCase
     {
         $this->visit('/login')
         ->type('test@example.com', 'email')
-        ->type('passw0rd','password')
+        ->type('passw0rd', 'password')
         ->press('Login')
         ->seePageIs('/home')
         ->see('Account');
     }
-
-
-
-
 }

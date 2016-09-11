@@ -22,12 +22,11 @@ class PaymentCardPolicy
 
     public function show(User $user, PaymentCard $paymentCard)
     {
-        $user->id===$paymentCard->user_id;
+        $user->id === $paymentCard->user_id;
     }
-
 
     public function delete(User $user, PaymentCard $paymentCard)
     {
-        $user->id===$paymentCard->user_id;
+        $user->id === $paymentCard->user_id;
     }
 }

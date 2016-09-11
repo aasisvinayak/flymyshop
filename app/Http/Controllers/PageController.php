@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Page;
-use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 /**
- * Class PageController
+ * Class PageController.
  *
  * @category Main
  *
- * @package App\Http\Controllers
- *
  * @author acev <aasisvinayak@gmail.com>
- *
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
@@ -23,15 +19,15 @@ use App\Http\Requests;
 class PageController extends Controller
 {
     /**
-     * Paginated listing of all shop pages
+     * Paginated listing of all shop pages.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $pages = Page ::paginate(10);
 
-        $pages= Page ::paginate(10);
-        return view('admin/pages',compact('pages'));
+        return view('admin/pages', compact('pages'));
     }
 
     /**
@@ -53,15 +49,16 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        $page= Page::create($request->all());
-        $page->status=1;
-        $page->page_id=str_random(50);
+        $page = Page::create($request->all());
+        $page->status = 1;
+        $page->page_id = str_random(50);
         $page->save();
+
         return redirect('admin/pages/');
     }
 
     /**
-     * Fetch page by id
+     * Fetch page by id.
      *
      * @param int $id page id
      *
@@ -69,7 +66,8 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $page= Page::findorFail($id);
+        $page = Page::findorFail($id);
+
         return view('shop/page', compact('page'));
     }
 
@@ -82,7 +80,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $page=Page::findorFail($id);
+        $page = Page::findorFail($id);
+
         return view('admin/edit-page', compact('page'));
     }
 
@@ -96,8 +95,9 @@ class PageController extends Controller
      */
     public function update(PageRequest $request, $id)
     {
-        $page= Page::findorFail($id);
+        $page = Page::findorFail($id);
         $page->update($request->all());
+
         return redirect('admin/pages/');
     }
 
@@ -111,6 +111,7 @@ class PageController extends Controller
     public function destroy($id)
     {
         Page::findorFail($id)->delete();
+
         return redirect('admin/pages/');
     }
 }

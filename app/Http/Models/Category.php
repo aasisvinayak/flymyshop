@@ -6,27 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'category_id',
         'title',
         'parent_id',
         'status',
     ];
 
-
-    public function scopeGetInfo($query,$slug)
+    public function scopeGetInfo($query, $slug)
     {
-       return $query->where('category_id', '=', $slug);
+        return $query->where('category_id', '=', $slug);
     }
-
 
     public function products()
     {
         return $this->hasMany('App\Http\Models\Product');
     }
 
-
-    /**
+    /*
      * Scope a query to only include users of a given type.
      *
      * @return \Illuminate\Database\Eloquent\Builder

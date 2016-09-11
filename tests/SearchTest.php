@@ -1,16 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SearchTest extends TestCase
 {
     use DatabaseTransactions;
 
-
     /**
-     * Search for seed entry
+     * Search for seed entry.
      *
      * @test
      *
@@ -24,5 +21,4 @@ class SearchTest extends TestCase
             ->seePageIs('/search')
             ->see('98');
     }
-
 }

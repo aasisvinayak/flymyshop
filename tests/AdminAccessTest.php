@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminAccessTest extends TestCase
 {
-
     /**
      * Check user with admin privileges can access
-     * admin page
+     * admin page.
      *
      * @test
+     *
      * @since  version 0.1
+     *
      * @return void
      */
     public function testAccessAdminPageForAdmin()
@@ -23,9 +21,10 @@ class AdminAccessTest extends TestCase
     }
 
     /**
-     * Check user without admin privileges cannot access admin pages
+     * Check user without admin privileges cannot access admin pages.
      *
      * @test
+     *
      * @return void
      */
     public function testAccessAdminPageForUser()
@@ -34,5 +33,4 @@ class AdminAccessTest extends TestCase
         $this->visit('/admin/users')
             ->assertViewMissing('users');
     }
-
 }

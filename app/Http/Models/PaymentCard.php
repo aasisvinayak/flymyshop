@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentCard extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
 
     ];
 

@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\CategoryAdded;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendCategoryNotification
 {
@@ -21,7 +19,8 @@ class SendCategoryNotification
     /**
      * Handle the event.
      *
-     * @param  CategoryAdded  $event
+     * @param CategoryAdded $event
+     *
      * @return void
      */
     public function handle(CategoryAdded $event)

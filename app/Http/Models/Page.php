@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-
-    protected $fillable=[
-      "title",
-        "content",
+    protected $fillable = [
+      'title',
+        'content',
     ];
 
-    public function scopeGetPage($query,$page_id)
+    public function scopeGetPage($query, $page_id)
     {
-        return $query->where('page_id','=',$page_id)->get();
-
+        return $query->where('page_id', '=', $page_id)->get();
     }
-
 }

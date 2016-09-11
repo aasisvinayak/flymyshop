@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class AddressRequest extends Request
 {
     /**
@@ -27,11 +25,11 @@ class AddressRequest extends Request
     {
         return [
             'address_l1'      => 'required',
-            'address_l2' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-            'postcode' => 'required'
+            'address_l2'      => 'required',
+            'city'            => 'required',
+            'state'           => 'required',
+            'country'         => 'required',
+            'postcode'        => 'required',
         ];
     }
 }

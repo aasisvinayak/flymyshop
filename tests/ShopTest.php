@@ -1,17 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ShopTest extends TestCase
 {
-
-
     /**
-     * Test homepage is visible
+     * Test homepage is visible.
      *
      * @test
+     *
      * @return void
      */
     public function testHomePage()
@@ -20,16 +16,14 @@ class ShopTest extends TestCase
     }
 
     /**
-     * Test homepage has products listing
+     * Test homepage has products listing.
      *
      * @test
+     *
      * @return void
      */
     public function testHomePageListing()
     {
         $this->visit('/')->assertViewHas('products');
     }
-
-
-
 }

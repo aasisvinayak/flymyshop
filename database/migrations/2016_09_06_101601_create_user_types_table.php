@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateUserTypesTable extends Migration
 {
@@ -15,7 +15,7 @@ class CreateUserTypesTable extends Migration
         Schema::create('user_types', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('type',10);
+            $table->string('type', 10);
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
             $table->timestamps();

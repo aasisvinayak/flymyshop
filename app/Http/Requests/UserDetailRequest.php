@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class UserDetailRequest extends Request
 {
     /**
@@ -24,9 +22,9 @@ class UserDetailRequest extends Request
     public function rules()
     {
         return [
-            'name'      => 'required',
-            'dob'      => 'required',
-            'phone'      => 'required'
+            'name'       => 'required',
+            'dob'        => 'required',
+            'phone'      => 'required',
         ];
     }
 }

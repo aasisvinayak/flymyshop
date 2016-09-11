@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class ContactFormRequest extends Request
 {
     /**
@@ -24,8 +22,8 @@ class ContactFormRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name'    => 'required',
+            'email'   => 'required|email',
             'message' => 'required',
         ];
     }

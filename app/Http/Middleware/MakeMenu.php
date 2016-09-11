@@ -12,14 +12,14 @@ class MakeMenu
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-
-        $menu = new Menu;
+        $menu = new Menu();
 
         $menu->make(
             'MainMenu', function ($menu) {
@@ -33,13 +33,10 @@ class MakeMenu
 
         $menu->make(
             'CategoryMenu', function ($menu) {
-
-                 $categories = Category::all();
+                $categories = Category::all();
 
                 foreach ($categories as $category) {
-
                     $menu->add($category->title, $category->category_id);
-
                 }
             }
         );
@@ -47,20 +44,14 @@ class MakeMenu
 
         $menu->make(
             'PageMenu', function ($menu) {
-
                 $pages = Page::all();
 
                 foreach ($pages as $page) {
-
-                       $menu->add($page->title, $page->title . "/" . $page->page_id);
-
+                    $menu->add($page->title, $page->title.'/'.$page->page_id);
                 }
-
-
             }
         );
 
         return $next($request);
-
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('facebook_id',255)->unique()->nullable();
-            $table->string('avatar',255)->nullable();
+            $table->string('facebook_id', 255)->unique()->nullable();
+            $table->string('avatar', 255)->nullable();
             $table->rememberToken();
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();
@@ -51,5 +51,4 @@ class CreateUsersTable extends Migration
         Schema::drop('users');
         Schema::drop('subscriptions');
     }
-
 }
