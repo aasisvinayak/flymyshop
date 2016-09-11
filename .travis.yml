@@ -28,5 +28,4 @@ script:
   - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
   - php artisan serve --port=8000 --host=localhost &
-  - php artisan clear-compiled
   - vendor/bin/phpunit
