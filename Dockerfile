@@ -52,12 +52,12 @@ RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTable
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
 
-ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+ENTRYPOINT ["apache2ctl"]
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
+CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
