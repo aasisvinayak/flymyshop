@@ -6,7 +6,7 @@ use App\Events\OrderPlaced;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendOrderNotification
+class SendOrderNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -28,7 +28,11 @@ class SendOrderNotification
     {
 
 
-
-
+        Mail::send(
+            'emails.send',
+            ['title' => "Order Placed", 'content' => "An order has been placed"],
+            function ($message) {
+            }
+        );
     }
 }

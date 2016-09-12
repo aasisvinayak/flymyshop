@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderPlaced;
 use App\Http\Models\Category;
 use App\Http\Models\Invoice;
 use App\Http\Models\InvoiceItem;
@@ -345,6 +346,7 @@ class ShopController extends Controller
 
         Cart::destroy();
         Session::flash('alert-success', 'Thank you for shopping with us!');
+        event(new  OrderPlaced($invoice));
 
         return redirect('/account');
     }
