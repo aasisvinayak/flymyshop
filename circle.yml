@@ -8,3 +8,6 @@ machine:
   environment:
     ENVIRONMENT: testing-ci
     DB_DATABASE: testing.sqlite
+  test:
+    post:
+      - php vendor/bin/phpunit

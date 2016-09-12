@@ -6,6 +6,7 @@ apache2-bin \
 libapache2-mod-php5 \
 php5-curl \
 php5-ldap \
+php5-sqlite \
 php5-mysql \
 php5-mcrypt \
 php5-gd \
@@ -38,6 +39,7 @@ WORKDIR /var/www/html
 COPY docker/docker.env /var/www/html/.env
 
 RUN chown -R docker /var/www/html
+RUN service apache2 restart
 
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 

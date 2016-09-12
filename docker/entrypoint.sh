@@ -6,3 +6,4 @@ cd /var/www/html
   php artisan db:seed --no-interaction --class=UserTypesTableSeeder
   php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   php artisan db:seed --no-interaction --class=ProductsTableSeeder
+  service apache2 start
