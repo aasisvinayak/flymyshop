@@ -5,28 +5,13 @@ use Illuminate\Database\Migrations\Migration;
 class CreateCurrencyTable extends Migration
 {
     /**
-     * Currencies table name.
-     *
-     * @var string
-     */
-    protected $table_name;
-
-    /**
-     * Create a new migration instance.
-     */
-    public function __construct()
-    {
-        $this->table_name = config('currency.drivers.database.table');
-    }
-
-    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create($this->table_name, function ($table) {
+        Schema::create('currencies', function ($table) {
             $table->increments('id')->unsigned();
             $table->string('title', 255);
             $table->string('symbol_left', 12);
@@ -547,7 +532,7 @@ class CreateCurrencyTable extends Migration
             ],
         ];
 
-        DB::table($this->table_name)->insert($currencies);
+        DB::table('currencies')->insert($currencies);
     }
 
     /**
@@ -557,6 +542,6 @@ class CreateCurrencyTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->table_name);
+        Schema::drop('currencies');
     }
 }
