@@ -53,7 +53,6 @@ RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UsersTableSeed
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
-CMD ["apachectl", "-DFOREGROUND"]
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
@@ -61,4 +60,3 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
-CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
