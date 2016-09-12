@@ -34,6 +34,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 
 Automated installation will be added soon. In the mean time you can deploy this application by following the steps below:
 
+```
   - cp .env.example .env
   - complete .env values 
   - composer install
@@ -46,7 +47,15 @@ Automated installation will be added soon. In the mean time you can deploy this 
   - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
   - php artisan serve --port=8000 --host=localhost &
+```
 
+#Testing
+
+Run the tests with:
+
+``` bash
+vendor/bin/phpunit
+```
 
 # How to contribute
 

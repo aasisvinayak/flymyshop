@@ -1,28 +1,31 @@
 <?php
 
 Route::group(
-    ['middleware' => 'install'], function () {
+    ['middleware' => 'install'],
+    function () {
         Route::get('install', 'InstallController@index');
     }
 );
 Route::group(
-    ['middleware' => 'menu'], function () {
+    ['middleware' => 'menu'],
+    function () {
         Route::get('/', 'ShopController@home');
         Route::get('home', 'ShopController@home');
         Route::get(
-              'images/{slug}', function ($slug) {
+            'images/{slug}',
+            function ($slug) {
                   $path = 'public/uploads/'.$slug;
-                  if (! File::exists($path)) {
+                if (! File::exists($path)) {
                       abort(404);
-                  }
+                }
                   $file = File::get($path);
                   $type = File::mimeType($path);
                   $response = Response::make($file, 200);
                   $response->header('Content-Type', $type);
 
                   return $response;
-              }
-          );
+            }
+        );
 
         Route::pattern('id', '[a-z0-9-]+');
         Route::get('contact', 'ShopController@contact');
@@ -32,7 +35,9 @@ Route::group(
         Route::get('listing/{slug}', 'ShopController@category');
 
         Route::group(
-                ['prefix' => 'account', 'middleware' => 'auth'], function () {
+            ['prefix' => 'account',
+                    'middleware' => 'auth'],
+            function () {
                     Route::get('/', 'UserDetailController@profile');
                         //TODO complete support for third-party address retrieval
                         Route::get('address', 'ShopController@address');
@@ -48,19 +53,22 @@ Route::group(
                     Route::resource('addresses', 'AddressController');
                     Route::get('/order_history', 'OrderController@index');
                     Route::get('/orders/{slug}', 'OrderController@view');
-                }
-            );
+            }
+        );
 
 
         Route::group(
-                ['prefix' => 'shop', 'middleware' => ['auth', 'checkout']], function () {
+            ['prefix' => 'shop',
+                    'middleware' => ['auth', 'checkout']],
+            function () {
                     Route::get('check_out', 'ShopController@checkOut');
-                }
-            );
+            }
+        );
 
 
         Route::group(
-                 ['prefix' => 'shop'], function () {
+            ['prefix' => 'shop'],
+            function () {
                      Route::get('product/{slug}', 'ShopController@productDetails');
                      Route::get('cart', 'ShopController@cart');
                      Route::get('favourites', 'ShopController@favourites');
@@ -68,20 +76,22 @@ Route::group(
                      Route::get('empty_cart', 'ShopController@emptyCart');
                      Route::get('currency/{iso}', 'ShopController@currency');
                      Route::get('/', 'ShopController@home');
-                 }
-             );
+            }
+        );
 
 
         Route::group(
-                ['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+            ['prefix' => 'admin',
+                    'middleware' => ['auth', 'admin']],
+            function () {
                     Route::get('/', 'AdminController@welcome');
                     Route::get('/sales', 'AdminController@sales');
                     Route::resource('categories', 'CategoryController');
                     Route::resource('products', 'ProductController');
                     Route::resource('pages', 'PageController');
                     Route::get('/users', 'AdminController@users');
-                }
-            );
+            }
+        );
 
         Route::post('cart', 'ShopController@addCart');
         Route::post('favourite', 'ShopController@addFavourite');

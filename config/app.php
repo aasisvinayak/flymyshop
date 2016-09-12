@@ -164,6 +164,8 @@ return [
         Laravel\Cashier\CashierServiceProvider::class,
         Spatie\Newsletter\NewsletterServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class
+
 
 
 
@@ -221,11 +223,7 @@ return [
         'Currency'   => Torann\Currency\Facades\Currency::class,
         'Recaptcha'  => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Socialite'  => Laravel\Socialite\Facades\Socialite::class,
-
-
-
-
-
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
 
 
 

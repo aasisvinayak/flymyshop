@@ -20,7 +20,8 @@
         "torann/currency":"0.3.*",
         "greggilbert/recaptcha":"2.1.*",
         "spatie/laravel-newsletter":"3.*.*",
-        "laravel/socialite":"2.0.*"
+        "laravel/socialite":"2.0.*",
+        "irazasyed/telegram-bot-sdk": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

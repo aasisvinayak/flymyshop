@@ -8,6 +8,7 @@ use App\Http\Models\Invoice;
 use App\Http\Models\InvoiceItem;
 use App\Http\Models\Page;
 use App\Http\Models\Product;
+use App\Http\Traits\TelegramTrait;
 use App\Jobs\CreateThumbnail;
 use Cart;
 use Illuminate\Http\Request;
@@ -32,8 +33,13 @@ use View;
  */
 class ShopController extends Controller
 {
+
+    use TelegramTrait;
+
+
     /**
      * Display list of all addresses for the user.
+     * TODO: remove obsolete function
      *
      * @return View
      */
@@ -50,7 +56,6 @@ class ShopController extends Controller
     public function home()
     {
         $products = Product::featured();
-//        $this->dispatch(new  CreateThumbnail());
         return view('pages/home', compact('products'));
     }
 
@@ -349,6 +354,12 @@ class ShopController extends Controller
         Session::flash('alert-success', 'Thank you for shopping with us!');
         event(new  OrderPlaced($invoice));
 
+        //Telegram support can be enabled if the .env values are filled
+        if (strlen(env('TELEGRAM_BOT_TOKEN'))>2) {
+            if ($this->checkChatID()) {
+                $this->sendTelegram("New order placed! Order no. ". $invoice->order_no);
+            }
+        }
         return redirect('/account');
     }
 
