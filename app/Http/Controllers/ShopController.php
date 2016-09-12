@@ -8,6 +8,7 @@ use App\Http\Models\Invoice;
 use App\Http\Models\InvoiceItem;
 use App\Http\Models\Page;
 use App\Http\Models\Product;
+use App\Jobs\CreateThumbnail;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class ShopController extends Controller
     public function home()
     {
         $products = Product::featured();
-
+        $this->dispatch(new  CreateThumbnail());
         return view('pages/home', compact('products'));
     }
 

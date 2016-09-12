@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Jobs\Job;
+use Illuminate\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,8 +27,18 @@ class CreateThumbnail extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(Mailer $mailer)
     {
-        //
+//        $mailer->send(
+//            [],
+//            [],
+//            function ($message) {
+//                $message->from(env('MAIL_FROM'));
+//                $message->to(env('MAIL_TO'));
+//                $message->subject("Test");
+//                $message->setBody('Test message');
+//            }
+//        );
+
     }
 }
