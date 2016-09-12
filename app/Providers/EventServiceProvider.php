@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendShipmentNotification',
         ],
 
-        'App\Events\CategoryAdded' => [
-            'App\Listeners\SendCategoryNotification',
+        'App\Events\OrderPlaced' => [
+            'App\Listeners\SendOrderNotification',
         ],
     ];
 
