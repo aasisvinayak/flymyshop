@@ -50,7 +50,7 @@ class ShopController extends Controller
     public function home()
     {
         $products = Product::featured();
-        $this->dispatch(new  CreateThumbnail());
+//        $this->dispatch(new  CreateThumbnail());
         return view('pages/home', compact('products'));
     }
 
