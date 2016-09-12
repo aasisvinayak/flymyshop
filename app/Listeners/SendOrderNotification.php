@@ -5,14 +5,19 @@ namespace App\Listeners;
 use App\Events\OrderPlaced;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 
-class SendOrderNotification implements ShouldQueue
+class SendOrderNotification
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
+
+
+    public $order_id;
+
     public function __construct()
     {
         //
@@ -26,12 +31,15 @@ class SendOrderNotification implements ShouldQueue
      */
     public function handle(OrderPlaced $event)
     {
-
-
-        Mail::send(
-            'emails.send',
-            ['title' => "Order Placed", 'content' => "An order has been placed"],
+        $this->order_id=$event->order->order_no;
+        Mail::queue(
+            [],
+            [],
             function ($message) {
+                $message->from(env('MAIL_FROM'));
+                $message->to(env('MAIL_TO'));
+                $message->subject("Order Placed");
+                $message->setBody('Order id '.$this->order_id);
             }
         );
     }

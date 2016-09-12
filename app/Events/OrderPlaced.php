@@ -21,6 +21,7 @@ class OrderPlaced extends Event
     public function __construct(Invoice $order)
     {
         $this->order=$order;
+
     }
 
     /**

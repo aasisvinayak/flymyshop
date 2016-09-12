@@ -45,6 +45,13 @@ RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.ph
 
 RUN cd /var/www/html;composer install
 
+RUN cd /var/www/html;php artisan key:generate
+RUN cd /var/www/html;php artisan migrate
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UsersTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
+
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
