@@ -39,6 +39,8 @@ WORKDIR /var/www/html
 COPY docker/docker.env /var/www/html/.env
 
 RUN chown -R docker /var/www/html
+
+RUN service apache2 start
 RUN service apache2 restart
 
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
@@ -56,7 +58,6 @@ RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableS
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["apache2ctl"]
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 80
