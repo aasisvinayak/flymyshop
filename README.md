@@ -52,7 +52,7 @@ Automated installation will be added soon. In the mean time you can deploy this 
 
 #Testing
 
-Run the tests with:
+Run the tests with (please make sure the values for testing are filled in correctly in the config/database.php file and .env:
 
 ``` bash
 vendor/bin/phpunit
