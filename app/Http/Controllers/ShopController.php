@@ -159,7 +159,8 @@ class ShopController extends Controller
     {
         $product_id = Product::GetID($slug)->get()->toArray();
         $product = Product::findorFail($product_id[0]['id']);
-        $productAdditionalImages=$product->additionalImages()->get()->toArray();
+        $productAdditionalImages = $product->additionalImages()->get()->toArray();
+
         return view('shop.product', compact('product', 'productAdditionalImages'));
     }
 
@@ -290,6 +291,7 @@ class ShopController extends Controller
     {
         $rowId = Input::get('row_id');
         Cart::instance('favourites')->remove($rowId);
+
         return redirect('/shop/favourites');
     }
 
@@ -332,7 +334,7 @@ class ShopController extends Controller
         $user->charge($total_price * 100);
 
         try {
-             $user->charge($total_price * 100);
+            $user->charge($total_price * 100);
             $invoice = new Invoice();
             $invoice->user_id = $user->id;
             $invoice->invoice_id = str_random(50);
@@ -366,10 +368,9 @@ class ShopController extends Controller
             return redirect('/account');
         } catch (Exception $e) {
             Session::flash('alert-danger', 'Payment failed! Please update your payment card');
+
             return redirect('/account/payment_cards');
         }
-
-
     }
 
     /**

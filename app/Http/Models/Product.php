@@ -18,7 +18,7 @@ class Product extends Model
         'price',
         'is_featured',
         'status',
-        'stock'
+        'stock',
     ];
 
     public function getPriceAttribute($value)
@@ -36,8 +36,7 @@ class Product extends Model
     {
         return $query->select('product_id', 'id', 'make',
             'title', 'price', 'image_name', 'description')
-            ->where('category_id', '=', $category_id)
-            ;
+            ->where('category_id', '=', $category_id);
     }
 
     public function scopeGetID($query, $slug)

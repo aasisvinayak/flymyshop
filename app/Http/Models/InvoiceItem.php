@@ -16,6 +16,4 @@ class InvoiceItem extends Model
         return $query->select('qty', 'created_at')
             ->where('created_at', '>', $time)->sum('qty');
     }
-
-    
 }

@@ -8,8 +8,6 @@ use App\Http\Models\Product;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Spatie\Newsletter\Newsletter;
 use Stripe\Charge;
 use Stripe\Stripe;
 use View;
@@ -35,62 +33,61 @@ class AdminController extends Controller
     public function welcome()
     {
         //TODO: account for previous year and change order
-        $graph=$this->salesGraphData()->toArray();
-        $stats= $this->stats();
-        $formattedGraph=[];
+        $graph = $this->salesGraphData()->toArray();
+        $stats = $this->stats();
+        $formattedGraph = [];
         for ($i = 1; $i < 13; $i++) {
-            $num_padded = sprintf("%02d", $i);
+            $num_padded = sprintf('%02d', $i);
             array_key_exists($num_padded, $graph) ?
-                $formattedGraph[$num_padded] =$graph[$num_padded]:
-                $formattedGraph[(string)$num_padded] =0;
+                $formattedGraph[$num_padded] = $graph[$num_padded] :
+                $formattedGraph[(string) $num_padded] = 0;
         }
 
-        $months=  array_keys($formattedGraph);
-        $monthNames=array();
+        $months = array_keys($formattedGraph);
+        $monthNames = [];
         foreach ($months as $number) {
-            $mName= date("F", mktime(0, 0, 0, $number, 10));
+            $mName = date('F', mktime(0, 0, 0, $number, 10));
             array_push($monthNames, $mName);
         }
 
-        $valueArray = array();
+        $valueArray = [];
         foreach ($formattedGraph as $item) {
             array_push($valueArray, $item['sum']);
         }
         $arrayInJson = json_encode($valueArray);
-        $graphY= "var value_array = ". $arrayInJson . ";\n";
+        $graphY = 'var value_array = '.$arrayInJson.";\n";
 
-        return view('admin/welcome', compact('graph', 'graphY','monthNames', 'stats'));
+        return view('admin/welcome', compact('graph', 'graphY', 'monthNames', 'stats'));
     }
-
 
     //TODO reuse code
     public function reports()
     {
-        $graph=$this->salesGraphData()->toArray();
-        $stats= $this->stats();
-        $formattedGraph=[];
+        $graph = $this->salesGraphData()->toArray();
+        $stats = $this->stats();
+        $formattedGraph = [];
         for ($i = 1; $i < 13; $i++) {
-            $num_padded = sprintf("%02d", $i);
+            $num_padded = sprintf('%02d', $i);
             array_key_exists($num_padded, $graph) ?
-                $formattedGraph[$num_padded] =$graph[$num_padded]:
-                $formattedGraph[(string)$num_padded] =0;
+                $formattedGraph[$num_padded] = $graph[$num_padded] :
+                $formattedGraph[(string) $num_padded] = 0;
         }
 
-        $months=  array_keys($formattedGraph);
-        $monthNames=array();
+        $months = array_keys($formattedGraph);
+        $monthNames = [];
         foreach ($months as $number) {
-            $mName= date("F", mktime(0, 0, 0, $number, 10));
+            $mName = date('F', mktime(0, 0, 0, $number, 10));
             array_push($monthNames, $mName);
         }
 
-        $valueArray = array();
+        $valueArray = [];
         foreach ($formattedGraph as $item) {
             array_push($valueArray, $item['sum']);
         }
         $arrayInJson = json_encode($valueArray);
-        $graphY= "var value_array = ". $arrayInJson . ";\n";
+        $graphY = 'var value_array = '.$arrayInJson.";\n";
 
-       return view('admin/reports', compact('graph', 'graphY','monthNames', 'stats'));
+        return view('admin/reports', compact('graph', 'graphY', 'monthNames', 'stats'));
     }
 
     /**
@@ -168,22 +165,23 @@ class AdminController extends Controller
     }
 
     /**
-     * Update status of the order
+     * Update status of the order.
      *
      * @param Request $request Status update request
-     * 
+     *
      * @return mixed
      */
     public function updateOrderStatus(Request $request)
     {
-        $invoice=Invoice::findorFail($request->get('id'));
-        $invoice->update(array('status'=>$request->get('status')));
+        $invoice = Invoice::findorFail($request->get('id'));
+        $invoice->update(['status' => $request->get('status')]);
+
         return redirect('admin/orders');
     }
 
     /**
      * View individual order
-     * TODO: reuse code in account controller
+     * TODO: reuse code in account controller.
      *
      * @param int $id order_id
      *
@@ -191,7 +189,7 @@ class AdminController extends Controller
      */
     public function viewOrder($id)
     {
-        $invoice=Invoice::findorFail($id);
+        $invoice = Invoice::findorFail($id);
         $invoice_items = $invoice->invoice_items->all();
         $order_no = $invoice->order_no;
         $products = [];
@@ -214,8 +212,6 @@ class AdminController extends Controller
         );
     }
 
-
-
     //total orders today
     // total orders this month
     //total orders this year
@@ -230,56 +226,51 @@ class AdminController extends Controller
     // graph for payment received over last year
     // graph for users  over last year
 
+     public function stats()
+     {
+         $today = Carbon::now();
+         $lastYearThisDate = Carbon::now()->subYear();
+         $lastMonthThisDate = Carbon::now()->subMonth();
+         $yesterday = Carbon::now()->subDay();
 
-     function stats()
-    {
-        $today=Carbon::now();
-        $lastYearThisDate=Carbon::now()->subYear();
-        $lastMonthThisDate=Carbon::now()->subMonth();
-        $yesterday=Carbon::now()->subDay();
+         $invoiceItem = new InvoiceItem();
 
-        $invoiceItem= new InvoiceItem();
-
-        $productsSoldAllTime= $this->returnNumber($invoiceItem->productsSold(0));
-        $productsSoldInYear= $this->returnNumber($invoiceItem->productsSold($lastYearThisDate));
-        $productsSoldInMonth= $this->returnNumber($invoiceItem->productsSold($lastMonthThisDate));
-        $productsSoldToday= $this->returnNumber($invoiceItem->productsSold($yesterday));
-
-
-        $invoice= new Invoice();
-
-        $revenueAllTime=$this->returnNumber($invoice->sales(0));
-        $revenueInYear=$this->returnNumber($invoice->sales($lastYearThisDate));
-        $revenueInMonth=$this->returnNumber($invoice->sales($lastMonthThisDate));
-        $revenueToday=$this->returnNumber($invoice->sales($yesterday));
-
-        $invoiceCountAllTime=$this->returnNumber($invoice->invoiceCount(0));
-        $invoiceCountInYear=$this->returnNumber($invoice->invoiceCount($lastYearThisDate));
-        $invoiceCountInMonth=$this->returnNumber($invoice->invoiceCount($lastMonthThisDate));
-        $invoiceCountToday=$this->returnNumber($invoice->invoiceCount($yesterday));
+         $productsSoldAllTime = $this->returnNumber($invoiceItem->productsSold(0));
+         $productsSoldInYear = $this->returnNumber($invoiceItem->productsSold($lastYearThisDate));
+         $productsSoldInMonth = $this->returnNumber($invoiceItem->productsSold($lastMonthThisDate));
+         $productsSoldToday = $this->returnNumber($invoiceItem->productsSold($yesterday));
 
 
-        $userCountAllTime=$this->returnNumber(User::userCount(0));
-        $userCountInYear=$this->returnNumber(User::userCount($lastYearThisDate));
-        $userCountInMonth=$this->returnNumber(User::userCount($lastMonthThisDate));
-        $userCountToday=$this->returnNumber(User::userCount($yesterday));
+         $invoice = new Invoice();
 
-        return compact(
+         $revenueAllTime = $this->returnNumber($invoice->sales(0));
+         $revenueInYear = $this->returnNumber($invoice->sales($lastYearThisDate));
+         $revenueInMonth = $this->returnNumber($invoice->sales($lastMonthThisDate));
+         $revenueToday = $this->returnNumber($invoice->sales($yesterday));
+
+         $invoiceCountAllTime = $this->returnNumber($invoice->invoiceCount(0));
+         $invoiceCountInYear = $this->returnNumber($invoice->invoiceCount($lastYearThisDate));
+         $invoiceCountInMonth = $this->returnNumber($invoice->invoiceCount($lastMonthThisDate));
+         $invoiceCountToday = $this->returnNumber($invoice->invoiceCount($yesterday));
+
+
+         $userCountAllTime = $this->returnNumber(User::userCount(0));
+         $userCountInYear = $this->returnNumber(User::userCount($lastYearThisDate));
+         $userCountInMonth = $this->returnNumber(User::userCount($lastMonthThisDate));
+         $userCountToday = $this->returnNumber(User::userCount($yesterday));
+
+         return compact(
             'productsSoldAllTime', 'productsSoldInYear', 'productsSoldInMonth', 'productsSoldToday',
             'revenueAllTime', 'revenueInYear', 'revenueInMonth', 'revenueToday',
             'invoiceCountAllTime', 'invoiceCountInYear', 'invoiceCountInMonth', 'invoiceCountToday',
             'userCountAllTime', 'userCountInYear', 'userCountInMonth', 'userCountToday'
         );
+     }
 
-    }
-
-
-
-     function salesGraphData()
+    public function salesGraphData()
     {
-
-         $lastYearThisDate=Carbon::now()->subYear();
-        $invoices =  Invoice::select('sub_total', 'created_at')
+        $lastYearThisDate = Carbon::now()->subYear();
+        $invoices = Invoice::select('sub_total', 'created_at')
             ->where('created_at', '>', $lastYearThisDate)
             ->get()
             ->groupBy(
@@ -288,31 +279,30 @@ class AdminController extends Controller
                 }
             );
 
-        foreach ( $invoices as $item ) {
-            $sub_total=0.00;
-            foreach ( $item as $entry ) {
-                $sub_total=$sub_total+$entry->sub_total;
+        foreach ($invoices as $item) {
+            $sub_total = 0.00;
+            foreach ($item as $entry) {
+                $sub_total = $sub_total + $entry->sub_total;
             }
-            $item['sum']=$sub_total;
+            $item['sum'] = $sub_total;
         }
 
-        return ($invoices);
-
+        return $invoices;
     }
 
-    /**
-     * TODO: move as helper
-     *
-     * @param $value
-     * @return int|string
-     */
-     function returnNumber($value)
-    {
-        return is_numeric($value)?  $value : 0;
-    }
+     /**
+      * TODO: move as helper.
+      *
+      * @param $value
+      * @return int|string
+      */
+     public function returnNumber($value)
+     {
+         return is_numeric($value) ? $value : 0;
+     }
 
     /**
-     * TODO: allow editing .env settings from here
+     * TODO: allow editing .env settings from here.
      *
      * @return View
      */
@@ -320,6 +310,4 @@ class AdminController extends Controller
     {
         return view('admin/settings');
     }
-    
-
 }

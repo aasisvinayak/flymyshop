@@ -50,9 +50,9 @@ class ProductController extends Controller
     public function updateProductStatus(Request $request)
     {
         $product = Product::findorFail($request->get('id'));
-        $product->update(array('status' => $request->get('status')));
-        return redirect('admin/products');
+        $product->update(['status' => $request->get('status')]);
 
+        return redirect('admin/products');
     }
 
     /**
@@ -87,72 +87,72 @@ class ProductController extends Controller
         $randomFileName = str_random(50);
         $extension = '';
 
-        if (!is_null($request->file('image'))) {
+        if (! is_null($request->file('image'))) {
             if ($request->file('image')->isValid()) {
                 $destinationPath = 'uploads';
                 $extension = $request->file('image')->getClientOriginalExtension();
-                $fileName = $randomFileName . '.' . $extension;
+                $fileName = $randomFileName.'.'.$extension;
                 $request->file('image')->move(public_path($destinationPath), $fileName);
             }
         }
 
         $request ['image'] = $randomFileName;
-        $request ['image_name'] = $randomFileName . '.' . $extension;
+        $request ['image_name'] = $randomFileName.'.'.$extension;
         $product_id = Product::create($request->all())->id;
 
 
-        if (!is_null($request->file('image1'))) {
+        if (! is_null($request->file('image1'))) {
             if ($request->file('image1')->isValid()) {
                 $randomFileName = str_random(50);
                 $destinationPath = 'uploads';
                 $extension = $request->file('image1')->getClientOriginalExtension();
-                $fileName = $randomFileName . '.' . $extension;
+                $fileName = $randomFileName.'.'.$extension;
                 $request->file('image1')->move(public_path($destinationPath), $fileName);
                 $additonalImage = new ProductImage();
                 $additonalImage->create(
-                    array(
+                    [
                         'image' => $randomFileName,
-                        'image_name' => $randomFileName . '.' . $extension,
+                        'image_name' => $randomFileName.'.'.$extension,
                         'product_id' => $product_id,
-                    )
+                    ]
                 );
             }
-
         }
-        if (!is_null($request->file('image2'))) {
+        if (! is_null($request->file('image2'))) {
             if ($request->file('image2')->isValid()) {
                 $randomFileName = str_random(50);
                 $destinationPath = 'uploads';
                 $extension = $request->file('image2')->getClientOriginalExtension();
-                $fileName = $randomFileName . '.' . $extension;
+                $fileName = $randomFileName.'.'.$extension;
                 $request->file('image2')->move(public_path($destinationPath), $fileName);
                 $additonalImage = new ProductImage();
                 $additonalImage->create(
-                    array(
+                    [
                         'image' => $randomFileName,
-                        'image_name' => $randomFileName . '.' . $extension,
+                        'image_name' => $randomFileName.'.'.$extension,
                         'product_id' => $product_id,
-                    )
+                    ]
                 );
             }
         }
-        if (!is_null($request->file('image3'))) {
+        if (! is_null($request->file('image3'))) {
             if ($request->file('image3')->isValid()) {
                 $randomFileName = str_random(50);
                 $destinationPath = 'uploads';
                 $extension = $request->file('image3')->getClientOriginalExtension();
-                $fileName = $randomFileName . '.' . $extension;
+                $fileName = $randomFileName.'.'.$extension;
                 $request->file('image3')->move(public_path($destinationPath), $fileName);
                 $additonalImage = new ProductImage();
                 $additonalImage->create(
-                    array(
+                    [
                         'image' => $randomFileName,
-                        'image_name' => $randomFileName . '.' . $extension,
+                        'image_name' => $randomFileName.'.'.$extension,
                         'product_id' => $product_id,
-                    )
+                    ]
                 );
             }
         }
+
         return redirect('admin/products/');
     }
 
@@ -179,6 +179,7 @@ class ProductController extends Controller
         }
 
         $productAdditionalImages = $product->additionalImages()->get()->toArray();
+
         return view('admin.product', compact('product', 'productAdditionalImages'));
     }
 
@@ -193,6 +194,7 @@ class ProductController extends Controller
     {
         $product = Product::findorFail($id);
         $categories_list = Category::lists('title', 'category_id');
+
         return view('admin.edit-product', compact('product', 'categories_list'));
     }
 
@@ -207,24 +209,25 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         Product::findorFail($id)->update($request->all());
+
         return redirect('admin/products');
     }
 
     public function stocks()
     {
         $products = Product::paginate(10);
+
         return view('admin/stocks', compact('products'));
     }
 
     public function updateStock(Request $request)
     {
         $product = Product::findorFail($request->get('id'));
-        $product->update(array(
-            "stock" => $request->get('stock')
-        ));
+        $product->update([
+            'stock' => $request->get('stock'),
+        ]);
 
         return redirect('admin/stocks');
-
     }
 
     /**
@@ -237,6 +240,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::findorFail($id)->delete();
+
         return redirect('admin/products');
     }
 }
