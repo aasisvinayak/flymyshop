@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\OrderPlaced;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendOrderNotification
@@ -14,8 +12,6 @@ class SendOrderNotification
      *
      * @return void
      */
-
-
     public $order_id;
 
     public function __construct()
@@ -31,14 +27,14 @@ class SendOrderNotification
      */
     public function handle(OrderPlaced $event)
     {
-        $this->order_id=$event->order->order_no;
+        $this->order_id = $event->order->order_no;
         Mail::queue(
             [],
             [],
             function ($message) {
                 $message->from(env('MAIL_FROM'));
                 $message->to(env('MAIL_TO'));
-                $message->subject("Order Placed");
+                $message->subject('Order Placed');
                 $message->setBody('Order id '.$this->order_id);
             }
         );
