@@ -92,7 +92,6 @@ Route::group(
                 Route::get('/users', 'AdminController@users');
                 Route::get('/orders', 'AdminController@orders');
                 Route::post('/orders', 'AdminController@updateOrderStatus');
-
             }
         );
 

@@ -102,9 +102,7 @@ class AdminController extends Controller
         return view('admin/orders', compact('orders'));
     }
 
-
     public function updateOrderStatus()
     {
-
     }
 }
