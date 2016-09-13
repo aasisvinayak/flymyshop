@@ -1,18 +1,16 @@
 <?php
 
 namespace App\Http\Traits;
+
 use Telegram\Bot\Api;
-use App\Http\Requests;
 
 /**
- * For obtaining telegram chat details and sending messages
+ * For obtaining telegram chat details and sending messages.
  *
  * Class TelegramTrait
- * @package App\Http\Traits
  */
 trait TelegramTrait
 {
-
     protected $telegram;
 
     public function __construct()
@@ -21,29 +19,31 @@ trait TelegramTrait
     }
 
     /**
-     * Checking if there are any conversations to the bot
+     * Checking if there are any conversations to the bot.
      *
      * @return bool
      */
     public function checkChatID()
     {
         $response = $this->telegram->getUpdates();
-        return is_null($response)? false:true;
+
+        return is_null($response) ? false : true;
     }
 
     /**
-     * if there are conversations returning the chat id
+     * if there are conversations returning the chat id.
      *
      * @return mixed
      */
     public function getChatID()
     {
         $response = $this->telegram->getUpdates();
-        return ($response[0]['message']['chat']['id']);
+
+        return $response[0]['message']['chat']['id'];
     }
 
     /**
-     * Send message to user's telegram
+     * Send message to user's telegram.
      *
      * @param string $msg Order related message e.g. Order no
      *
@@ -51,13 +51,12 @@ trait TelegramTrait
      */
     public function sendTelegram($msg)
     {
-        $chatID= $this->getChatID();
+        $chatID = $this->getChatID();
         $response = $this->telegram->sendMessage([
-            'chat_id' =>$chatID,
-            'text' => $msg
+            'chat_id' => $chatID,
+            'text' => $msg,
         ]);
 
         return $response->getMessageId();
     }
-
 }

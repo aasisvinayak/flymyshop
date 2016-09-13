@@ -34,6 +34,6 @@ class Invoice extends Model
 
     public function scopeIdDescending($query)
     {
-        return $query->orderBy('id','DESC');
+        return $query->orderBy('id', 'DESC');
     }
 }

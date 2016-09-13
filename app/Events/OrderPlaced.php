@@ -2,10 +2,8 @@
 
 namespace App\Events;
 
-use App\Events\Event;
 use App\Http\Models\Invoice;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class OrderPlaced extends Event
 {
@@ -20,8 +18,7 @@ class OrderPlaced extends Event
      */
     public function __construct(Invoice $order)
     {
-        $this->order=$order;
-
+        $this->order = $order;
     }
 
     /**

@@ -63,42 +63,42 @@ class AdminController extends Controller
     }
 
     /**
-     * List of orders
+     * List of orders.
      *
      * @return View
      */
     public function orders()
     {
-        $orders= Invoice::IdDescending()->paginate(10);
+        $orders = Invoice::IdDescending()->paginate(10);
         foreach ($orders as $item) {
-            $item->user_id=User::findorFail($item->user_id)->email;
+            $item->user_id = User::findorFail($item->user_id)->email;
 
-            if(is_null($item->status)){
-                $item->status="Order placed";
+            if (is_null($item->status)) {
+                $item->status = 'Order placed';
             } else {
                 switch ($item->status) {
                     case 1:
-                        $item->status = "Currently being processed!";
+                        $item->status = 'Currently being processed!';
                         break;
                     case 2:
-                        $item->status = "Currently being processed!";
+                        $item->status = 'Currently being processed!';
                         break;
                     case 3:
-                        $item->status = "Currently being processed!";
+                        $item->status = 'Currently being processed!';
                         break;
                     case 4:
-                        $item->status = "Currently being processed!";
+                        $item->status = 'Currently being processed!';
                         break;
                     default:
-                        $item->status = "Status Unavailable";
+                        $item->status = 'Status Unavailable';
                 }
             }
 
-            if($item->status==1){
-                $item->status="Order placed";
+            if ($item->status == 1) {
+                $item->status = 'Order placed';
             }
-
         }
+
         return view('admin/orders', compact('orders'));
     }
 }
