@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
     /**
      * Display the specified category.
-     * Not required - to be removed
+     * Not required - to be removed.
      *
      * @param int $id category id
      *
@@ -83,6 +83,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::findorFail($id);
+
         return $category;
     }
 
@@ -96,11 +97,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorFail($id);
+
         return view('admin.edit-category', compact('category'));
     }
-
-
-
 
     /**
      * Update the specified resource in storage.
@@ -113,6 +112,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         Category::findorFail($id)->update($request->all());
+
         return redirect('admin/categories/');
     }
 
@@ -126,6 +126,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findorFail($id)->delete();
+
         return redirect('admin/categories/');
     }
 }

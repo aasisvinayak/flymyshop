@@ -3,7 +3,7 @@
 
 Route::get('install', 'InstallController@index');
 Route::group(
-    ['middleware' => array('install','menu') ],
+    ['middleware' => ['install', 'menu']],
     function () {
         Route::get('/', 'ShopController@home');
         Route::get('home', 'ShopController@home');
