@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return $query->select('email')->where('stripe_id', '=', $customer_id)->get();
     }
+
+    public function scopeUserCount($query, $time)
+    {
+        return $query->select('id')
+            ->where('created_at', '>', $time)->count();
+    }
 }

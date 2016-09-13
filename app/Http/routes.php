@@ -1,13 +1,9 @@
 <?php
 
+
+Route::get('install', 'InstallController@index');
 Route::group(
-    ['middleware' => 'install'],
-    function () {
-        Route::get('install', 'InstallController@index');
-    }
-);
-Route::group(
-    ['middleware' => 'menu'],
+    ['middleware' => array('install','menu') ],
     function () {
         Route::get('/', 'ShopController@home');
         Route::get('home', 'ShopController@home');
@@ -85,7 +81,7 @@ Route::group(
                     'middleware' => ['auth', 'admin'], ],
             function () {
                 Route::get('/', 'AdminController@welcome');
-                Route::get('/payment', 'AdminController@payment');
+                Route::get('/payments', 'AdminController@payment');
                 Route::resource('categories', 'CategoryController');
                 Route::resource('products', 'ProductController');
                 Route::resource('pages', 'PageController');
@@ -93,6 +89,11 @@ Route::group(
                 Route::get('/orders', 'AdminController@orders');
                 Route::get('/orders/{id}', 'AdminController@viewOrder');
                 Route::post('/orders', 'AdminController@updateOrderStatus');
+                Route::get('/reports', 'AdminController@reports');
+                Route::get('/settings', 'AdminController@settings');
+                Route::get('/stocks', 'ProductController@stocks');
+                Route::post('/stocks', 'ProductController@updateStock');
+                Route::post('/product_status', 'ProductController@updateProductStatus');
             }
         );
 

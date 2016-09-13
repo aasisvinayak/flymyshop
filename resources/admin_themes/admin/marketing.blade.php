@@ -1,3 +1,6 @@
+
+
+
 @extends('admin-layouts.admin')
 @section('title')
     Reports
@@ -51,37 +54,7 @@
     </style>
 
 
-    @include('admin-partials._report-block',array(
-            $reportTitle="Sales Revenue",
-            $today=$stats['revenueToday'],
-            $thisMonth=$stats['revenueInMonth'],
-            $thisYear=$stats['revenueInYear'],
-            $allTime=$stats['revenueAllTime'],
-       ))
 
-    @include('admin-partials._report-block',array(
-            $reportTitle="Orders",
-            $today=$stats['invoiceCountToday'],
-            $thisMonth=$stats['invoiceCountInMonth'],
-            $thisYear=$stats['invoiceCountInYear'],
-            $allTime=$stats['invoiceCountAllTime'],
-        ))
-
-    @include('admin-partials._report-block',array(
-            $reportTitle="Products Sold",
-            $today=$stats['productsSoldToday'],
-            $thisMonth=$stats['productsSoldInMonth'],
-            $thisYear=$stats['productsSoldInYear'],
-            $allTime=$stats['productsSoldAllTime'],
-        ))
-
-    @include('admin-partials._report-block',array(
-            $reportTitle="Users",
-            $today=$stats['userCountToday'],
-            $thisMonth=$stats['userCountInMonth'],
-            $thisYear=$stats['userCountInYear'],
-            $allTime=$stats['userCountAllTime'],
-        ))
 
 
 

@@ -8,7 +8,7 @@
     </style>
 
     <div class="jumbotron text-center">
-        <h1>Welcome to Laravel Shop</h1>
+        <h1>Welcome to {{env('SHOP_NAME')}}</h1>
     </div>
 
     <div class="container">

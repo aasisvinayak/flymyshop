@@ -12,6 +12,7 @@ use App\Http\Traits\TelegramTrait;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Input;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -158,8 +159,8 @@ class ShopController extends Controller
     {
         $product_id = Product::GetID($slug)->get()->toArray();
         $product = Product::findorFail($product_id[0]['id']);
-
-        return view('shop.product', compact('product'));
+        $productAdditionalImages=$product->additionalImages()->get()->toArray();
+        return view('shop.product', compact('product', 'productAdditionalImages'));
     }
 
     /**
@@ -289,7 +290,6 @@ class ShopController extends Controller
     {
         $rowId = Input::get('row_id');
         Cart::instance('favourites')->remove($rowId);
-
         return redirect('/shop/favourites');
     }
 
@@ -331,35 +331,45 @@ class ShopController extends Controller
         //TODO catch error and set which card to use
         $user->charge($total_price * 100);
 
-        $invoice = new Invoice();
-        $invoice->user_id = $user->id;
-        $invoice->invoice_id = str_random(50);
-        $invoice->order_no = rand(pow(10, 9) - 1, pow(10, 10) - 1);
-        $invoice->sub_total = $total_price;
-        $invoice->tax = env('TAX_RATE') * $total_price;
-        $invoice->save();
-        $invoice_id = $invoice->id;
+        try {
+             $user->charge($total_price * 100);
+            $invoice = new Invoice();
+            $invoice->user_id = $user->id;
+            $invoice->invoice_id = str_random(50);
+            $invoice->order_no = rand(pow(10, 9) - 1, pow(10, 10) - 1);
+            $invoice->sub_total = $total_price;
+            $invoice->tax = env('TAX_RATE') * $total_price;
+            $invoice->save();
+            $invoice_id = $invoice->id;
 
-        foreach ($cart_content as $item) {
-            $invoice_item = new InvoiceItem();
-            $invoice_item->invoice_id = $invoice_id;
-            $invoice_item->product_id = $item->options->id;
-            $invoice_item->qty = $item->qty;
-            $invoice_item->save();
-        }
-
-        Cart::destroy();
-        Session::flash('alert-success', 'Thank you for shopping with us!');
-        event(new  OrderPlaced($invoice));
-
-        //Telegram support can be enabled if the .env values are filled
-        if (strlen(env('TELEGRAM_BOT_TOKEN')) > 2) {
-            if ($this->checkChatID()) {
-                $this->sendTelegram('New order placed! Order no. '.$invoice->order_no);
+            foreach ($cart_content as $item) {
+                $invoice_item = new InvoiceItem();
+                $invoice_item->invoice_id = $invoice_id;
+                $invoice_item->product_id = $item->options->id;
+                DB::table('products')->whereId($item->options->id)->decrement('stock');
+                DB::table('products')->whereId($item->options->id)->increment('sold_count');
+                $invoice_item->qty = $item->qty;
+                $invoice_item->save();
             }
+
+            Cart::destroy();
+            Session::flash('alert-success', 'Thank you for shopping with us!');
+            event(new  OrderPlaced($invoice));
+
+            //Telegram support can be enabled if the .env values are filled
+            if (strlen(env('TELEGRAM_BOT_TOKEN')) > 2) {
+                if ($this->checkChatID()) {
+                    $this->sendTelegram('New order placed! Order no. '.$invoice->order_no);
+                }
+            }
+
+            return redirect('/account');
+        } catch (Exception $e) {
+            Session::flash('alert-danger', 'Payment failed! Please update your payment card');
+            return redirect('/account/payment_cards');
         }
 
-        return redirect('/account');
+
     }
 
     /**

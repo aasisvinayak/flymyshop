@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('admin-layouts.admin')
+@section('title')
+    View Product
+@stop
+
 @section('content')
 
 
@@ -35,7 +39,7 @@
             font-size: 20px;
             margin-top: 10px;
         }
-        
+
         .display-items {
             padding: 0px 0 0px 0;
             float: left;
@@ -83,7 +87,7 @@
         <div class="content-wrapper">
             <div class="item-container">
                 <div class="container">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
 
                         <div class="col-md-6">
                             <div class="product col-md-3 service-image-left">
@@ -100,18 +104,12 @@
 
                             </div>
 
-
-
-
-
-
-
                             <div class="container display-items col-sm-2 col-md-2 pull-left">
                                 <center>
 
                                     <?php $i=0; ?>
                                     @foreach($productAdditionalImages as $image)
-                                            <?php $i++; ?>
+                                        <?php $i++; ?>
                                         <a id="item-{{$i}}" class="display-item">
                                             <img src="/uploads/{{$image['image_name']}}" alt=""></img>
                                         </a>
@@ -122,15 +120,23 @@
                         </div>
 
 
+                         <span style="color:red;  float: right;">
+                                   <h4>Status: {{$product->status}}</h4>
+                                </span>
+
                         <div class="col-md-6">
-                            <div class="product-title"> {{$product->title}}  </div>
+                            <div class="product-title"> {{$product->title}}
+
+
+
+                            </div>
                             <div class="product-desc">{{$product->description}}</div>
 
                             {{--TODO Add product rating facility--}}
 
                             {{--<div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i>--}}
-                                {{--<i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> <i--}}
-                                        {{--class="fa fa-star-o"></i>--}}
+                            {{--<i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> <i--}}
+                            {{--class="fa fa-star-o"></i>--}}
                             {{--</div>--}}
                             <hr>
                             <div class="product-price">{{$product->price}}</div>
@@ -162,8 +168,7 @@
                                 {{Form::close()}}
                             </div>
 
-
-                            @else
+                                @else
 
                                 <div style="color: red;" class="product-stock">Not In Stock</div>
                                 <hr>
@@ -180,7 +185,7 @@
             </div>
 
             <div class="container-fluid" style="margin-top:5% ">
-                <div class="col-md-12 product-info">
+                <div class="col-md-6 product-info">
                     <ul id="myTab" class="nav nav-tabs nav_tabs">
 
                         <li class="active"><a href="#service-one" data-toggle="tab">DETAILS</a></li>
@@ -190,7 +195,7 @@
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade in active" id="service-one">
 
-                            <section class="container product-info">
+                            <section class=" product-info">
 
                                 {{$product->details}}
 

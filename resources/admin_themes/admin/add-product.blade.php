@@ -5,7 +5,7 @@
 
 @section('content')
 
-    @include('partials._form-error')
+    @include('admin-partials._form-error')
 
 
     <div class="container">
@@ -13,7 +13,7 @@
 
     {{Form::open(array('action'=>'ProductController@store', 'files' => true))}}
 
-    @include('partials._product-form',array('productButton'=>'Add Product'))
+    @include('admin-partials._product-form',array('productButton'=>'Add Product'))
 
     {{Form::close()}}
 

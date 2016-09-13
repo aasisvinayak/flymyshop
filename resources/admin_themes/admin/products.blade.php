@@ -36,7 +36,9 @@
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Description </th>
+                <th>Status </th>
                 <th class="text-center">Action</th>
+                <th class="text-center">Update Status</th>
             </tr>
             </thead>
 
@@ -46,11 +48,29 @@
                     <td>{{$item->title}}</td>
                     <td>{{$item->price}}</td>
                     <td>{{$item->description}}</td>
+                    <td>{{$item->status}}</td>
                     <td class="text-center">
-                        <a class='btn btn-info btn-xs' href="/shop/product/{{$item->product_id}} ">
+                        <a class='btn btn-info btn-xs' href="/admin/products/{{$item->id}}/ ">
                             <span class="glyphicon glyphicon-edit"></span> View</a>
                         <a class='btn btn-info btn-xs' href="/admin/products/{{$item->id}}/edit ">
                             <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    </td>
+
+                    <td class="text-center">
+                        {{Form::open(array('action'=>"ProductController@updateProductStatus"))}}
+
+                        <input type="hidden" name="id" value="{{$item->id}}">
+                        {{ Form::select('status', [
+                                       '1' => 'Publish',
+                                       '0' => 'Un-publish'
+                                       ]
+                                        ) }}
+
+                        <br> <br>
+                        {{Form::submit('Update', array('class' =>" btn-primary  btn-sm"))}}
+
+                        {{Form::close()}}
+
                     </td>
                 </tr>
 

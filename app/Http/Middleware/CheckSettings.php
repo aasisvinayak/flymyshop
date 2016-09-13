@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Request;
 
 class CheckSettings
@@ -11,20 +13,26 @@ class CheckSettings
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (DB::connection()->getDatabaseName()) {
-            if (Request::is('install')) {
-                redirect('/');
+        try {
+            if (!is_null((DB::connection()->getDatabaseName()))) {
+                if (Request::is('install')) {
+                    return redirect('/');
+                }
+                return $next($request);
+            } else {
+                return redirect('/install');
             }
 
-            return $next($request);
-        } else {
-            redirect('/');
+        } catch (PDOException $e) {
+            echo('Error');
+            exit();
+
         }
     }
 }

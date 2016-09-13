@@ -18,6 +18,7 @@ class Product extends Model
         'price',
         'is_featured',
         'status',
+        'stock'
     ];
 
     public function getPriceAttribute($value)
@@ -35,7 +36,8 @@ class Product extends Model
     {
         return $query->select('product_id', 'id', 'make',
             'title', 'price', 'image_name', 'description')
-            ->where('category_id', '=', $category_id);
+            ->where('category_id', '=', $category_id)
+            ;
     }
 
     public function scopeGetID($query, $slug)
@@ -46,8 +48,18 @@ class Product extends Model
     public function scopeFeatured($query)
     {
         return $query->select('product_id', 'id',
-            'title', 'price', 'image_name', 'description')->where('is_featured', '=', '1')
+            'title', 'price', 'image_name', 'description')
+            ->where('is_featured', '=', '1')
+            ->where('status', '=', '1')
             ->orderBy('id', 'DESC')->take(9)->skip(0)->get();
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->select('product_id', 'id',
+            'title', 'price', 'image_name', 'description')
+            ->where('status', '=', '1')
+            ->orderBy('id', 'DESC')->skip(0)->get();
     }
 
     public function scopeSearch($query, $search)
@@ -74,5 +86,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo('App\Http\Models\Category');
+    }
+
+    public function additionalImages()
+    {
+        return $this->hasMany('App\Http\Models\ProductImage');
     }
 }

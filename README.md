@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/aasisvinayak/flymyshop.svg?branch=master)](https://travis-ci.org/aasisvinayak/flymyshop)
 [![Latest Stable Version](https://poser.pugx.org/aasisvinayak/shop/v/stable)](https://packagist.org/packages/aasisvinayak/shop)
 [![License](https://poser.pugx.org/aasisvinayak/shop/license)](https://packagist.org/packages/aasisvinayak/shop)
+<!--[![StyleCI](https://styleci.io/repos/66875598/shield)](https://styleci.io/repos/66875598)-->
 
 
 # FlyMyShop
@@ -22,7 +23,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 - Ability to refund orders
 - Throttling to protect against brute force attacks
 - reCAPTCHA to prevent abuse
-- Newsletter support
+- Newsletter support (Integrated MailChimp)
 - Multi-currency support
 
 # Features

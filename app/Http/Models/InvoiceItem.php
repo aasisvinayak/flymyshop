@@ -10,4 +10,12 @@ class InvoiceItem extends Model
     {
         return $this->belongsTo('App\Http\Models\Invoice');
     }
+
+    public function scopeProductsSold($query, $time)
+    {
+        return $query->select('qty', 'created_at')
+            ->where('created_at', '>', $time)->sum('qty');
+    }
+
+    
 }

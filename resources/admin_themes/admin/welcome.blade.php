@@ -1,3 +1,6 @@
+
+
+
 @extends('admin-layouts.admin')
 @section('title')
     Dashboard
@@ -17,25 +20,25 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <a href="#" class="btn btn-success btn-lg" role="button"><span
+                        <a href="/admin/users" class="btn btn-success btn-lg" role="button"><span
                                     class="glyphicon glyphicon-user"></span> <br/>Users</a>
-                        <a href="#" class="btn btn-info btn-lg" role="button"><span
+                        <a href="/admin/products" class="btn btn-info btn-lg" role="button"><span
                                     class="glyphicon glyphicon-gift"></span> <br/>Products</a>
-                        <a href="#" class="btn btn-primary btn-lg" role="button"><span
+                        <a href="/admin/categories" class="btn btn-primary btn-lg" role="button"><span
                                     class="glyphicon glyphicon-list"></span> <br/>Categories</a>
-                        <a href="#" class="btn btn-primary btn-lg" role="button"><span
+                        <a href="/admin/stocks" class="btn btn-primary btn-lg" role="button"><span
                                     class="glyphicon glyphicon-folder-close"></span> <br/>Stock</a>
                     </div>
 
                     <div class="col-md-6">
-                        <a href="#" class="btn btn-danger btn-lg" role="button"><span
+                        <a href="/admin/reports" class="btn btn-danger btn-lg" role="button"><span
                                     class="glyphicon glyphicon-pushpin"></span> <br/>Reports</a>
-                        <a href="#" class="btn btn-warning btn-lg" role="button"><span
+                        <a href="/admin/orders" class="btn btn-warning btn-lg" role="button"><span
                                     class="glyphicon glyphicon-usd"></span> <br/>Sales</a>
-                        <a href="#" class="btn btn-primary btn-lg" role="button"><span
+                        <a href="/admin/settings" class="btn btn-primary btn-lg" role="button"><span
                                     class="glyphicon glyphicon-wrench"></span> <br/>Settings</a>
-                        <a href="#" class="btn btn-primary btn-lg" role="button"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span> <br/>Marketing</a>
+                        <a href="/admin/payments" class="btn btn-primary btn-lg" role="button"><span
+                                    class="glyphicon glyphicon-thumbs-up"></span> <br/>Payments</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +112,8 @@
                                             </div>
 
                                             <div class="ao-volume">
-                                                $ 100.00
+
+                                                {{$stats['revenueToday']}}
                                             </div>
                                         </div>
                                     </div>
@@ -132,11 +136,11 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="ao">
                                             <div class="ao-date">
-                                                Total
+                                                All Time
                                             </div>
 
                                             <div class="ao-volume">
-                                                $1000.00
+                                                {{$stats['revenueAllTime']}}
                                             </div>
                                         </div>
                                     </div>
@@ -154,6 +158,76 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Orders</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+
+                    <div  class="col-md-3">
+
+                        <section id="labels">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="ao">
+                                            <div class="ao-date">
+                                                Today
+                                            </div>
+
+                                            <div class="ao-volume">
+
+                                                {{$stats['invoiceCountToday']}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                    </div>
+
+                    <div  class="col-md-3">
+
+                    </div>
+
+                    <div  class="col-md-3">
+
+                        <section id="labels">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="ao">
+                                            <div class="ao-date">
+                                                All Time
+                                            </div>
+
+                                            <div class="ao-volume">
+                                                {{$stats['invoiceCountAllTime']}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="col-md-8">
@@ -177,7 +251,16 @@
 
                     <script>
                         $(function () {
-                            $('#stats').highcharts({
+
+                            {{$graphY}}
+
+                            var month_array=[
+                            @foreach($monthNames as $monthName)
+                                '{{$monthName}}',
+                            @endforeach
+                            ];
+
+                           $('#stats').highcharts({
                                 chart: {
                                     type: 'column'
                                 },
@@ -188,20 +271,7 @@
                                     text: 'For: Laravel Shop'
                                 },
                                 xAxis: {
-                                    categories: [
-                                        'Jan',
-                                        'Feb',
-                                        'Mar',
-                                        'Apr',
-                                        'May',
-                                        'Jun',
-                                        'Jul',
-                                        'Aug',
-                                        'Sep',
-                                        'Oct',
-                                        'Nov',
-                                        'Dec'
-                                    ],
+                                    categories:  month_array,
                                     crosshair: true
                                 },
                                 yAxis: {
@@ -213,7 +283,7 @@
                                 tooltip: {
                                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
                                     footerFormat: '</table>',
                                     shared: true,
                                     useHTML: true
@@ -226,11 +296,7 @@
                                 },
                                 series: [{
                                     name: 'Revenue',
-                                    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-                                }, {
-                                    name: 'Products Sold',
-                                    data: [1, 12, 12, 16, 3, 9, 29, 21, 22,8,19, 22]
+                                    data: value_array
 
                                 },
                                 ]

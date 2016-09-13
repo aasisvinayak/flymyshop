@@ -75,7 +75,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <h1> <a class="shop-name" href="#">
+            <h1> <a class="shop-name" href="/admin">
                     Shop Administrator
                 </a></h1>
 

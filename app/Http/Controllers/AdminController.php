@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Invoice;
+use App\Http\Models\InvoiceItem;
 use App\Http\Models\Product;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Newsletter\Newsletter;
 use Stripe\Charge;
 use Stripe\Stripe;
 use View;
@@ -30,7 +34,63 @@ class AdminController extends Controller
      */
     public function welcome()
     {
-        return view('admin/welcome');
+        //TODO: account for previous year and change order
+        $graph=$this->salesGraphData()->toArray();
+        $stats= $this->stats();
+        $formattedGraph=[];
+        for ($i = 1; $i < 13; $i++) {
+            $num_padded = sprintf("%02d", $i);
+            array_key_exists($num_padded, $graph) ?
+                $formattedGraph[$num_padded] =$graph[$num_padded]:
+                $formattedGraph[(string)$num_padded] =0;
+        }
+
+        $months=  array_keys($formattedGraph);
+        $monthNames=array();
+        foreach ($months as $number) {
+            $mName= date("F", mktime(0, 0, 0, $number, 10));
+            array_push($monthNames, $mName);
+        }
+
+        $valueArray = array();
+        foreach ($formattedGraph as $item) {
+            array_push($valueArray, $item['sum']);
+        }
+        $arrayInJson = json_encode($valueArray);
+        $graphY= "var value_array = ". $arrayInJson . ";\n";
+
+        return view('admin/welcome', compact('graph', 'graphY','monthNames', 'stats'));
+    }
+
+
+    //TODO reuse code
+    public function reports()
+    {
+        $graph=$this->salesGraphData()->toArray();
+        $stats= $this->stats();
+        $formattedGraph=[];
+        for ($i = 1; $i < 13; $i++) {
+            $num_padded = sprintf("%02d", $i);
+            array_key_exists($num_padded, $graph) ?
+                $formattedGraph[$num_padded] =$graph[$num_padded]:
+                $formattedGraph[(string)$num_padded] =0;
+        }
+
+        $months=  array_keys($formattedGraph);
+        $monthNames=array();
+        foreach ($months as $number) {
+            $mName= date("F", mktime(0, 0, 0, $number, 10));
+            array_push($monthNames, $mName);
+        }
+
+        $valueArray = array();
+        foreach ($formattedGraph as $item) {
+            array_push($valueArray, $item['sum']);
+        }
+        $arrayInJson = json_encode($valueArray);
+        $graphY= "var value_array = ". $arrayInJson . ";\n";
+
+       return view('admin/reports', compact('graph', 'graphY','monthNames', 'stats'));
     }
 
     /**
@@ -153,4 +213,113 @@ class AdminController extends Controller
             )
         );
     }
+
+
+
+    //total orders today
+    // total orders this month
+    //total orders this year
+    //total orders all time
+
+    //repeat for
+    //  payment this month
+    // no of products
+    // users
+
+
+    // graph for payment received over last year
+    // graph for users  over last year
+
+
+     function stats()
+    {
+        $today=Carbon::now();
+        $lastYearThisDate=Carbon::now()->subYear();
+        $lastMonthThisDate=Carbon::now()->subMonth();
+        $yesterday=Carbon::now()->subDay();
+
+        $invoiceItem= new InvoiceItem();
+
+        $productsSoldAllTime= $this->returnNumber($invoiceItem->productsSold(0));
+        $productsSoldInYear= $this->returnNumber($invoiceItem->productsSold($lastYearThisDate));
+        $productsSoldInMonth= $this->returnNumber($invoiceItem->productsSold($lastMonthThisDate));
+        $productsSoldToday= $this->returnNumber($invoiceItem->productsSold($yesterday));
+
+
+        $invoice= new Invoice();
+
+        $revenueAllTime=$this->returnNumber($invoice->sales(0));
+        $revenueInYear=$this->returnNumber($invoice->sales($lastYearThisDate));
+        $revenueInMonth=$this->returnNumber($invoice->sales($lastMonthThisDate));
+        $revenueToday=$this->returnNumber($invoice->sales($yesterday));
+
+        $invoiceCountAllTime=$this->returnNumber($invoice->invoiceCount(0));
+        $invoiceCountInYear=$this->returnNumber($invoice->invoiceCount($lastYearThisDate));
+        $invoiceCountInMonth=$this->returnNumber($invoice->invoiceCount($lastMonthThisDate));
+        $invoiceCountToday=$this->returnNumber($invoice->invoiceCount($yesterday));
+
+
+        $userCountAllTime=$this->returnNumber(User::userCount(0));
+        $userCountInYear=$this->returnNumber(User::userCount($lastYearThisDate));
+        $userCountInMonth=$this->returnNumber(User::userCount($lastMonthThisDate));
+        $userCountToday=$this->returnNumber(User::userCount($yesterday));
+
+        return compact(
+            'productsSoldAllTime', 'productsSoldInYear', 'productsSoldInMonth', 'productsSoldToday',
+            'revenueAllTime', 'revenueInYear', 'revenueInMonth', 'revenueToday',
+            'invoiceCountAllTime', 'invoiceCountInYear', 'invoiceCountInMonth', 'invoiceCountToday',
+            'userCountAllTime', 'userCountInYear', 'userCountInMonth', 'userCountToday'
+        );
+
+    }
+
+
+
+     function salesGraphData()
+    {
+
+         $lastYearThisDate=Carbon::now()->subYear();
+        $invoices =  Invoice::select('sub_total', 'created_at')
+            ->where('created_at', '>', $lastYearThisDate)
+            ->get()
+            ->groupBy(
+                function ($date) {
+                    return Carbon::parse($date->created_at)->format('m');
+                }
+            );
+
+        foreach ( $invoices as $item ) {
+            $sub_total=0.00;
+            foreach ( $item as $entry ) {
+                $sub_total=$sub_total+$entry->sub_total;
+            }
+            $item['sum']=$sub_total;
+        }
+
+        return ($invoices);
+
+    }
+
+    /**
+     * TODO: move as helper
+     *
+     * @param $value
+     * @return int|string
+     */
+     function returnNumber($value)
+    {
+        return is_numeric($value)?  $value : 0;
+    }
+
+    /**
+     * TODO: allow editing .env settings from here
+     *
+     * @return View
+     */
+    public function settings()
+    {
+        return view('admin/settings');
+    }
+    
+
 }

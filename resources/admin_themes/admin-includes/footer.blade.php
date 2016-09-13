@@ -112,11 +112,9 @@ $now = $now->year;
     <footer class="footer">
         <div class="row">
             <div class="col-md-3 footer-shop-name">
-                <h2>Laravel Shop</h2>
+                <h2>{{env('SHOP_NAME')}}</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias expedita hic ipsa magni nisi
-                    obcaecati placeat sed similique tenetur veniam. Adipisci atque beatae cumque fugit ipsum molestias,
-                    non nostrum quasi!</p>
+
 
                 <p>© {{$now}} GPLv3 Fly My Cloud Limited</p>
             </div>

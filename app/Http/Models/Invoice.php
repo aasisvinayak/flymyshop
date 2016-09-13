@@ -38,4 +38,16 @@ class Invoice extends Model
     {
         return $query->orderBy('id', 'DESC');
     }
+
+    public function scopeSales($query, $time)
+    {
+        return $query->select('sub_total', 'created_at')
+            ->where('created_at', '>', $time)->sum('sub_total');
+    }
+
+    public function scopeInvoiceCount($query, $time)
+    {
+        return $query->select('id')
+            ->where('created_at', '>', $time)->count();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Category;
 use App\Http\Models\Product;
+use App\Http\Models\ProductImage;
 use App\Http\Requests\ProductRequest;
 use  Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -29,7 +30,29 @@ class ProductController extends Controller
     {
         $products = Product::paginate(10);
 
+
+        foreach ($products as $item) {
+            switch ($item->status) {
+                case 1:
+                    $item->status = 'Published';
+                    break;
+                case 0:
+                    $item->status = 'Un-published';
+                    break;
+                default:
+                    $item->status = 'Status Unavailable';
+            }
+        }
+
         return view('admin/products', compact('products'));
+    }
+
+    public function updateProductStatus(Request $request)
+    {
+        $product = Product::findorFail($request->get('id'));
+        $product->update(array('status' => $request->get('status')));
+        return redirect('admin/products');
+
     }
 
     /**
@@ -54,28 +77,82 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $category_id = Category::select('id')
-        ->where('category_id', '=', $request['category_id'])
-        ->get()->toArray();
+            ->where('category_id', '=', $request['category_id'])
+            ->get()->toArray();
         $category_id = $category_id[0]['id'];
         $request['category_id'] = $category_id;
         $request['product_id'] = str_random(50);
         $request['status'] = 1;
-        $request['stock'] = 0;
         $request['sold_count'] = 0;
         $randomFileName = str_random(50);
         $extension = '';
 
-        if ($request->file('image')->isValid()) {
-            $destinationPath = 'uploads';
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileName = $randomFileName.'.'.$extension;
-            $request->file('image')->move(public_path($destinationPath), $fileName);
+        if (!is_null($request->file('image'))) {
+            if ($request->file('image')->isValid()) {
+                $destinationPath = 'uploads';
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $fileName = $randomFileName . '.' . $extension;
+                $request->file('image')->move(public_path($destinationPath), $fileName);
+            }
         }
 
         $request ['image'] = $randomFileName;
-        $request ['image_name'] = $randomFileName.'.'.$extension;
-        Product::create($request->all());
+        $request ['image_name'] = $randomFileName . '.' . $extension;
+        $product_id = Product::create($request->all())->id;
 
+
+        if (!is_null($request->file('image1'))) {
+            if ($request->file('image1')->isValid()) {
+                $randomFileName = str_random(50);
+                $destinationPath = 'uploads';
+                $extension = $request->file('image1')->getClientOriginalExtension();
+                $fileName = $randomFileName . '.' . $extension;
+                $request->file('image1')->move(public_path($destinationPath), $fileName);
+                $additonalImage = new ProductImage();
+                $additonalImage->create(
+                    array(
+                        'image' => $randomFileName,
+                        'image_name' => $randomFileName . '.' . $extension,
+                        'product_id' => $product_id,
+                    )
+                );
+            }
+
+        }
+        if (!is_null($request->file('image2'))) {
+            if ($request->file('image2')->isValid()) {
+                $randomFileName = str_random(50);
+                $destinationPath = 'uploads';
+                $extension = $request->file('image2')->getClientOriginalExtension();
+                $fileName = $randomFileName . '.' . $extension;
+                $request->file('image2')->move(public_path($destinationPath), $fileName);
+                $additonalImage = new ProductImage();
+                $additonalImage->create(
+                    array(
+                        'image' => $randomFileName,
+                        'image_name' => $randomFileName . '.' . $extension,
+                        'product_id' => $product_id,
+                    )
+                );
+            }
+        }
+        if (!is_null($request->file('image3'))) {
+            if ($request->file('image3')->isValid()) {
+                $randomFileName = str_random(50);
+                $destinationPath = 'uploads';
+                $extension = $request->file('image3')->getClientOriginalExtension();
+                $fileName = $randomFileName . '.' . $extension;
+                $request->file('image3')->move(public_path($destinationPath), $fileName);
+                $additonalImage = new ProductImage();
+                $additonalImage->create(
+                    array(
+                        'image' => $randomFileName,
+                        'image_name' => $randomFileName . '.' . $extension,
+                        'product_id' => $product_id,
+                    )
+                );
+            }
+        }
         return redirect('admin/products/');
     }
 
@@ -89,7 +166,20 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findorFail($id);
-        return $product; // TODO display in view
+
+        switch ($product->status) {
+            case 1:
+                $product->status = 'Published';
+                break;
+            case 0:
+                $product->status = 'Un-published';
+                break;
+            default:
+                $product->status = 'Status Unavailable';
+        }
+
+        $productAdditionalImages = $product->additionalImages()->get()->toArray();
+        return view('admin.product', compact('product', 'productAdditionalImages'));
     }
 
     /**
@@ -110,7 +200,7 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request product request
-     * @param int                      $id      product id
+     * @param int $id product id
      *
      * @return Redirect
      */
@@ -118,6 +208,23 @@ class ProductController extends Controller
     {
         Product::findorFail($id)->update($request->all());
         return redirect('admin/products');
+    }
+
+    public function stocks()
+    {
+        $products = Product::paginate(10);
+        return view('admin/stocks', compact('products'));
+    }
+
+    public function updateStock(Request $request)
+    {
+        $product = Product::findorFail($request->get('id'));
+        $product->update(array(
+            "stock" => $request->get('stock')
+        ));
+
+        return redirect('admin/stocks');
+
     }
 
     /**
