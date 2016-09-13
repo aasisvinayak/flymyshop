@@ -20,7 +20,6 @@ before_script:
 
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --no-interaction --class=UsersTableSeeder
   - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
   - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
