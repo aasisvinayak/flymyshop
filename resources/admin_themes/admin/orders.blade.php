@@ -47,6 +47,8 @@
                         <td>{{$item->status}}</td>
                         <td class="text-center">
 
+                            {{Form::open(array('action'=>"AdminController@updateOrderStatus"))}}
+
                         </td>
                     </tr>
 

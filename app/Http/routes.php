@@ -91,6 +91,8 @@ Route::group(
                 Route::resource('pages', 'PageController');
                 Route::get('/users', 'AdminController@users');
                 Route::get('/orders', 'AdminController@orders');
+                Route::post('/orders', 'AdminController@updateOrderStatus');
+
             }
         );
 
