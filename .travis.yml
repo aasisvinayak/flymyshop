@@ -18,7 +18,6 @@ before_script:
   - chmod -R 777 storage
   - php artisan key:generate --no-interaction
 
-
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --no-interaction --class=UsersTableSeeder
