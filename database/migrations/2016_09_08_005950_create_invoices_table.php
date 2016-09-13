@@ -20,6 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->decimal('sub_total', 10, 2);
             $table->decimal('tax', 10, 2);
             $table->decimal('shipping', 10, 2);
+            $table->smallInteger('status')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');

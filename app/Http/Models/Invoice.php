@@ -31,4 +31,9 @@ class Invoice extends Model
     {
         return  date('F d, Y', strtotime($value));
     }
+
+    public function scopeIdDescending($query)
+    {
+        return $query->orderBy('id','DESC');
+    }
 }

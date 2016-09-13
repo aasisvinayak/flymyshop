@@ -24,41 +24,42 @@
             <table class="table table-striped shop_tab">
                 <thead>
                 <tr>
-                    <th>Type</th>
+                    <th>Order No</th>
+                    <th>Date </th>
                     <th>Amount</th>
-                    <th>Date</th>
-                    <th>Refund </th>
-                    <th>Currency </th>
-                    <th>Customer </th>
-                    <th>Card (last 4 digits) </th>
+                    <th>Tax</th>
+                    <th>Shipping </th>
+                    <th>Customer</th>
                     <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
 
-                @foreach($charges as $item)
+                @foreach($orders as $item)
                     <tr>
-                        <td>{{$item->object}}</td>
-                        <td>{{$item->amount/100}}</td>
-                        <td>{{$item->created}}</td>
-                        <td>{{$item->amount_refunded}}</td>
-                        <td>{{$item->currency}}</td>
-                        <td>{{$item->customer}}</td>
+                        <td>{{$item->order_no}}</td>
+                        <td>{{$item->created_at}}</td>
+                        <td>{{$item->sub_total}}</td>
+                        <td>{{$item->tax}}</td>
+                        <td>{{$item->shipping}}</td>
+                        <td>{{$item->user_id}}</td>
                         <td>{{$item->last4}}</td>
                         <td>{{$item->status}}</td>
                         <td class="text-center">
-                            <a class='btn btn-info btn-xs' href="/shop/product/{{$item->id}} ">
-                                <span class="glyphicon glyphicon-edit"></span> Refund</a>
+
                         </td>
                     </tr>
 
                 @endforeach
 
             </table>
+
+
+
         </div>
     </div>
 
-
+    {{ $orders->links() }}
 
 
 @stop

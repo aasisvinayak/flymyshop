@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Invoice;
 use App\User;
 use Stripe\Charge;
 use Stripe\Stripe;
@@ -59,5 +60,45 @@ class AdminController extends Controller
         }
 
         return view('admin/sales', compact('charges'));
+    }
+
+    /**
+     * List of orders
+     *
+     * @return View
+     */
+    public function orders()
+    {
+        $orders= Invoice::IdDescending()->paginate(10);
+        foreach ($orders as $item) {
+            $item->user_id=User::findorFail($item->user_id)->email;
+
+            if(is_null($item->status)){
+                $item->status="Order placed";
+            } else {
+                switch ($item->status) {
+                    case 1:
+                        $item->status = "Currently being processed!";
+                        break;
+                    case 2:
+                        $item->status = "Currently being processed!";
+                        break;
+                    case 3:
+                        $item->status = "Currently being processed!";
+                        break;
+                    case 4:
+                        $item->status = "Currently being processed!";
+                        break;
+                    default:
+                        $item->status = "Status Unavailable";
+                }
+            }
+
+            if($item->status==1){
+                $item->status="Order placed";
+            }
+
+        }
+        return view('admin/orders', compact('orders'));
     }
 }

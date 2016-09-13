@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Invoice;
 use App\Http\Models\Product;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -27,7 +28,6 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $invoices = Invoice::ByUser($user->id)->paginate(10);
-
         return view('account/order-list', compact('invoices'));
     }
 
