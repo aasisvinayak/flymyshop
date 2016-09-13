@@ -1,4 +1,4 @@
-@extends('admin-admin-layouts.admin')
+@extends('admin-layouts.admin')
 @section('title')
     Users
 @stop
