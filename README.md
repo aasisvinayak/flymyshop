@@ -23,6 +23,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 - Throttling to protect against brute force attacks
 - reCAPTCHA to prevent abuse
 - Newsletter support
+- Multi-currency support
 
 # Features
 

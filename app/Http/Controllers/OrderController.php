@@ -55,7 +55,7 @@ class OrderController extends Controller
 
 
         foreach ($invoice_items as $item) {
-            $product = Product::findorFail($item->product_id);
+            $product =  Product::findorFail($item->product_id);
             $product['qty'] = $item->qty;
             array_push($products, $product);
         }

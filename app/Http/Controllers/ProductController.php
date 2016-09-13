@@ -6,6 +6,7 @@ use App\Http\Models\Category;
 use App\Http\Models\Product;
 use App\Http\Requests\ProductRequest;
 use  Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class ProductController.
@@ -88,7 +89,6 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findorFail($id);
-
         return $product; // TODO display in view
     }
 
@@ -103,7 +103,6 @@ class ProductController extends Controller
     {
         $product = Product::findorFail($id);
         $categories_list = Category::lists('title', 'category_id');
-
         return view('admin.edit-product', compact('product', 'categories_list'));
     }
 
@@ -113,12 +112,11 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request product request
      * @param int                      $id      product id
      *
-     * @return \Illuminate\Http\Response
+     * @return Redirect
      */
     public function update(Request $request, $id)
     {
         Product::findorFail($id)->update($request->all());
-
         return redirect('admin/products');
     }
 
@@ -127,10 +125,11 @@ class ProductController extends Controller
      *
      * @param int $id product id
      *
-     * @return \Illuminate\Http\Response
+     * @return Redirect
      */
     public function destroy($id)
     {
         Product::findorFail($id)->delete();
+        return redirect('admin/products');
     }
 }

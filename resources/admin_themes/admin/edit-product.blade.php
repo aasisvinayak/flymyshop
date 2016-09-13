@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('admin-layouts.admin')
+@section('title')
+    Edit product
+@stop
+
 @section('content')
 
 

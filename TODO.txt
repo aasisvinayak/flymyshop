@@ -1,5 +1,6 @@
 Un-publish categories
+Un-publish products
+Add reports
 Promo codes
-Separate admin partials and includes to admin folder
 "Danger Zone" implementation (admin menu)
 Localization support (+remove messages from code)

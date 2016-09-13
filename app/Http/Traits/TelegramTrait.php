@@ -38,8 +38,9 @@ trait TelegramTrait
     public function getChatID()
     {
         $response = $this->telegram->getUpdates();
-
-        return $response[0]['message']['chat']['id'];
+        if (count($response)>0) {
+            return $response[0]['message']['chat']['id'];
+        }
     }
 
     /**

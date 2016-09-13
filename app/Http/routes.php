@@ -85,12 +85,13 @@ Route::group(
                     'middleware' => ['auth', 'admin'], ],
             function () {
                 Route::get('/', 'AdminController@welcome');
-                Route::get('/sales', 'AdminController@sales');
+                Route::get('/payment', 'AdminController@payment');
                 Route::resource('categories', 'CategoryController');
                 Route::resource('products', 'ProductController');
                 Route::resource('pages', 'PageController');
                 Route::get('/users', 'AdminController@users');
                 Route::get('/orders', 'AdminController@orders');
+                Route::get('/orders/{id}', 'AdminController@viewOrder');
                 Route::post('/orders', 'AdminController@updateOrderStatus');
             }
         );

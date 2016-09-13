@@ -19,7 +19,7 @@
                     <li><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
                     <li><a href="/admin/orders"><span class="glyphicon glyphicon-user"></span> Orders</a></li>
                     <li><a href="/admin/reports"><span class="glyphicon glyphicon-user"></span> Reports</a></li>
-                    <li><a href="/admin/sales"><span class="glyphicon glyphicon-user"></span> Manage Payments</a> </li>
+                    <li><a href="/admin/payment"><span class="glyphicon glyphicon-user"></span> Manage Payments</a> </li>
                     <li><a href="/admin/pages"><span class="glyphicon glyphicon-user"></span> Shop Pages</a></li>
 
 

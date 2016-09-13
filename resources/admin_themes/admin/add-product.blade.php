@@ -1,6 +1,9 @@
-@extends('layouts.main')
-@section('content')
+@extends('admin-layouts.admin')
+@section('title')
+    Add product
+@stop
 
+@section('content')
 
     @include('partials._form-error')
 

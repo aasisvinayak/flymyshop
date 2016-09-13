@@ -1,6 +1,6 @@
-@extends('layouts.admin')
+@extends('admin-layouts.admin')
 @section('title')
-    Sales Report
+    Orders
 @stop
 
 @section('content')
@@ -19,18 +19,17 @@
         }
     </style>
 
-    <div class="container">
-        <div class="row col-md-8  custyle">
+    <div class="">
+        <div class="row col-md-6 custyle">
             <table class="table table-striped shop_tab">
                 <thead>
                 <tr>
                     <th>Order No</th>
                     <th>Date </th>
                     <th>Amount</th>
-                    <th>Tax</th>
-                    <th>Shipping </th>
                     <th>Customer</th>
                     <th>Status</th>
+                    <th>View</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -40,14 +39,26 @@
                         <td>{{$item->order_no}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->sub_total}}</td>
-                        <td>{{$item->tax}}</td>
-                        <td>{{$item->shipping}}</td>
                         <td>{{$item->user_id}}</td>
-                        <td>{{$item->last4}}</td>
                         <td>{{$item->status}}</td>
+                        <td><a class="btn btn-primary" href="/admin/orders/{{$item->id}}">View Order</a></td>
                         <td class="text-center">
-
                             {{Form::open(array('action'=>"AdminController@updateOrderStatus"))}}
+
+                            <input type="hidden" name="id" value="{{$item->id}}">
+                            {{ Form::select('status', [
+                                           '1' => 'Currently being processed!',
+                                           '2' => 'At Warehouse',
+                                           '3' => 'Dispatched',
+                                           '4' => 'Cancelled & Refund Pending',
+                                           '5' => 'Cancelled & Refund Issued',
+                                           ]
+                                            ) }}
+
+                            <br> <br>
+                            {{Form::submit('Update', array('class' =>" btn-primary  btn-sm"))}}
+
+                            {{Form::close()}}
 
                         </td>
                     </tr>

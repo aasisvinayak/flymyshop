@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin-layouts.admin')
 @section('title')
     Add a new page
 @stop

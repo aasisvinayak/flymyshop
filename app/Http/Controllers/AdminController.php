@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Invoice;
+use App\Http\Models\Product;
 use App\User;
+use Illuminate\Http\Request;
 use Stripe\Charge;
 use Stripe\Stripe;
 use View;
@@ -48,7 +50,7 @@ class AdminController extends Controller
      *
      * @return View
      */
-    public function sales()
+    public function payment()
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
         $charges = Charge::all();
@@ -81,13 +83,16 @@ class AdminController extends Controller
                         $item->status = 'Currently being processed!';
                         break;
                     case 2:
-                        $item->status = 'Currently being processed!';
+                        $item->status = 'At Warehouse';
                         break;
                     case 3:
-                        $item->status = 'Currently being processed!';
+                        $item->status = 'Dispatched';
                         break;
                     case 4:
-                        $item->status = 'Currently being processed!';
+                        $item->status = 'Cancelled & Refund Pending';
+                        break;
+                    case 5:
+                        $item->status = 'Cancelled & Refund Issued';
                         break;
                     default:
                         $item->status = 'Status Unavailable';
@@ -102,7 +107,50 @@ class AdminController extends Controller
         return view('admin/orders', compact('orders'));
     }
 
-    public function updateOrderStatus()
+    /**
+     * Update status of the order
+     *
+     * @param Request $request Status update request
+     * 
+     * @return mixed
+     */
+    public function updateOrderStatus(Request $request)
     {
+        $invoice=Invoice::findorFail($request->get('id'));
+        $invoice->update(array('status'=>$request->get('status')));
+        return redirect('admin/orders');
+    }
+
+    /**
+     * View individual order
+     * TODO: reuse code in account controller
+     *
+     * @param int $id order_id
+     *
+     * @return View
+     */
+    public function viewOrder($id)
+    {
+        $invoice=Invoice::findorFail($id);
+        $invoice_items = $invoice->invoice_items->all();
+        $order_no = $invoice->order_no;
+        $products = [];
+
+        $sub_total = $invoice->sub_total;
+        $shipping = $invoice->shipping;
+        $tax = $invoice->tax;
+        $invoice_date = $invoice->created_at;
+
+        foreach ($invoice_items as $item) {
+            $product = Product::findorFail($item->product_id);
+            $product['qty'] = $item->qty;
+            array_push($products, $product);
+        }
+
+        return view(
+            'admin/order', compact(
+                'products', 'order_no', 'sub_total', 'shipping', 'tax', 'invoice_date'
+            )
+        );
     }
 }

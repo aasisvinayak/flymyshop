@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('admin-layouts.admin')
+@section('title')
+    Edit category
+@stop
+
 @section('content')
 
 @include('partials._form-error')

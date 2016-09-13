@@ -1,4 +1,8 @@
-@extends('layouts.main')
+@extends('admin-layouts.admin')
+@section('title')
+    Add category
+@stop
+
 @section('content')
 
 
