@@ -18,13 +18,10 @@ class CheckSettings
      */
     public function handle($request, Closure $next)
     {
-
-
         $env_path = base_path('.env');
         if (file_exists($env_path)) {
-
             try {
-                if (!is_null((DB::connection()->getDatabaseName()))) {
+                if (! is_null((DB::connection()->getDatabaseName()))) {
                     if (Request::is('install')) {
                         return redirect('/');
                     }
@@ -40,11 +37,11 @@ class CheckSettings
         } else {
             try {
                 copy(base_path('.env.sample'), $env_path);
+
                 return redirect('/');
             } catch (\Error $err) {
                 exit('Please check FlyMyShop has write permissions!');
             }
-
         }
     }
 }
