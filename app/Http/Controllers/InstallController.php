@@ -7,7 +7,7 @@ use App\Http\Requests\InstallRequest;
 use App\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use \Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class InstallController extends Controller
@@ -20,7 +20,7 @@ class InstallController extends Controller
     public function index()
     {
         try {
-            if (!is_null((DB::connection()->getDatabaseName()))) {
+            if (! is_null((DB::connection()->getDatabaseName()))) {
                 return redirect('/');
             } else {
                 return view('install/install');
@@ -33,7 +33,7 @@ class InstallController extends Controller
 
     public function process(InstallAdminUserRequest $request)
     {
-        if (!Schema::hasTable('users')) {
+        if (! Schema::hasTable('users')) {
             echo 'Please wait while we setup the shop ............. <br>';
             Artisan::call('migrate');
             ob_end_flush();
@@ -44,14 +44,13 @@ class InstallController extends Controller
 
             $user = User::findorFail(1);
             $user->update(
-                array(
+                [
                     'email' => $request->get('admin_user'),
-                    'password' => Hash::make($request->get('admin_password'))
-                )
+                    'password' => Hash::make($request->get('admin_password')),
+                ]
             );
-
         } else {
-            echo "You can already installed FlyMyShop!";
+            echo 'You can already installed FlyMyShop!';
             exit();
         }
 
@@ -67,46 +66,42 @@ class InstallController extends Controller
             'DB_PORT' => $request->get('DB_PORT'),
             'DB_HOST' => $request->get('DB_HOST'),
             'DB_DATABASE' => $request->get('DB_DATABASE'),
-            'SHOP_NAME' => $request->get('SHOP_NAME')
+            'SHOP_NAME' => $request->get('SHOP_NAME'),
         ]);
         if ($env_update) {
             return redirect('install/step-2');
-
         } else {
-            echo "Error occurred! Please make sure that .env file is writable";
+            echo 'Error occurred! Please make sure that .env file is writable';
         }
     }
 
     public function postInstall()
     {
         try {
-            if (!is_null((DB::connection()->getDatabaseName()))) {
-                if ( Schema::hasTable('users')) {
-                    exit("You have setup FlyMyShop already!");
+            if (! is_null((DB::connection()->getDatabaseName()))) {
+                if (Schema::hasTable('users')) {
+                    exit('You have setup FlyMyShop already!');
                 } else {
                     return view('install/admin-setup');
                 }
             } else {
-
             }
-
         } catch (PDOException $e) {
             echo 'Error';
             exit();
         }
-
     }
 
-    protected function save($shop_config = array())
+    protected function save($shop_config = [])
     {
-        if (!is_null($shop_config)) {
+        if (! is_null($shop_config)) {
             $env = preg_split('/\s+/', file_get_contents(base_path('.env')));
             foreach ($shop_config as $key => $value) {
                 $found = false;
                 foreach ($env as $env_key => $env_value) {
-                    $entry = explode("=", $env_value);
+                    $entry = explode('=', $env_value);
                     if ($entry[0] == $key) {
-                        $env[$env_key] = $key . "=" . $value;
+                        $env[$env_key] = $key.'='.$value;
                         $found = true;
                     } else {
                         $env[$env_key] = $env_value;
@@ -118,15 +113,16 @@ class InstallController extends Controller
                 }
             }
 
-            $newValues = array();
+            $newValues = [];
             foreach ($shop_config as $key => $value) {
-                $new = $key . "=" . $value;
+                $new = $key.'='.$value;
                 array_push($newValues, $new);
             }
 
             $env = implode("\n", $env);
             $envAdditional = implode("\n", $newValues);
-            file_put_contents(base_path('.env'), $env . "\n" . $envAdditional);
+            file_put_contents(base_path('.env'), $env."\n".$envAdditional);
+
             return true;
         } else {
             return false;
