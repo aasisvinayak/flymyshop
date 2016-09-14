@@ -35,11 +35,11 @@ class InstallController extends Controller
     {
         if (! Schema::hasTable('users')) {
             echo 'Please wait while we setup the shop ............. <br>';
-            Artisan::call('migrate', array('--force' => true));
+            Artisan::call('migrate', ['--force' => true]);
             ob_end_flush();
             echo 'Working on the database and adding admin user ...... <br>';
             ob_start();
-            Artisan::call('db:seed', array('--force' => true));
+            Artisan::call('db:seed', ['--force' => true]);
             echo 'Working on it ...... <br>';
 
             $user = User::findorFail(1);
@@ -61,7 +61,7 @@ class InstallController extends Controller
     {
         echo 'Setting up database<br>';
 
-        $shopName=preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
+        $shopName = preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
         $env_update = $this->save([
             'DB_PASSWORD' => $request->get('DB_PASSWORD'),
             'DB_USERNAME' => $request->get('DB_USERNAME'),
