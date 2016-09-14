@@ -84,12 +84,6 @@ use Gloudemans\Shoppingcart\Facades\Cart;
                     {{Form::close()}}
 
 
-
-
-
-
-
-
                 </span>
                     </div>
                 </li>

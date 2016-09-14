@@ -18,19 +18,33 @@ class CheckSettings
      */
     public function handle($request, Closure $next)
     {
-        try {
-            if (! is_null((DB::connection()->getDatabaseName()))) {
-                if (Request::is('install')) {
-                    return redirect('/');
-                }
 
-                return $next($request);
-            } else {
-                return redirect('/install');
+
+        $env_path = base_path('.env');
+        if (file_exists($env_path)) {
+
+            try {
+                if (!is_null((DB::connection()->getDatabaseName()))) {
+                    if (Request::is('install')) {
+                        return redirect('/');
+                    }
+
+                    return $next($request);
+                } else {
+                    return redirect('/install');
+                }
+            } catch (PDOException $e) {
+                echo 'Error';
+                exit();
             }
-        } catch (PDOException $e) {
-            echo 'Error';
-            exit();
+        } else {
+            try {
+                copy(base_path('.env.sample'), $env_path);
+                return redirect('/');
+            } catch (\Error $err) {
+                exit('Please check FlyMyShop has write permissions!');
+            }
+
         }
     }
 }

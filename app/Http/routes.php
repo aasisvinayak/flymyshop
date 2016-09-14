@@ -2,6 +2,11 @@
 
 
 Route::get('install', 'InstallController@index');
+Route::post('install', 'InstallController@installShop');
+Route::get('install/step-2', 'InstallController@postInstall');
+Route::post('install/step-2', 'InstallController@process');
+
+
 Route::group(
     ['middleware' => ['install', 'menu']],
     function () {
