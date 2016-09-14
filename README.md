@@ -8,6 +8,8 @@
 
 A free open source e-commerce platform for online merchants based on customised version of Laravel.
 
+![FlyMyShop Demo](/thumbnail.png)
+
 # Overview
 
 FlyMyShop is a fully fledged e-commerce platform for online merchants. 
@@ -33,8 +35,20 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 - OS independent
 - Laravel based
 
+#Automated Installation and Shop Configuration
 
-# Installation 
+Please follow the steps below to install FlyMyShop on your web server
+
+a. Download [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.1/flymyshop_v0.0.1.zip) file
+b. Unzip and upload to your server
+c. Visit the public folder
+d. Follow the instructions
+
+Please make sure that only public directory is visible to the outside world!
+
+#  Installation Methods
+ 
+ You can also install FlyMyShop in the following ways as well:
 
 a. Manual
 
@@ -107,10 +121,6 @@ user@example.com
 
 The first one is an administrator and the second one a regular user. The default password for both are passw0rd. 
 You can manually update the database to update the email.
-
-#Automated Installation and Shop Configuration
-
-Installation and configuration similar to Wordpress installation is in the pipeline and it will be released with v0.0.2
 
 
 #Testing
