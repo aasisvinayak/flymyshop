@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "shopName" =>  str_replace('_', ' ', env('SHOP_NAME')),
+    'shopName' =>  str_replace('_', ' ', env('SHOP_NAME')),
 ];
