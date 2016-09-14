@@ -36,7 +36,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 
 # Installation 
 
-1. Manual
+a. Manual
 
 Download the release and follow the steps below:
 
@@ -55,14 +55,14 @@ Download the release and follow the steps below:
   - php artisan serve --port=8000 --host=localhost &
 ```
 
-2. Using Composer
+b. Using Composer
 
 ```
 composer create-project --prefer-dist aasisvinayak/shop
 
 ```
 
-3. Docker
+c. Docker
 
 ```
 docker pull aasisvinayak/flymyshop
