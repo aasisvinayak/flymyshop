@@ -46,7 +46,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "composer update",
+            "@composer update",
             "php -r \"copy('.env.example', '.env');\"",
             "php artisan key:generate",
             "php artisan migrate",
@@ -56,7 +56,7 @@
             "php artisan db:seed --no-interaction --class=ProductsTableSeeder"
         ],
         "post-create-project-cmd": [
-            "composer update",
+            "@composer update",
             "php artisan key:generate",
             "php artisan migrate",
             "php artisan db:seed --no-interaction --class=UsersTableSeeder",
