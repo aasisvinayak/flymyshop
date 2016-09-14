@@ -20,5 +20,9 @@ before_script:
 
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan db:seed --no-interaction --class=UsersTableSeeder
+  - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
+  - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
+  - php artisan db:seed --no-interaction --class=ProductsTableSeeder
   - php artisan serve --port=8000 --host=localhost &
   - vendor/bin/phpunit
