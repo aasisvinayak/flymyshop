@@ -60,13 +60,15 @@ class InstallController extends Controller
     public function installShop(InstallRequest $request)
     {
         echo 'Setting up database<br>';
+
+        $shopName=preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
         $env_update = $this->save([
             'DB_PASSWORD' => $request->get('DB_PASSWORD'),
             'DB_USERNAME' => $request->get('DB_USERNAME'),
             'DB_PORT' => $request->get('DB_PORT'),
             'DB_HOST' => $request->get('DB_HOST'),
             'DB_DATABASE' => $request->get('DB_DATABASE'),
-            'SHOP_NAME' => $request->get('SHOP_NAME'),
+            'SHOP_NAME' => $shopName,
         ]);
         if ($env_update) {
             return redirect('install/step-2');

@@ -8,7 +8,10 @@
     </style>
 
     <div class="jumbotron text-center">
-        <h1>Welcome to {{env('SHOP_NAME')}}</h1>
+
+        <h1>Welcome to {{config('flymyshop.shopName')}}</h1>
+
+
     </div>
 
     <div class="container">
