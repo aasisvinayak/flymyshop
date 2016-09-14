@@ -70,6 +70,48 @@ docker pull aasisvinayak/flymyshop
 
 Please make sure that Apache is running in your docker container if the shop fails to load.
 
+#Get Started
+
+If you have pull the release via composer, please go to the 'shop' folder and issue
+
+```
+php artisan serve --port 8000
+```
+
+The application will be available at http://localhost:8000
+
+
+If you would like to try FlyMyShop using Apache or Nginx, please upload the whole directory to the web server and point the server root to the public folder inside the shop directory
+
+
+#Database
+
+The default is sqlite and you can change this to any other database as you please. For example, if you wish to use mysql please update the .env file as follows:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1		
+DB_PORT=3306		
+DB_DATABASE=database_name		
+DB_USERNAME=username		
+DB_PASSWORD=secret
+
+```
+
+#Seed Users
+
+When you install the project, it creates two users for you:
+
+a.test@example.com
+b.user@example.com
+
+The first one is an administrator and the second one a regular user. The default password for both are passw0rd. 
+You can manually update the database to update the email.
+
+#Automated Installation and Shop Configuration
+
+Installation and configuration similar to Wordpress installation is in the pipeline and it will be released with v0.0.2
+
 
 #Testing
 
