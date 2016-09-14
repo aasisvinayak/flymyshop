@@ -102,8 +102,8 @@ DB_PASSWORD=secret
 
 When you install the project, it creates two users for you:
 
-a.test@example.com
-b.user@example.com
+test@example.com and 
+user@example.com
 
 The first one is an administrator and the second one a regular user. The default password for both are passw0rd. 
 You can manually update the database to update the email.
