@@ -35,11 +35,11 @@ class InstallController extends Controller
     {
         if (! Schema::hasTable('users')) {
             echo 'Please wait while we setup the shop ............. <br>';
-            Artisan::call('migrate');
+            Artisan::call('migrate', array('--force' => true));
             ob_end_flush();
             echo 'Working on the database and adding admin user ...... <br>';
             ob_start();
-            Artisan::call('db:seed');
+            Artisan::call('db:seed', array('--force' => true));
             echo 'Working on it ...... <br>';
 
             $user = User::findorFail(1);
