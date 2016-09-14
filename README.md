@@ -36,7 +36,9 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 
 # Installation 
 
-Automated installation will be added soon. In the mean time you can deploy this application by following the steps below:
+1. Manual
+
+Download the release and follow the steps below:
 
 ```
   - cp .env.example .env
@@ -52,6 +54,22 @@ Automated installation will be added soon. In the mean time you can deploy this 
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
   - php artisan serve --port=8000 --host=localhost &
 ```
+
+2. Using Composer
+
+```
+composer create-project --prefer-dist aasisvinayak/shop
+
+```
+
+3. Docker
+
+```
+docker pull aasisvinayak/flymyshop
+```
+
+Please make sure that Apache is running in your docker container if the shop fails to load.
+
 
 #Testing
 
