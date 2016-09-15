@@ -2,11 +2,10 @@
 
 namespace Flymyshop\Helpers;
 
-
 use Illuminate\Support\Facades\File;
 
-class PluginHelper{
-
+class PluginHelper
+{
     public function hello()
     {
         return 'hello';
@@ -14,7 +13,6 @@ class PluginHelper{
 
     public function getPluginNames()
     {
-       return  (File::directories(base_path('/resources/plugins')));
+        return  File::directories(base_path('/resources/plugins'));
     }
-
 }

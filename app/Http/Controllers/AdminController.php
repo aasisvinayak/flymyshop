@@ -303,14 +303,15 @@ class AdminController extends Controller
      }
 
     /**
-     * TODO: change to row by row approach (key->value)
+     * TODO: change to row by row approach (key->value).
      *
      * @return View
      */
     public function settings()
     {
-        $settings= Setting::findorFail(1);
-        return view('admin/settings',compact('settings'));
+        $settings = Setting::findorFail(1);
+
+        return view('admin/settings', compact('settings'));
     }
 
     public function updateSettings()
