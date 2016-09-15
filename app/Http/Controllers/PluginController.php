@@ -11,4 +11,17 @@ class PluginController extends Controller
     {
         return $pluginBasicHelper->getPluginNames();
     }
+
+    public function addNewPlugin(){
+
+        
+    }
+
+    public function deletePlugin(){
+
+        
+
+    }
+
+    
 }
