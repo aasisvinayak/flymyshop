@@ -35,10 +35,6 @@ class CreateSettingsTable extends Migration
             $table->string('mail_password', 255)->nullable();
             $table->string('mail_encryption', 255)->nullable();
             $table->string('mail_from', 255)->nullable();
-            
-            
-            $table->string('fb', 255)->nullable();
-
             $table->string('fb', 255)->nullable();
             $table->string('twitter', 255)->nullable();
             $table->string('gplus', 255)->nullable();
