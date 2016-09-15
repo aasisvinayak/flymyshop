@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Invoice;
 use App\Http\Models\InvoiceItem;
 use App\Http\Models\Product;
+use App\Http\Models\Setting;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -302,12 +303,17 @@ class AdminController extends Controller
      }
 
     /**
-     * TODO: allow editing .env settings from here.
+     * TODO: change to row by row approach (key->value)
      *
      * @return View
      */
     public function settings()
     {
-        return view('admin/settings');
+        $settings= Setting::findorFail(1);
+        return view('admin/settings',compact('settings'));
+    }
+
+    public function updateSettings()
+    {
     }
 }

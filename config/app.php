@@ -165,6 +165,7 @@ return [
         Spatie\Newsletter\NewsletterServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        App\Providers\PluginHelperServiceProvider::class,
 
 
 

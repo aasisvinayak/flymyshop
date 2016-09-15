@@ -53,6 +53,8 @@ RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UsersTableSeed
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
 RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=SettingsTableSeeder
+
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

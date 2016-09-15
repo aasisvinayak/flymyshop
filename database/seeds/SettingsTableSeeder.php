@@ -1,11 +1,9 @@
 <?php
 
-
-
 use Illuminate\Database\Seeder;
 use \Illuminate\Support\Facades\DB;
 
-class UserTypesTableSeeder extends Seeder
+class SettingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +12,8 @@ class UserTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_types')->insert([
-            'user_id' => 1,
-            'type'    => 'admin',
+        DB::table('settings')->insert([
+            'title' => "Demo",
         ]);
     }
 }

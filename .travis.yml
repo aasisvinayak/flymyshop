@@ -24,5 +24,6 @@ script:
   - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
   - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
   - php artisan db:seed --no-interaction --class=ProductsTableSeeder
+  - php artisan db:seed --no-interaction --class=SettingsTableSeeder
   - php artisan serve --port=8000 --host=localhost &
   - vendor/bin/phpunit
