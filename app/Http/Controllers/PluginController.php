@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Flymyshop\Helpers\PluginHelper;
-use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use Flymyshop\Helpers\PluginHelper;
+
 
 class PluginController extends Controller
 {
