@@ -1,0 +1,18 @@
+<?php
+
+namespace Flymyshop\Plugins\PluginName;
+
+/**
+ * Class PluginName
+ * @package Flymyshop\Plugins\PluginName
+ */
+class PluginName
+{
+         /**
+         * Main class of the plugin which is invoked by the reflector class
+         *
+         */
+        public static function main()
+        {
+        }
+}

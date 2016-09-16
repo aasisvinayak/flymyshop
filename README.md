@@ -31,7 +31,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 # Features
 
 - Add custom shop themes
-- Add plugins to extend the features
+- Add plugins to extend the features (See master branch - v0.0.1 does not offer support for plugins)
 - OS independent
 - Laravel based
 

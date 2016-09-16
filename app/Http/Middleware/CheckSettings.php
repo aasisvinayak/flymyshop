@@ -25,8 +25,9 @@ class CheckSettings
                     if (Request::is('install')) {
                         return redirect('/');
                     }
-
                     return $next($request);
+//                    $response = $next($request);
+//                    return $response;
                 } else {
                     return redirect('/install');
                 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Flymyshop\Core\EnablePlugins;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('path.storage', function () {
             return 'files';
         });
+
+        require base_path().'/flymyshop/functions.php';
+        require base_path().'/flymyshop/hooks.php';
+
+        new EnablePlugins();
     }
+
+
 }
+
+
