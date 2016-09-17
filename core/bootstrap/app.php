@@ -1,5 +1,7 @@
 <?php
 
+use App\Flymyshop;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -11,9 +13,14 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(
+
+$app = new App\Flymyshop(
     realpath(__DIR__.'/../')
 );
+
+//$app = new Illuminate\Foundation\Application(
+//    realpath(__DIR__.'/../')
+//);
 
 /*
 |--------------------------------------------------------------------------

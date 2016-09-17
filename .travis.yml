@@ -11,6 +11,7 @@ services:
   - mysql
 
 before_script:
+  - cd core
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
   - composer self-update

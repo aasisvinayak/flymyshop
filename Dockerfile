@@ -28,7 +28,7 @@ RUN useradd --uid 1000 --gid 50 docker
 RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
 RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 
-COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY core/docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 #RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
@@ -36,7 +36,7 @@ COPY . /var/www/html
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
-COPY docker/docker.env /var/www/html/.env
+COPY core/docker/docker.env /var/www/html/core/.env
 
 RUN chown -R docker /var/www/html
 
@@ -45,18 +45,18 @@ RUN service apache2 restart
 
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
-RUN cd /var/www/html;composer install
+RUN cd /var/www/html/core;composer install
 
-RUN cd /var/www/html;php artisan key:generate
-RUN cd /var/www/html;php artisan migrate
-RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UsersTableSeeder
-RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
-RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
-RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
-RUN cd /var/www/html;php artisan db:seed --no-interaction --class=SettingsTableSeeder
+RUN cd /var/www/html/core;php artisan key:generate
+RUN cd /var/www/html/core;php artisan migrate
+RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=UsersTableSeeder
+RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
+RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
+RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=ProductsTableSeeder
+RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=SettingsTableSeeder
 
 
-COPY docker/entrypoint.sh /entrypoint.sh
+COPY core/docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

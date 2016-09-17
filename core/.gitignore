@@ -1,0 +1,24 @@
+.env
+vendor/
+node_modules/
+files/
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+bootstrap/cache/compiled.php
+.env.*.php
+.env.php
+
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+.idea

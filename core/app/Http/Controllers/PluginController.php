@@ -12,7 +12,7 @@ class PluginController extends Controller
 {
     public function index(PluginHelper $pluginBasicHelper)
     {
-        
+        return view('admin/plugins/list');
     }
 
     public function addNewPlugin()
