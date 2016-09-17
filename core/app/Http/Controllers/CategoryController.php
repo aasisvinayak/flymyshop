@@ -129,4 +129,10 @@ class CategoryController extends Controller
 
         return redirect('admin/categories/');
     }
+
+    public static function getAllCategories()
+    {
+        return Category::all();
+
+    }
 }

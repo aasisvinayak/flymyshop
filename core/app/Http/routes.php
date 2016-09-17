@@ -111,5 +111,6 @@ Route::group(
         Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
 
         Route::get('/plugins', 'PluginController@index');
+        Route::get('/plugin_list', 'PluginController@pluginList');
     }
 );

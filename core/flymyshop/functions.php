@@ -33,14 +33,56 @@ function plugins(){
 
 }
 
-function categories($number){
+function categories(){
+
+    return \App\Http\Controllers\CategoryController::getAllCategories();
 
 }
 
-function products(){
-
+/**
+ * Get products
+ *
+ * @param $take
+ * @param $skip
+ * @return mixed
+ */
+function products($take,$skip){
+    return \App\Http\Controllers\ProductController::getPublishedProducts($take,$skip);
 }
 
 function featuredProducts(){
 
+
+}
+
+/**
+ * Get the name of the shop
+ */
+function getShopName()
+{
+
+}
+
+/**
+ * Get current version of Flymyshop
+ */
+function getVersion()
+{
+
+}
+
+
+
+
+function favourites()
+{
+
+}
+
+function creditCards(){
+
+}
+
+function token(){
+    return csrf_field();
 }

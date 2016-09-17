@@ -5,9 +5,11 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "bootstrap-sass": "^3.0.0",
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0",
-    "laravel-elixir-vueify": "^1.0.0"
+    "laravel-elixir-vueify": "^1.0.0",
+    "vueify": "^8.7.0"
   }
 }

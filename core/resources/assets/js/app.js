@@ -27,5 +27,3 @@ new Vue({
 
 
 });
-
-//# sourceMappingURL=app.js.map

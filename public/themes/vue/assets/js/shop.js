@@ -22,10 +22,5 @@ new Vue({
                 that.plugins=data;
             });
         }
-
     },
-
-
 });
-
-//# sourceMappingURL=app.js.map
