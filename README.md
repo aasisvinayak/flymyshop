@@ -55,6 +55,7 @@ a. Manual
 Download the release and follow the steps below:
 
 ```
+  - cd  core
   - cp .env.example .env
   - complete .env values 
   - composer install
