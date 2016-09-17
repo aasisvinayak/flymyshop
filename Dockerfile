@@ -41,7 +41,6 @@ COPY core/docker/docker.env /var/www/html/core/.env
 RUN chown -R docker /var/www/html
 
 RUN service apache2 start
-RUN service apache2 restart
 
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
