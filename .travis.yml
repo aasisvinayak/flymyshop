@@ -15,6 +15,7 @@ before_script:
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
   - composer self-update
+  - composer dump-autoload
   - composer update
   - chmod -R 777 storage
   - php artisan key:generate --no-interaction
