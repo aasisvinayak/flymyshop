@@ -57,16 +57,12 @@ Download the release and follow the steps below:
 ```
   - cd  core
   - cp .env.example .env
-  - complete .env values 
+  - complete .env values (optional)
   - composer install
   - chmod -R 777 storage
   - php artisan key:generate 
-  - php artisan migrate 
-  - php artisan key:generate
-  - php artisan db:seed --no-interaction --class=UsersTableSeeder
-  - php artisan db:seed --no-interaction --class=UserTypesTableSeeder
-  - php artisan db:seed --no-interaction --class=CategoriesTableSeeder
-  - php artisan db:seed --no-interaction --class=ProductsTableSeeder
+  - php artisan migrate  (if prompted say yes)
+  - php artisan db:seed (if prompted say yes)
   - php artisan serve --port=8000 --host=localhost &
 ```
 
