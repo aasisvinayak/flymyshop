@@ -9,7 +9,7 @@
 locale                   : "en"
 title                    : "Flymyshop"
 title_separator          : "-"
-name                     : "acev"
+name                     : "Flymyshop"
 description              : "Built on top of laravel"
 url                      : "http://flymyshop.com"
 baseurl                  : # the subpath of your site, e.g. "/blog"

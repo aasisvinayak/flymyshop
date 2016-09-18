@@ -1,9 +1,4 @@
-main:
-  - title: "Home"
-    url: /
-  - title: "Documentation"
-    url: /docs/
-
+# documentation links
 docs:
   - title: Getting Started
     children:
