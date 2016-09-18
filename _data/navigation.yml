@@ -3,8 +3,6 @@ main:
     url: /
   - title: "Documentation"
     url: /docs
-  - title: "About"
-      url: /about
 
 docs:
   - title: Getting Started
