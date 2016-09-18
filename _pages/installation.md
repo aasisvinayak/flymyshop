@@ -5,6 +5,7 @@ sidebar:
 layout: single
 excerpt: "Page not found. Your pixels are in another canvas."
 sitemap: false
+share: true
 permalink: /docs/installation/
 ---
 
@@ -12,13 +13,12 @@ permalink: /docs/installation/
 {% include toc icon="gears" title="Table of Contents" %}
 
 
-# Contents
-{:.no_toc}
+# H2 Installation
 
-{:toc}
+## H3 Automatic
 
-# H1 Installation
+## H3 Composer
 
-## H2 Automatic
-
-## H2 Automatic
+{% highlight shell %}
+composer create-project --prefer-dist aasisvinayak/shop
+{% endhighlight %}

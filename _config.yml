@@ -78,24 +78,24 @@ analytics:
 # Site Author
 author:
   name             : "Aasis Vinayak"
-  avatar           : "bio-photo.jpg"
+  avatar           : ""
   bio              : ""
   location         : "London"
-  email            :
+  email            : "aasisvinayak@gmail.com"
   uri              :
   bitbucket        :
   codepen          :
   dribbble         :
   flickr           :
-  facebook         :
+  facebook         : "aasisvinayak"
   foursquare       :
-  github           :
-  google_plus      :
+  github           : "aasisvinayak"
+  google_plus      : "aasisvinayak"
   keybase          :
-  instagram        :
+  instagram        : "aasisvinayak"
   lastfm           :
-  linkedin         :
-  pinterest        :
+  linkedin         : "aasisvinayak"
+  pinterest        : "aasisvinayak"
   soundcloud       :
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. http://stackoverflow.com/users/123456/username)
   steam            :
