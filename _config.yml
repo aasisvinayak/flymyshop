@@ -7,9 +7,9 @@
 
 # Site Settings
 locale                   : "en"
-title                    : "Flymyshop"
+title                    : "FlyMyShop"
 title_separator          : "-"
-name                     : "Flymyshop"
+name                     : "FlyMyShop"
 description              : "Built on top of laravel"
 url                      : "https://flymyshop.com"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -48,7 +48,7 @@ atom_feed:
   path                   : # blank (default) uses feed.xml
 
 # SEO Related
-google_site_verification :
+google_site_verification : "-LWTJesClJI224xaimoZGi2HcORiFDWFd6371csnjLw"
 bing_site_verification   :
 alexa_site_verification  :
 yandex_site_verification :
