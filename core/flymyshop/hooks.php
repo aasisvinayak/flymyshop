@@ -1,9 +1,9 @@
 <?php
 
-function product(){
+function productHook(){
 
 }
 
-function cart(){
-    
+function cartHook(){
+
 }

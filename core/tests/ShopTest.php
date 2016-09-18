@@ -12,7 +12,7 @@ class ShopTest extends TestCase
      */
     public function testHomePage()
     {
-        $this->visit('/')->see('Shop');
+        $this->visit('/')->see('Welcome');
     }
 
     /**

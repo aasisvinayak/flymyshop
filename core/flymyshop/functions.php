@@ -19,11 +19,10 @@ function fmsFooter()
             break;
         }
     }
-
 }
 
 /**
- * 
+ *
  */
 function themes(){
 
@@ -70,8 +69,6 @@ function getVersion()
 {
 
 }
-
-
 
 
 function favourites()
