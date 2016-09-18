@@ -357,6 +357,7 @@ class ShopController extends Controller
             Cart::destroy();
             Session::flash('alert-success', 'Thank you for shopping with us!');
             event(new  OrderPlaced($invoice));
+            orderHook($invoice);
 
             //Telegram support can be enabled if the .env values are filled
             if (strlen(env('TELEGRAM_BOT_TOKEN')) > 2) {

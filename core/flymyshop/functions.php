@@ -49,7 +49,7 @@ function products($take,$skip){
     return \App\Http\Controllers\ProductController::getPublishedProducts($take,$skip);
 }
 
-function featuredProducts(){
+function featured_products(){
 
 
 }
@@ -57,7 +57,7 @@ function featuredProducts(){
 /**
  * Get the name of the shop
  */
-function getShopName()
+function get_shop_name()
 {
 
 }
@@ -65,7 +65,7 @@ function getShopName()
 /**
  * Get current version of Flymyshop
  */
-function getVersion()
+function get_version()
 {
 
 }
