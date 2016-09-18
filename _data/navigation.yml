@@ -2,7 +2,9 @@ main:
   - title: "Home"
     url: /
   - title: "Documentation"
-    url: /docs/
+    url: /docs
+  - title: "About"
+      url: /about
 
 docs:
   - title: Getting Started
