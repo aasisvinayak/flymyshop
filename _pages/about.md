@@ -2,7 +2,7 @@
 layout: single
 title:  "About"
 categories: flymyshop docs
-permalink: /about
+permalink: /about/
 ---
 
 About Flymyshop.
