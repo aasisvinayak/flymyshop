@@ -4,7 +4,7 @@
     box-sizing: content-box;
     padding: 5px;
     border: none;
-    font: normal normal bold 76px/3 "wire-one", Helvetica, sans-serif;
+    font: normal normal bold "wire-one", Helvetica, sans-serif;
     color: #e20084;
     text-align: center;
     -o-text-overflow: ellipsis;
