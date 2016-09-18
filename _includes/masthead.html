@@ -9,7 +9,9 @@
       <nav id="site-nav" class="greedy-nav">
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}/"><span class="site-title-display">FlyMyShop</span>
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}/">
+            <img src="/icon.png" width="20%" alt="">
+            <span class="site-title-display">FlyMyShop</span>
             </a></li>
           {% for link in site.data.navigation.main %}
             {% if link.url contains 'http' %}
