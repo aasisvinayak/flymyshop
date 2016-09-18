@@ -1,12 +1,4 @@
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
-.gitignore
-.idea/copyright/
-.idea/encodings.xml
-.idea/flymyshop.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
+_site
+.sass-cache
+.jekyll-metadata
+.idea/

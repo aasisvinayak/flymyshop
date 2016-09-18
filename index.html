@@ -1,38 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+---
+layout: archive
+author_profile: true
+---
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+{% include base_path %}
 
-    <title>FlyMyShop : Laravel Shop</title>
-  </head>
+<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
-  <body>
+{% for post in paginator.posts %}
+  {% include archive-single.html %}
+{% endfor %}
 
-    <header>
-      <div class="container">
-        <h1>FlyMyShop</h1>
-        <h2>Shop built on top of laravel</h2>
-
-        <section id="downloads">
-          <a href="https://github.com/aasisvinayak/shop/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/aasisvinayak/shop/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/aasisvinayak/shop" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h3>
-<a id="welcome-to-flymyshop" class="anchor" href="#welcome-to-welcome-to-flymyshop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to FlyMyShop</h3>
-      </section>
-    </div>
-
-    
-  </body>
-</html>
+{% include paginator.html %}
