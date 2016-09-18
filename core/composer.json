@@ -65,6 +65,7 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@composer dump-autoload",
             "php artisan optimize"
         ]
     },
