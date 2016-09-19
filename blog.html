@@ -6,7 +6,6 @@ categories: flymyshop docs
 permalink: /blog/
 ---
 
-# Recent Posts
 
 {% include base_path %}
 
