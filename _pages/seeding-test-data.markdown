@@ -1,7 +1,7 @@
 ---
 title: "Seeding Test Data"
 sidebar:
-nav: "docs"
+  nav: "docs"
 layout: single
 excerpt: "Seeding Test Data for testing FlyMyShop"
 sitemap: false

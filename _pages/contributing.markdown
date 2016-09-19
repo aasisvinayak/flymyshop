@@ -1,5 +1,7 @@
 ---
 title: "Contributing"
+sidebar:
+  nav: "docs"
 layout: single
 excerpt: "Different ways of installing FlyMyShop"
 sitemap: true
