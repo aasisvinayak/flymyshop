@@ -27,8 +27,10 @@ docs:
         url: /docs/plugins/
       - title: "Themes"
         url: /docs/themes/
-      - title: "Functions & Helpers"
-        url: /docs/functions-helpers/
+      - title: "Functions, Hooks and Helpers"
+        url: /docs/functions-hooks-helpers/
+      - title: "Installing new plugins and themes"
+        url: /docs/installing-plugins-and-themes/
   - title: Working with Plugins
     children:
       - title: "Plugin Structure"

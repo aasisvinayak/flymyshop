@@ -18,42 +18,45 @@ FlyMyShop code is organised into two main directories:
 Everything related to teh core application that does not need to be available to the public
 are located in the 'core' folder. Core folder has the following directories
 
-1. app
+<li>app</li>
 
 Same as in Laravel except in the presence of the Flymyshop class which sets up the directory structure.
 It is an extension of Laravel Application class and it simply tells the server where the files are.
 
 You will able to find all Controllers, Models, Events, Jobs, Policies, Routes etc under this directory.
 
-2. bootstrap
+<li>bootstrap</li>
 
 Same as in Laravel
 
-3. config
+<li>config</li>
 
 Same as in Laravel
 
-4. database
+<li>database</li>database
 
 Same as in Laravel
 
-5. docker
+<li>docker</li> docker
 
 All the docker related files except the main Dokerfile is placed here.
 
-6. flymyshop
+<li>flymyshop</li>
 
 Anything that offers modularity to FlyMyShop application is found under this. Please see the section below for details.
 
-7.resources
+<li>resources</li>
 
 All non-public resources are located here. This includes assets for compiling, admin theme and installation theme.
 
-8. storage
+
+<li>storage</li>
 
 Same as in Laravel
 
-9. tests
+
+<li>tests</li>
+
 
 Same as in Laravel
 
@@ -62,13 +65,14 @@ Same as in Laravel
 
 Under this you will be able to find:
 
-1. Containers
+<li>Containers</li>
 
 DataContainer.php
 HookContainer.php
 ProductContainer.php
 
-2. Core
+<li>Core</li>
+
 
 EnablePlugins.php
 EnableRequestPlugins.php

@@ -15,4 +15,4 @@ Plugins are an integral part of FlyMyShop ecosystem. You can easily create your 
 php artisan make:plugin PluginName
 {% endhighlight %}
 
-The necessary files will be created under `/core/flymycloud/plugins` folder
+The necessary files will be created under `/flymycloud/core/flymycloud/plugins/` folder
