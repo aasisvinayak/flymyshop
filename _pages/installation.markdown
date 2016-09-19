@@ -3,8 +3,8 @@ title: "Installation"
 sidebar:
   nav: "docs"
 layout: single
-excerpt: "Page not found. Your pixels are in another canvas."
-sitemap: false
+excerpt: "Different ways of installing FlyMyShop"
+sitemap: true
 share: true
 permalink: /docs/installation/
 ---

@@ -25,7 +25,19 @@ docs:
         url: /docs/upgrading/
       - title: "Functions & Helpers"
         url: /docs/upgrading/
-  - title: Application
+  - title: Working with Plugins
+    children:
+      - title: "Structure"
+        url: /docs/upgrading/
+      - title: "Methods and Hooks"
+        url: /docs/upgrading/
+  - title: Working with Themes
+    children:
+      - title: "Structure"
+        url: /docs/upgrading/
+      - title: "FlyMyShop functions"
+        url: /docs/upgrading/
+  - title: App Namespace
     children:
       - title: "Controllers"
         url: /docs/quick-start-guide/
@@ -45,6 +57,8 @@ docs:
         url: /docs/upgrading/
       - title: "Policies"
         url: /docs/upgrading/
+      - title: "Middlewares"
+        url: /docs/upgrading/
   - title: Flymyshop Namespace
     children:
       - title: "Flymyshop Containers"
@@ -63,4 +77,3 @@ docs:
         url: /docs/upgrading/
       - title: "Node"
         url: /docs/upgrading/
-
