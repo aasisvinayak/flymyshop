@@ -5,6 +5,10 @@ main:
     url: /docs/
   - title: "About"
     url: /about/
+  - title: "Features"
+    url: /about/
+  - title: "API"
+    url: /about/
 
 docs:
   - title: Getting Started
@@ -20,60 +24,58 @@ docs:
   - title: Extending Flymyshop
     children:
       - title: "Plugins"
-        url: /docs/upgrading/
+        url: /docs/plugins/
       - title: "Themes"
-        url: /docs/upgrading/
+        url: /docs/themes/
       - title: "Functions & Helpers"
-        url: /docs/upgrading/
+        url: /docs/functions-helpers/
   - title: Working with Plugins
     children:
-      - title: "Structure"
-        url: /docs/upgrading/
+      - title: "Plugin Structure"
+        url: /docs/plugin-structure/
       - title: "Methods and Hooks"
-        url: /docs/upgrading/
+        url: /docs/methods-hooks/
   - title: Working with Themes
     children:
-      - title: "Structure"
-        url: /docs/upgrading/
+      - title: "Theme Structure"
+        url: /docs/theme-structure/
       - title: "FlyMyShop functions"
-        url: /docs/upgrading/
+        url: /docs/flymyshop-functions/
   - title: App Namespace
     children:
       - title: "Controllers"
-        url: /docs/quick-start-guide/
+        url: /docs/controllers/
       - title: "Models"
-        url: /docs/structure/
+        url: /docs/models/
       - title: "Events"
-        url: /docs/installation/
+        url: /docs/events/
       - title: "Listeners"
-        url: /docs/upgrading/
+        url: /docs/listeners/
       - title: "Arisan Commands"
-        url: /docs/upgrading/
+        url: /docs/artisan-commands/
       - title: "Jobs"
-        url: /docs/upgrading/
-      - title: "Database"
-        url: /docs/upgrading/
+        url: /docs/jobs/
       - title: "Providers"
-        url: /docs/upgrading/
+        url: /docs/providers/
       - title: "Policies"
-        url: /docs/upgrading/
+        url: /docs/policies/
       - title: "Middlewares"
-        url: /docs/upgrading/
+        url: /docs/middlewares/
   - title: Flymyshop Namespace
     children:
       - title: "Flymyshop Containers"
-        url: /docs/quick-start-guide/
+        url: /docs/flymyshop-containers/
       - title: "Flymyshop Core"
-        url: /docs/structure/
+        url: /docs/flymyshop-core/
       - title: "Flymyshop Helpers"
-        url: /docs/installation/
+        url: /docs/flymyshop-helpers/
   - title: Templates
     children:
       - title: "Stubs"
-        url: /docs/upgrading/
+        url: /docs/stubs/
   - title: Dependencies
     children:
       - title: "Composer"
-        url: /docs/upgrading/
+        url: /docs/composer/
       - title: "Node"
-        url: /docs/upgrading/
+        url: /docs/node/
