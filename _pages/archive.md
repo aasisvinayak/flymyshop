@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: archive
 title:  "Blog"
 date:   2016-09-18 16:20:01 +0100
 categories: flymyshop docs
