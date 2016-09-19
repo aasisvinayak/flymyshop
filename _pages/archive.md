@@ -6,10 +6,12 @@ categories: flymyshop docs
 permalink: /blog/
 ---
 
+Flymyshop
 
 {% include base_path %}
 
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
+
 
 
 <!-- This loops through the paginated posts -->
