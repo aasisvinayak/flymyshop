@@ -2,9 +2,11 @@ main:
   - title: "Home"
     url: /
   - title: "Documentation"
-    url: /docs
+    url: /docs/
   - title: "About"
-    url: /about
+    url: /about/
+  - title: "Blog"
+    url: /blog/
 
 docs:
   - title: Getting Started
