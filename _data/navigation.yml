@@ -57,10 +57,10 @@ docs:
     children:
       - title: "Stubs"
         url: /docs/upgrading/
-    - title: Dependencies
-      children:
-        - title: "Composer"
-          url: /docs/upgrading/
-        - title: "Node"
-          url: /docs/upgrading/
+  - title: Dependencies
+    children:
+      - title: "Composer"
+        url: /docs/upgrading/
+      - title: "Node"
+        url: /docs/upgrading/
 
