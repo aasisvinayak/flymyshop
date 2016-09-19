@@ -1,7 +1,7 @@
 ---
 title: "Upgrading"
 sidebar:
-nav: "docs"
+  nav: "docs"
 layout: single
 excerpt: "Upgrading FlyMyShop"
 sitemap: true
