@@ -9,6 +9,9 @@ share: true
 permalink: /docs/structure/
 ---
 
+{% include toc icon="gears" title="Table of Contents" %}
+
+
 FlyMyShop code is organised into two main directories:
 
 1. core
@@ -65,28 +68,55 @@ Same as in Laravel
 
 Under this you will be able to find:
 
-<li>Containers</li>
+### Containers
 
-DataContainer.php
-HookContainer.php
-ProductContainer.php
+FlyMyShop containers are essentially classes for holding different types of data associated with the application.
 
-<li>Core</li>
+This includes
+
+<li>DataContainer which folders all the raw data for the view</li>
+<li>HookContainer which has a list of plugins that have registered different hooks with the application. This is used by the application to trigger the right plugin at the right time. </li>
+
+### Core
+
+This contains the core of the application.
+
+<li>EnablePlugins : Load the plugins on to the application</li>
 
 
-EnablePlugins.php
-EnableRequestPlugins.php
-EnableResponsePlugins.php
-3. Helpers
-PluginHelper.php
-4. Plugins
-5. functions.php
-6. hooks.php
-7. stubs
+### Helpers
+
+Helper classes for application, plugins and themes.
+
+<li>PluginHelper: Helps identify list of plugins already installed</li>
+
+### Plugins
+
+All the plugins go under here. Currently few sample plugins come with the application.
+
+<li>Sample: To illustrate file structure</li>
+<li>Test: To show how to insert data into views</li>
+<li>Test: To show how to process objects from the application. In this example, it shows how the plugin can receive order details during checkout</li>
+
+### functions.php
+
+Functions that can be used by plugins and themes
+
+### hooks.php
+
+Allows plugins to register different hooks using the functions
+
+
+### stubs
+
+We store all the stub templates here
 
 # public
 
-themes
+## themes
 
-uploads/assets
+All the themes are stored here
 
+## uploads/assets
+
+Any public asset can go here

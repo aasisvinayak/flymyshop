@@ -6,9 +6,9 @@ main:
   - title: "About"
     url: /about/
   - title: "Features"
-    url: /about/
+    url: /features/
   - title: "API"
-    url: /about/
+    url: /api/
 
 docs:
   - title: Getting Started
@@ -27,8 +27,12 @@ docs:
         url: /docs/plugins/
       - title: "Themes"
         url: /docs/themes/
-      - title: "Functions, Hooks and Helpers"
-        url: /docs/functions-hooks-helpers/
+      - title: "Functions"
+        url: /docs/functions/
+      - title: "Hooks"
+        url: /docs/hooks/
+      - title: "Helpers"
+        url: /docs/helpers/
       - title: "Installing new plugins and themes"
         url: /docs/installing-plugins-and-themes/
   - title: Working with Plugins
@@ -81,3 +85,13 @@ docs:
         url: /docs/composer/
       - title: "Node"
         url: /docs/node/
+  - title: Miscellaneous
+    children:
+      - title: "Testing"
+        url: /docs/testing/
+      - title: "Seeding Test Data"
+        url: /docs/seeding-test-data/
+      - title: "Contributing"
+        url: /docs/contributing/
+      - title: "License"
+        url: /docs/license/
