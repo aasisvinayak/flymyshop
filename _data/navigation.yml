@@ -18,46 +18,49 @@ docs:
       - title: "Upgrading"
         url: /docs/upgrading/
   - title: Extending Flymyshop
-        - title: "Plugins"
-          url: /docs/upgrading/
-        - title: "Themes"
-          url: /docs/upgrading/
-        - title: "Functions & Helpers"
-          url: /docs/upgrading/
+    children:
+      - title: "Plugins"
+        url: /docs/upgrading/
+      - title: "Themes"
+        url: /docs/upgrading/
+      - title: "Functions & Helpers"
+        url: /docs/upgrading/
   - title: Application
-      children:
-        - title: "Controllers"
-          url: /docs/quick-start-guide/
-        - title: "Models"
-          url: /docs/structure/
-        - title: "Events"
-          url: /docs/installation/
-        - title: "Listeners"
-          url: /docs/upgrading/
-        - title: "Arisan Commands"
-          url: /docs/upgrading/
-        - title: "Jobs"
-          url: /docs/upgrading/
-        - title: "Database"
-          url: /docs/upgrading/
-        - title: "Providers"
-          url: /docs/upgrading/
-        - title: "Policies"
-          url: /docs/upgrading/
+    children:
+      - title: "Controllers"
+        url: /docs/quick-start-guide/
+      - title: "Models"
+        url: /docs/structure/
+      - title: "Events"
+        url: /docs/installation/
+      - title: "Listeners"
+        url: /docs/upgrading/
+      - title: "Arisan Commands"
+        url: /docs/upgrading/
+      - title: "Jobs"
+        url: /docs/upgrading/
+      - title: "Database"
+        url: /docs/upgrading/
+      - title: "Providers"
+        url: /docs/upgrading/
+      - title: "Policies"
+        url: /docs/upgrading/
   - title: Flymyshop Namespace
-      children:
-        - title: "Flymyshop Containers"
-          url: /docs/quick-start-guide/
-        - title: "Flymyshop Core"
-          url: /docs/structure/
-        - title: "Flymyshop Helpers"
-          url: /docs/installation/
+    children:
+      - title: "Flymyshop Containers"
+        url: /docs/quick-start-guide/
+      - title: "Flymyshop Core"
+        url: /docs/structure/
+      - title: "Flymyshop Helpers"
+        url: /docs/installation/
   - title: Templates
-        - title: "Stubs"
-          url: /docs/upgrading/
+    children:
+      - title: "Stubs"
+        url: /docs/upgrading/
     - title: Dependencies
-          - title: "Composer"
-            url: /docs/upgrading/
-          - title: "Node"
-            url: /docs/upgrading/
+      children:
+        - title: "Composer"
+          url: /docs/upgrading/
+        - title: "Node"
+          url: /docs/upgrading/
 
