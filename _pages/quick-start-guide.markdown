@@ -11,7 +11,7 @@ permalink: /docs/quick-start-guide/
 
 The best way to get started with FlyMyShop is to download the master branch from github.
 
-#Clone
+<h2>Clone</h2> 
 
 You either download the [zip file](https://github.com/aasisvinayak/flymyshop/archive/master.zip) or use git clone
 
@@ -30,7 +30,7 @@ git clone https://github.com/aasisvinayak/flymyshop.git
 
 if you would like to clone it via HTTPS.
 
-#Installation
+<h2>Installation</h2>
 
 Once you cloned the repository, then proceed with the following steps:
 
