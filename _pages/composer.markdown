@@ -1,7 +1,7 @@
 ---
 title: "Composer Dependencies"
 sidebar:
-nav: "docs"
+  nav: "docs"
 layout: single
 excerpt: "Composer Dependencies"
 sitemap: true
