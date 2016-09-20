@@ -1,4 +1,5 @@
 <?php
+
 Route::get('install', 'InstallController@index');
 Route::post('install', 'InstallController@installShop');
 Route::get('install/step-2', 'InstallController@postInstall');

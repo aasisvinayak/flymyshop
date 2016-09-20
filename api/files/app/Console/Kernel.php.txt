@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // Commands\Inspire::class,
         Commands\CreatePlugin::class,
-        Commands\CreateTheme::class
+        Commands\CreateTheme::class,
     ];
 
     /**

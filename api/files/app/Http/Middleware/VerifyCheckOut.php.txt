@@ -10,6 +10,9 @@ class VerifyCheckOut
     /**
      * Handle an incoming request.
      *
+     * Verifies that the request has met the necessary conditions to proceed
+     * with check_out. If not redirect to the necessary page to get the information
+     *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
      *

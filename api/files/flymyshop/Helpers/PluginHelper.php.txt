@@ -2,28 +2,32 @@
 
 namespace Flymyshop\Helpers;
 
-use Flymyshop\Containers\DataContainer;
 use Illuminate\Support\Facades\File;
 
+/**
+ * Class PluginHelper
+ * Helper class for plugins and controllers
+ *
+ * @package Flymyshop\Helpers
+ */
 class PluginHelper
 {
-    public function hello()
-    {
-        return 'hello';
-    }
 
+    /**
+     * Get the names of all plugins in the plugins directory
+     *
+     * @return array
+     */
     public function getPluginNames()
     {
-        $pluginList= File::directories(base_path('/flymyshop/plugins'));
-        $plugins=array();
+        $pluginList = File::directories(base_path('/flymyshop/plugins'));
+        $plugins = [];
 
-        foreach ($pluginList as $plugin){
-            array_push($plugins,ucfirst(basename($plugin))) ;
+        foreach ($pluginList as $plugin) {
+            array_push($plugins, ucfirst(basename($plugin)));
         }
 
         return $plugins;
-
-
     }
 }
 

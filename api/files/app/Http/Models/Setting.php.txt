@@ -4,6 +4,12 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Setting
+ * TODO: change db schema to key => value
+ *
+ * @package App\Http\Models
+ */
 class Setting extends Model
 {
     protected $fillable = [
