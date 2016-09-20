@@ -23,7 +23,6 @@ use View;
  */
 final class AddressController extends Controller
 {
-
     /**
      * Display a listing of all the addresses.
      *
@@ -33,6 +32,7 @@ final class AddressController extends Controller
     {
         $user = Auth::user();
         $addresses = $user->addresses->all();
+
         return view('account.address.index', compact('addresses'));
     }
 
@@ -67,6 +67,7 @@ final class AddressController extends Controller
         }
 
         $request->session()->flash('message', 'Successfully added address!');
+
         return redirect('account/addresses');
     }
 
@@ -81,6 +82,7 @@ final class AddressController extends Controller
     {
         $address = Address::GetInfo($slug)->get(0);
         $this->authorize('show', $address);
+
         return view('account.address.edit', compact('address'));
     }
 
@@ -98,6 +100,7 @@ final class AddressController extends Controller
         $this->authorize('update', $address);
         $address->update($request->all());
         $request->session()->flash('message', 'Successfully updated address');
+
         return redirect('account/addresses');
     }
 
@@ -112,10 +115,11 @@ final class AddressController extends Controller
      */
     public function destroy(Request $request, $slug)
     {
-        $address=Address::GetInfo($slug)->get(0);
+        $address = Address::GetInfo($slug)->get(0);
         $this->authorize('delete', $address);
         $address->delete();
         $request->session()->flash('message', 'Successfully deleted the entry!');
+
         return redirect('account/addresses');
     }
 }

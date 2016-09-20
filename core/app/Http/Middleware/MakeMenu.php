@@ -11,7 +11,7 @@ class MakeMenu
 {
     /**
      * Handle an incoming request.
-     * TODO: convert these to helper functions so that view can call them
+     * TODO: convert these to helper functions so that view can call them.
      *
      * Create menu objects so that it available for all the views
      *

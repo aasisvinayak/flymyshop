@@ -7,7 +7,6 @@ use App\Http\Models\UserType;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-
 class InvoicePolicy
 {
     use HandlesAuthorization;
@@ -24,13 +23,14 @@ class InvoicePolicy
 
     public function show(User $user, Invoice $invoice)
     {
-            return $user->id === $invoice->user_id;
+        return $user->id === $invoice->user_id;
     }
 
     public function update()
     {
         $id = Auth::user()->id;
         $type = UserType::getType($id);
-        return $type=="admin" ? true:false;
+
+        return $type == 'admin' ? true : false;
     }
 }

@@ -30,6 +30,7 @@ class PaymentCardController extends Controller
     {
         $user = Auth::user();
         $payment_cards = $user->payment_cards->all();
+
         return view('account.payment.index', compact('payment_cards'));
     }
 
@@ -98,6 +99,7 @@ class PaymentCardController extends Controller
         $this->authorize('delete', $payment_method);
         $payment_method->delete();
         $request->session()->flash('message', 'Successfully deleted card!');
+
         return redirect('account/addresses');
     }
 }

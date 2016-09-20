@@ -6,7 +6,6 @@ use App\Http\Models\Invoice;
 use App\Http\Models\Product;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 /**
  * Class OrderController.
@@ -29,6 +28,7 @@ final class OrderController extends Controller
     {
         $user = Auth::user();
         $invoices = Invoice::ByUser($user->id)->paginate(10);
+
         return view('account/order-list', compact('invoices'));
     }
 
@@ -41,7 +41,6 @@ final class OrderController extends Controller
      */
     public function view($slug)
     {
-
         $invoice_details = Invoice::GetID($slug);
         $invoice_id = ($invoice_details->get()[0]['id']);
         $this->authorize('show', $invoice_details->get()[0]);

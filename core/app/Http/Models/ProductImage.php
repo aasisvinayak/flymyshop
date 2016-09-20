@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductImage
- * ProductImage model
- *
- * @package App\Http\Models
+ * ProductImage model.
  */
 class ProductImage extends Model
 {
@@ -20,7 +18,7 @@ class ProductImage extends Model
 
     /**
      * Get product additional images
-     * TODO: switch to relationship based - remove obsolete
+     * TODO: switch to relationship based - remove obsolete.
      *
      * @param $query
      * @param $product_id
@@ -32,7 +30,7 @@ class ProductImage extends Model
     }
 
     /**
-     * Each product image belongs to product
+     * Each product image belongs to product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

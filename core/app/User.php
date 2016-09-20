@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns all invoices associated with the user
+     * Returns all invoices associated with the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -56,8 +56,8 @@ class User extends Authenticatable
     }
 
     /**
-     * Each user has a profile
-     * 
+     * Each user has a profile.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile()
@@ -66,7 +66,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get email address from the stripe id
+     * Get email address from the stripe id.
      *
      * @param $query
      * @param $customer_id
@@ -78,7 +78,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Count number of users after $time
+     * Count number of users after $time.
      *
      * @param $query
      * @param $time
@@ -89,5 +89,4 @@ class User extends Authenticatable
         return $query->select('id')
             ->where('created_at', '>', $time)->count();
     }
-
 }

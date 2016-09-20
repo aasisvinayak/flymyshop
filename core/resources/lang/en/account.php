@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'account' => 'Account Centre'
+    'account' => 'Account Centre',
 ];

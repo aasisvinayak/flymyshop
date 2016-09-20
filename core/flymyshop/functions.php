@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the footer content
+ * Returns the footer content.
  * @return mixed
  */
 function fmc_footer()
@@ -69,14 +69,14 @@ function get_fms_version()
 }
 
 /**
- * Get user's favourites
+ * Get user's favourites.
  */
 function favourites()
 {
 }
 
 /**
- * Return csrf token
+ * Return csrf token.
  * @return \Illuminate\Support\HtmlString
  */
 function token()

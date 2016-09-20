@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Category
- * Category model to store category information
- *
- * @package App\Http\Models
+ * Category model to store category information.
  */
 class Category extends Model
 {
@@ -20,7 +18,7 @@ class Category extends Model
     ];
 
     /**
-     * Get address object from category_id
+     * Get address object from category_id.
      *
      * @param $query
      * @param $slug
@@ -31,9 +29,8 @@ class Category extends Model
         return $query->where('category_id', '=', $slug);
     }
 
-
     /**
-     * Each category has many products
+     * Each category has many products.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

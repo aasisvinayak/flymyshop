@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Page
- * Page model for shop pages
- *
- * @package App\Http\Models
+ * Page model for shop pages.
  */
 class Page extends Model
 {
@@ -18,7 +16,7 @@ class Page extends Model
     ];
 
     /**
-     * Get page object by page_id
+     * Get page object by page_id.
      *
      * @param $query
      * @param $page_id

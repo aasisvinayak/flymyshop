@@ -4,14 +4,13 @@ namespace Flymyshop\Plugins;
 
 /**
  * Interface Plugin
- * For Plugin Main
- * @package Flymyshop\Plugins
+ * For Plugin Main.
  */
 interface Plugin
 {
     /**
-     * Main method for plugin class
-     * 
+     * Main method for plugin class.
+     *
      * @return void
      */
     public static function main();

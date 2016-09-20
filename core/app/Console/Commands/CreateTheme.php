@@ -7,9 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 
 /**
  * Class CreateTheme
- * Class for adding artisan command make:theme to create a new theme
- *
- * @package App\Console\Commands
+ * Class for adding artisan command make:theme to create a new theme.
  */
 class CreateTheme extends Command
 {
