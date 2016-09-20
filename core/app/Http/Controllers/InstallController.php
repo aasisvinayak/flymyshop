@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Class InstallController
- * TODO: flush the echos while processing
- * @package App\Http\Controllers
+ * TODO: flush the echos while processing.
  * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
@@ -23,9 +22,6 @@ use Illuminate\Support\Facades\Schema;
  */
 final class InstallController extends Controller
 {
-
-
-
     /**
      * TODO: Display form to save to .env.
      *
@@ -66,7 +62,7 @@ final class InstallController extends Controller
             Artisan::call('db:seed', ['--force' => true]);
             echo 'Working on it ...... <br>';
 
-            $user = User::findorFail(1);// getting the admin user TODO: allow admin user to change
+            $user = User::findorFail(1); // getting the admin user TODO: allow admin user to change
             $user->update(
                 [
                     'email' => $request->get('admin_user'),
@@ -81,17 +77,16 @@ final class InstallController extends Controller
         return redirect('/');
     }
 
-
     /**
      * Save DB details to .env file
-     * //TODO: change to database or config file
+     * //TODO: change to database or config file.
      *
      * @param InstallRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function installShop(InstallRequest $request)
     {
-        echo 'Setting up database<br>';// TODO: flush the echos while processing
+        echo 'Setting up database<br>'; // TODO: flush the echos while processing
 
         $shopName = preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
         $env_update = $this->save([
@@ -111,7 +106,7 @@ final class InstallController extends Controller
 
     /**
      * Checks if the application has already been installed and then allows the user
-     * to enter database config details
+     * to enter database config details.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -136,7 +131,7 @@ final class InstallController extends Controller
      * Save to .env file
      * If new key is supplied it will be appended
      * If existing key is supplied, value will be replaced
-     * If the key is not supplied, then the line will be ignored
+     * If the key is not supplied, then the line will be ignored.
      *
      * @param array $shop_config
      * @return bool
@@ -173,6 +168,7 @@ final class InstallController extends Controller
             //TODO: Check the efficiency and correspondingly check whether
             //  Laravel helper should be used
             file_put_contents(base_path('.env'), $env."\n".$envAdditional);
+
             return true;
         } else {
             return false;

@@ -35,17 +35,19 @@ final class AdminController extends Controller
     {
         //TODO: account for previous year and change order by getting the full date
         $reportValues = $this->generateReport()[0];
+
         return view('admin/welcome', $reportValues);
     }
 
     /**
-     * Generate reports view
+     * Generate reports view.
      *
      * @return View
      */
     public function reports()
     {
         $reportValues = $this->generateReport()[0];
+
         return view('admin/reports', $reportValues);
     }
 
@@ -57,6 +59,7 @@ final class AdminController extends Controller
     public function users()
     {
         $users = User::paginate(10);
+
         return view('admin/users', compact('users'));
     }
 
@@ -139,7 +142,7 @@ final class AdminController extends Controller
 
     /**
      * View individual order
-     * TODO: reuse code in account controller. Move to helper
+     * TODO: reuse code in account controller. Move to helper.
      *
      * @param int $id order_id
      *
@@ -176,9 +179,8 @@ final class AdminController extends Controller
         );
     }
 
-
     /**
-     * Get sales stats for admin pages
+     * Get sales stats for admin pages.
      *
      * @return array
      */
@@ -233,7 +235,7 @@ final class AdminController extends Controller
     }
 
     /**
-     * Generate data for the last one year
+     * Generate data for the last one year.
      *
      * @return mixed
      */
@@ -284,76 +286,77 @@ final class AdminController extends Controller
     }
 
     /**
-     * TODO: update settings from admin panel than by manually editing .env
+     * TODO: update settings from admin panel than by manually editing .env.
      */
     public function updateSettings()
     {
     }
 
-
     /**
-     * Fill-in the missing months with revenue =0
+     * Fill-in the missing months with revenue =0.
      *
      * @param $graph
      * @return array
      */
     protected function getGraphWithCompleteValues($graph)
     {
-        $formattedGraph = array();
+        $formattedGraph = [];
         $current = Carbon::now();
-        $month=$current->month;
+        $month = $current->month;
 
         for ($i = 1; $i < 13; $i++) {
             $num_padded = sprintf('%02d', $i);
-            if ($i>$month) {
-                $year=$current->year;
-                $num_padded=($year-1)."-".$num_padded;
+            if ($i > $month) {
+                $year = $current->year;
+                $num_padded = ($year - 1).'-'.$num_padded;
             } else {
-                $num_padded=$current->year."-".$num_padded;
+                $num_padded = $current->year.'-'.$num_padded;
             }
             array_key_exists($num_padded, $graph) ?
                 $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string)$num_padded] = 0;
+                $formattedGraph[(string) $num_padded] = 0;
         }
+
         return $formattedGraph;
     }
 
     /**
-     * Convert month number to name
+     * Convert month number to name.
      *
      * @param $months
      * @return array
      */
     protected function getMonthNamesFromNumbers($months)
     {
-        $monthNames = array();
+        $monthNames = [];
 
         foreach ($months as $number) {
-            $number = explode("-", $number);
+            $number = explode('-', $number);
             $mName = date('F', mktime(0, 0, 0, $number[1], 10));
-            array_push($monthNames, $number[0]."-".$mName);
+            array_push($monthNames, $number[0].'-'.$mName);
         }
 
         return $monthNames;
     }
 
     /**
-     * Extract the sum key from the main array and create a sub-array
+     * Extract the sum key from the main array and create a sub-array.
      *
      * @param $fullGraph
      * @return array
      */
     protected function getSumArray($fullGraph)
     {
-        $valueArray = array();
+        $valueArray = [];
         foreach ($fullGraph as $item) {
             array_push($valueArray, $item['sum']);
         }
-        return ($valueArray);
+
+        return $valueArray;
     }
 
     /**
-     * Grab data for the last one year
+     * Grab data for the last one year.
      *
      * @return array
      */
@@ -363,7 +366,7 @@ final class AdminController extends Controller
         $stats = $this->stats();
         $fullGraph = $this->getGraphWithCompleteValues($graph);
         $months = array_keys($fullGraph);
-        $formattedMonthName=array();
+        $formattedMonthName = [];
 
         foreach ($months as $month) {
             array_push($formattedMonthName, Carbon::createFromFormat('Y-m', $month)->toDateString());
@@ -372,10 +375,11 @@ final class AdminController extends Controller
         $sumInArray = $this->getSumArray($fullGraph);
         $data = array_combine($formattedMonthName, $sumInArray);
         ksort($data);
-        $monthNames= array_keys($data);
+        $monthNames = array_keys($data);
         $monthNames = $this->getMonthNamesFromNumbers($monthNames);
-        $sumInArray= json_encode(array_values($data)) ;
-        $graphY = 'var value_array = ' . ($sumInArray) . ";\n";
-        return array(compact('stats', 'graphY', 'graph', 'monthNames'));
+        $sumInArray = json_encode(array_values($data));
+        $graphY = 'var value_array = '.($sumInArray).";\n";
+
+        return [compact('stats', 'graphY', 'graph', 'monthNames')];
     }
 }

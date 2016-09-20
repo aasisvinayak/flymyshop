@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\User;
 
 class CategoryRequest extends Request
@@ -14,7 +13,7 @@ class CategoryRequest extends Request
      */
     public function authorize()
     {
-       //logic already checked using middleware
+        //logic already checked using middleware
         return true;
     }
 

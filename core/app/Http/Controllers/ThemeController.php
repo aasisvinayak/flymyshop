@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 /**
- * Class ThemeController
- * @package App\Http\Controllers
+ * Class ThemeController.
  * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>

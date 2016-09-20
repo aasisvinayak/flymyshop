@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Setting
- * TODO: change db schema to key => value
- *
- * @package App\Http\Models
+ * TODO: change db schema to key => value.
  */
 class Setting extends Model
 {

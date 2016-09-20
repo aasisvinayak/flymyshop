@@ -9,7 +9,7 @@ class Invoice extends Model
     protected $fillable = ['status'];
 
     /**
-     * An invoice (order) belongs to a user
+     * An invoice (order) belongs to a user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -19,7 +19,7 @@ class Invoice extends Model
     }
 
     /**
-     * Each invoice has many invoice items (products purchased)
+     * Each invoice has many invoice items (products purchased).
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -30,7 +30,7 @@ class Invoice extends Model
 
     /**
      * Get all invoices by user
-     * TODO: switch to relationship
+     * TODO: switch to relationship.
      *
      * @param $query
      * @param $user_id
@@ -43,7 +43,7 @@ class Invoice extends Model
     }
 
     /**
-     * Get invoice item by invoice_id
+     * Get invoice item by invoice_id.
      *
      * @param $query
      * @param $slug
@@ -55,7 +55,7 @@ class Invoice extends Model
     }
 
     /**
-     * Accessor to return invoice date in 'F d, Y' format
+     * Accessor to return invoice date in 'F d, Y' format.
      *
      * @param $value
      * @return mixed
@@ -66,7 +66,7 @@ class Invoice extends Model
     }
 
     /**
-     * Show the new invoices first
+     * Show the new invoices first.
      *
      * @param $query
      * @return mixed
@@ -77,7 +77,7 @@ class Invoice extends Model
     }
 
     /**
-     * Fetch sum of sub_total (sales) during a selected a period of time
+     * Fetch sum of sub_total (sales) during a selected a period of time.
      *
      * @param $query
      * @param $time
@@ -90,7 +90,7 @@ class Invoice extends Model
     }
 
     /**
-     * Select the number of invoices created after a specific time 
+     * Select the number of invoices created after a specific time.
      *
      * @param $query
      * @param $time

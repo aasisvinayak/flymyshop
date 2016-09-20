@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
-use Input;
 use Redirect;
-use Validator;
 use View;
 
 /**
@@ -31,6 +29,7 @@ final class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(10);
+
         return view('admin/categories', compact('categories'));
     }
 
@@ -52,12 +51,13 @@ final class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-            $data = $request->all();
-            $data['status'] = 1;
-            $data['category_id'] = str_random(50);
-            $data['parent_id'] = '';
-            Category::create($data);
-            return redirect('admin/categories/');
+        $data = $request->all();
+        $data['status'] = 1;
+        $data['category_id'] = str_random(50);
+        $data['parent_id'] = '';
+        Category::create($data);
+
+        return redirect('admin/categories/');
     }
 
     /**
@@ -71,6 +71,7 @@ final class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::findorFail($id);
+
         return $category;
     }
 
@@ -84,6 +85,7 @@ final class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorFail($id);
+
         return view('admin.edit-category', compact('category'));
     }
 
@@ -97,6 +99,7 @@ final class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         Category::findorFail($id)->update($request->all());
+
         return redirect('admin/categories/');
     }
 
@@ -110,11 +113,12 @@ final class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findorFail($id)->delete();
+
         return redirect('admin/categories/');
     }
 
     /**
-     * Return all categories as json object
+     * Return all categories as json object.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */

@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserType
- * UserType mode for user type
- *
- * @package App\Http\Models
+ * UserType mode for user type.
  */
 class UserType extends Model
 {
@@ -21,7 +19,7 @@ class UserType extends Model
     ];
 
     /**
-     * Get user type by user_id
+     * Get user type by user_id.
      *
      * @param $query
      * @param $user_id

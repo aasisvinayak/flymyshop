@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class FailedLogin
- * TODO: can be removed as the application is now using Laravel's builtin throttle check
- *
- * @package App\Http\Models
+ * TODO: can be removed as the application is now using Laravel's builtin throttle check.
  */
 class FailedLogin extends Model
 {
@@ -20,7 +18,7 @@ class FailedLogin extends Model
     ];
 
     /**
-     * Check how many times the IP has been added to the db in the last 10 minutes
+     * Check how many times the IP has been added to the db in the last 10 minutes.
      *
      * @param $query
      * @param $email
