@@ -11,6 +11,8 @@ class CheckSettings
     /**
      * Handle an incoming request.
      *
+     * Check database is configured properly if not send to install
+     *
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
      *

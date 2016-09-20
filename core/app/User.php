@@ -56,6 +56,8 @@ class User extends Authenticatable
     }
 
     /**
+     * Each user has a profile
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile()
@@ -63,11 +65,25 @@ class User extends Authenticatable
         return $this->hasOne('App\Http\Models\UserDetail');
     }
 
+    /**
+     * Get email address from the stripe id
+     *
+     * @param $query
+     * @param $customer_id
+     * @return mixed
+     */
     public function scopeGetEmailFromCustomerId($query, $customer_id)
     {
         return $query->select('email')->where('stripe_id', '=', $customer_id)->get();
     }
 
+    /**
+     * Count number of users after $time
+     *
+     * @param $query
+     * @param $time
+     * @return mixed
+     */
     public function scopeUserCount($query, $time)
     {
         return $query->select('id')

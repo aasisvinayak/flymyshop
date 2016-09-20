@@ -4,6 +4,14 @@ namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class OrderShipped
+ * Event when order status is updated to shipped
+ *
+ * TODO: send notification email
+ *
+ * @package App\Events
+ */
 class OrderShipped extends Event
 {
     use SerializesModels;

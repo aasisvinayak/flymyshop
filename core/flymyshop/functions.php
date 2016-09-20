@@ -63,15 +63,17 @@ function get_version()
 {
 }
 
-
+/**
+ * Get user's favourites
+ */
 function favourites()
 {
 }
 
-function creditCards()
-{
-}
-
+/**
+ * Return csrf token
+ * @return \Illuminate\Support\HtmlString
+ */
 function token()
 {
     return csrf_field();

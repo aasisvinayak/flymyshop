@@ -5,6 +5,12 @@ namespace App\Events;
 use App\Http\Models\Invoice;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class OrderPlaced
+ * Called when can order is placed - See check_out()
+ *
+ * @package App\Events
+ */
 class OrderPlaced extends Event
 {
     use SerializesModels;

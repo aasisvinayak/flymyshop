@@ -28,15 +28,5 @@ class CreateThumbnail extends Job implements ShouldQueue
      */
     public function handle(Mailer $mailer)
     {
-        //        $mailer->send(
-//            [],
-//            [],
-//            function ($message) {
-//                $message->from(env('MAIL_FROM'));
-//                $message->to(env('MAIL_TO'));
-//                $message->subject("Test");
-//                $message->setBody('Test message');
-//            }
-//        );
     }
 }

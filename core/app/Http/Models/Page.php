@@ -4,6 +4,12 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Page
+ * Page model for shop pages
+ *
+ * @package App\Http\Models
+ */
 class Page extends Model
 {
     protected $fillable = [
@@ -11,6 +17,13 @@ class Page extends Model
         'content',
     ];
 
+    /**
+     * Get page object by page_id
+     *
+     * @param $query
+     * @param $page_id
+     * @return mixed
+     */
     public function scopeGetPage($query, $page_id)
     {
         return $query->where('page_id', '=', $page_id)->get();

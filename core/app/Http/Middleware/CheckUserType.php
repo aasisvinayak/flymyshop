@@ -13,6 +13,10 @@ class CheckUserType
     /**
      * Handle an incoming request.
      *
+     * Check if the user is admin
+     *
+     * TODO: check for additional user types - eg. staff, moderators etc
+     *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
      *
