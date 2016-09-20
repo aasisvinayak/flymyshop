@@ -1,85 +1,78 @@
 <?php
 
 /**
- * Functions for views (custom themes)
- *
+ * Functions for views (custom themes).
  */
 
 
 /**
- *
  * @return mixed
  */
 function fmc_footer()
 {
-    $dataContainer =  \Flymyshop\Containers\DataContainer::instance();
-    foreach ($dataContainer->data as $item){
+    $dataContainer = \Flymyshop\Containers\DataContainer::instance();
+    foreach ($dataContainer->data as $item) {
         if (array_key_exists('footer', $item)) {
-            return ($item['footer']) ;
+            return $item['footer'];
             break;
         }
     }
 }
 
-/**
- *
- */
-function themes(){
 
+function themes()
+{
 }
 
-function plugins(){
-
+function plugins()
+{
 }
 
-function categories(){
-
+function categories()
+{
     return \App\Http\Controllers\CategoryController::getAllCategories();
-
 }
 
 /**
- * Get products
+ * Get products.
  *
  * @param $take
  * @param $skip
  * @return mixed
  */
-function products($take,$skip){
-    return \App\Http\Controllers\ProductController::getPublishedProducts($take,$skip);
+function products($take, $skip)
+{
+    return \App\Http\Controllers\ProductController::getPublishedProducts($take, $skip);
 }
 
-function featured_products(){
-
-
+function featured_products()
+{
 }
 
 /**
- * Get the name of the shop
+ * Get the name of the shop.
  */
 function get_shop_name()
 {
-
 }
 
 /**
- * Get current version of Flymyshop
+ * Get current version of Flymyshop.
  */
 function get_version()
 {
-
 }
 
 
 function favourites()
 {
-
 }
 
-function creditCards(){
-
+function creditCards()
+{
 }
 
-function token(){
+function token()
+{
     return csrf_field();
 }

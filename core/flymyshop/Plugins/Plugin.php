@@ -2,6 +2,7 @@
 
 namespace Flymyshop\Plugins;
 
-interface Plugin{
+interface Plugin
+{
     public static function main();
 }

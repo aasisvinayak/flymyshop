@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\HttpFoundation\File\File;
 use Illuminate\Filesystem\Filesystem;
 
 class CreateTheme extends Command
@@ -40,13 +39,11 @@ class CreateTheme extends Command
      */
     public function handle()
     {
-
         $themeName = $this->argument('name');
-        if (!$this->files->isDirectory(base_path() . "/../public/themes/" . $themeName)) {
+        if (! $this->files->isDirectory(base_path().'/../public/themes/'.$themeName)) {
+            $files = $this->files->allFiles(base_path().'/../public/themes/default');
 
-            $files = $this->files->allFiles(base_path() . "/../public/themes/default");
-
-            $this->files->makeDirectory(base_path() . "/../public/themes/" . $themeName);
+            $this->files->makeDirectory(base_path().'/../public/themes/'.$themeName);
 
             $directories = ['account', 'auth', 'emails', 'errors', 'includes',
                 'layouts', 'pages', 'partials', 'payment', 'shop',
@@ -55,21 +52,17 @@ class CreateTheme extends Command
             ];
 
             foreach ($directories as $directory) {
-                $this->files->makeDirectory(base_path() . "/../public/themes/" . $themeName . "/" . $directory);
+                $this->files->makeDirectory(base_path().'/../public/themes/'.$themeName.'/'.$directory);
             }
 
             foreach ($files as $item) {
-                $item = str_replace(base_path() . "/../public/themes/default/", "", $item);
-                $this->files->put(base_path() . "/../public/themes/" . $themeName . "/" . $item, '');
+                $item = str_replace(base_path().'/../public/themes/default/', '', $item);
+                $this->files->put(base_path().'/../public/themes/'.$themeName.'/'.$item, '');
             }
 
-            $this->info($themeName . "  created in themes folder");
+            $this->info($themeName.'  created in themes folder');
         } else {
-            $this->error($themeName . " theme already exists!");
+            $this->error($themeName.' theme already exists!');
         }
-
-
     }
-
-
 }

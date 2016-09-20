@@ -133,6 +133,5 @@ class CategoryController extends Controller
     public static function getAllCategories()
     {
         return Category::all();
-
     }
 }

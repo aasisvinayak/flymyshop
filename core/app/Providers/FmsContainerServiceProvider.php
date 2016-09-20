@@ -30,6 +30,5 @@ class FmsContainerServiceProvider extends ServiceProvider
 //        App::singleton('DataContainer', function () {
 //            return  DataContainer::instance();
 //        });
-
     }
 }

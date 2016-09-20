@@ -9,6 +9,5 @@ class Sample implements Plugin
     public static function main()
     {
         return 'sample';
-
     }
 }
