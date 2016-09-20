@@ -30,11 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
         new EnablePlugins();
     }
-
-
-
 }
 
 require base_path().'/flymyshop/functions.php';
 require base_path().'/flymyshop/hooks.php';
-

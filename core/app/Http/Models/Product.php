@@ -61,7 +61,7 @@ class Product extends Model
             ->orderBy('id', 'DESC')->skip(0)->get();
     }
 
-    public function scopePublishedProducts($query,$take,$skip)
+    public function scopePublishedProducts($query, $take, $skip)
     {
         return $query->select('product_id', 'id',
             'title', 'price', 'image_name', 'description')

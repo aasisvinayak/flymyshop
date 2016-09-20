@@ -244,8 +244,8 @@ class ProductController extends Controller
         return redirect('admin/products');
     }
 
-    public static function getPublishedProducts($take,$skip)
+    public static function getPublishedProducts($take, $skip)
     {
-        return Product::PublishedProducts($take,$skip)->toArray();
+        return Product::PublishedProducts($take, $skip)->toArray();
     }
 }

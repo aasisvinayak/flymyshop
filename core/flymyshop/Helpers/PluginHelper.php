@@ -2,7 +2,6 @@
 
 namespace Flymyshop\Helpers;
 
-use Flymyshop\Containers\DataContainer;
 use Illuminate\Support\Facades\File;
 
 class PluginHelper
@@ -14,15 +13,13 @@ class PluginHelper
 
     public function getPluginNames()
     {
-        $pluginList= File::directories(base_path('/flymyshop/plugins'));
-        $plugins=array();
+        $pluginList = File::directories(base_path('/flymyshop/plugins'));
+        $plugins = [];
 
-        foreach ($pluginList as $plugin){
-            array_push($plugins,ucfirst(basename($plugin))) ;
+        foreach ($pluginList as $plugin) {
+            array_push($plugins, ucfirst(basename($plugin)));
         }
 
         return $plugins;
-
-
     }
 }

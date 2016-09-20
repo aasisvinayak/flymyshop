@@ -2,23 +2,23 @@
 
 namespace Flymyshop\Containers;
 
-final class HookContainer{
-
+final class HookContainer
+{
     public $hooks;
 
     public function __construct()
     {
-        $this->hooks=array();
+        $this->hooks = [];
     }
 
     public static function instance()
     {
         static $inst = null;
         if ($inst === null) {
-            $inst = new HookContainer();
+            $inst = new self();
         }
-        return $inst;
 
+        return $inst;
     }
 
     public function getHook($key)
@@ -26,14 +26,12 @@ final class HookContainer{
         return $this->hooks[$key];
     }
 
-    public function setHook($in=array())
+    public function setHook($in = [])
     {
-        array_push($this->hooks,$in);
+        array_push($this->hooks, $in);
     }
 
-    public function removeData($in=array())
+    public function removeData($in = [])
     {
-
     }
-
 }

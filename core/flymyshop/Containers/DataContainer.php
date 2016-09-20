@@ -2,23 +2,23 @@
 
 namespace Flymyshop\Containers;
 
-final class DataContainer{
-
+final class DataContainer
+{
     public $data;
 
     public function __construct()
     {
-        $this->data=array();
+        $this->data = [];
     }
 
     public static function instance()
     {
         static $inst = null;
         if ($inst === null) {
-            $inst = new DataContainer();
+            $inst = new self();
         }
-        return $inst;
 
+        return $inst;
     }
 
     public function getData($key)
@@ -26,14 +26,12 @@ final class DataContainer{
         return $this->data[$key];
     }
 
-    public function setData($in=array())
+    public function setData($in = [])
     {
-        array_push($this->data,$in);
+        array_push($this->data, $in);
     }
 
-    public function removeData($in=array())
+    public function removeData($in = [])
     {
-
     }
-
 }
