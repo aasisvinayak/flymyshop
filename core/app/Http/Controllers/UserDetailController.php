@@ -87,8 +87,9 @@ final class UserDetailController extends Controller
     {
         $id = UserDetail::GetId($request->profile_id);
         $profile = UserDetail::findorFail($id[0]->id);
+        $this->authorize('update', $profile);
         $profile->update($request->all());
-        Session::flash('alert-success', 'Profile updated');
+        $request->session()->flash('alert-success', 'Profile updated');
         return redirect('account/profile');
     }
 }

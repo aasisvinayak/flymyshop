@@ -9,6 +9,7 @@ use App\Http\Models\UserDetail;
 use App\Policies\AddressPolicy;
 use App\Policies\InvoicePolicy;
 use App\Policies\PaymentCardPolicy;
+use App\Policies\UserDetailPolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -23,7 +24,6 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model'        => 'App\Policies\ModelPolicy',
         Address::class     => AddressPolicy::class,
         PaymentCard::class => PaymentCardPolicy::class,
-        UserDetail::class  => UserDetailPolicy::class,
         UserDetail::class  => UserDetailPolicy::class,
         Invoice::class  => InvoicePolicy::class,
 

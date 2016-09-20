@@ -14,4 +14,9 @@ class PaymentCard extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function scopeGetInfo($query, $slug)
+    {
+        return $query->where('card_id', '=', $slug)->get();
+    }
 }

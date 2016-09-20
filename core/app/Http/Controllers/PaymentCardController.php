@@ -30,7 +30,6 @@ class PaymentCardController extends Controller
     {
         $user = Auth::user();
         $payment_cards = $user->payment_cards->all();
-
         return view('account.payment.index', compact('payment_cards'));
     }
 
@@ -83,7 +82,7 @@ class PaymentCardController extends Controller
             return redirect('shop/check_out');
         }
 
-        redirect('/account/payment_cards');
+        return redirect('/account/payment_cards');
     }
 
     /**
@@ -93,12 +92,12 @@ class PaymentCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Request $request, $slug)
     {
-        $address = PaymentCard::GetInfo($slug);
-        $address[0]->delete();
-        Session::flash('message', 'Successfully deleted the entry!');
-
-        return Redirect::to('account/addresses');
+        $payment_method = PaymentCard::GetInfo($slug)->get(0);
+        $this->authorize('delete', $payment_method);
+        $payment_method->delete();
+        $request->session()->flash('message', 'Successfully deleted card!');
+        return redirect('account/addresses');
     }
 }

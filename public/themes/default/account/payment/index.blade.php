@@ -46,7 +46,7 @@
 
                                     <br>
 
-                                    {{ Form::model($value,array('action' => array('AddressController@destroy', $value->card_id), 'class' => 'pull-right')) }}
+                                    {{ Form::model($value,array('action' => array('PaymentCardController@destroy', $value->card_id), 'class' => 'pull-right')) }}
                                     {{ Form::hidden('_method', 'DELETE') }}
                                     {{ Form::submit('Delete card', array('class' => 'btn btn-danger')) }}
                                     {{ Form::close() }}
