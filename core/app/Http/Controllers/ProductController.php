@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 /**
  * Class ProductController.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0

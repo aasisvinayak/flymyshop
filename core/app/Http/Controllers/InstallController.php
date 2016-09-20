@@ -10,8 +10,22 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
-class InstallController extends Controller
+/**
+ * Class InstallController
+ * TODO: flush the echos while processing
+ * @package App\Http\Controllers
+ * @category AppControllers
+ *
+ * @author acev <aasisvinayak@gmail.com>
+ * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
+ *
+ * @link https://github.com/aasisvinayak/flymyshop
+ */
+final class InstallController extends Controller
 {
+
+
+
     /**
      * TODO: Display form to save to .env.
      *
@@ -25,12 +39,22 @@ class InstallController extends Controller
             } else {
                 return view('install/install');
             }
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo 'Error';
             exit();
         }
     }
 
+    /**
+     * Method to install FlyMyShop
+     * This method checks that the database config is correct and the install step has
+     * not been done previously. It does migrations and seeding of sample data.
+     *
+     * TODO: make seeding of sample data optional
+     *
+     * @param InstallAdminUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function process(InstallAdminUserRequest $request)
     {
         if (! Schema::hasTable('users')) {
@@ -42,7 +66,7 @@ class InstallController extends Controller
             Artisan::call('db:seed', ['--force' => true]);
             echo 'Working on it ...... <br>';
 
-            $user = User::findorFail(1);
+            $user = User::findorFail(1);// getting the admin user TODO: allow admin user to change
             $user->update(
                 [
                     'email' => $request->get('admin_user'),
@@ -57,9 +81,17 @@ class InstallController extends Controller
         return redirect('/');
     }
 
+
+    /**
+     * Save DB details to .env file
+     * //TODO: change to database or config file
+     *
+     * @param InstallRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function installShop(InstallRequest $request)
     {
-        echo 'Setting up database<br>';
+        echo 'Setting up database<br>';// TODO: flush the echos while processing
 
         $shopName = preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
         $env_update = $this->save([
@@ -77,6 +109,12 @@ class InstallController extends Controller
         }
     }
 
+    /**
+     * Checks if the application has already been installed and then allows the user
+     * to enter database config details
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function postInstall()
     {
         try {
@@ -94,6 +132,15 @@ class InstallController extends Controller
         }
     }
 
+    /**
+     * Save to .env file
+     * If new key is supplied it will be appended
+     * If existing key is supplied, value will be replaced
+     * If the key is not supplied, then the line will be ignored
+     *
+     * @param array $shop_config
+     * @return bool
+     */
     protected function save($shop_config = [])
     {
         if (! is_null($shop_config)) {
@@ -123,8 +170,9 @@ class InstallController extends Controller
 
             $env = implode("\n", $env);
             $envAdditional = implode("\n", $newValues);
+            //TODO: Check the efficiency and correspondingly check whether
+            //  Laravel helper should be used
             file_put_contents(base_path('.env'), $env."\n".$envAdditional);
-
             return true;
         } else {
             return false;

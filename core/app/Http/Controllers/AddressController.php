@@ -14,15 +14,16 @@ use View;
  * Class AddressController
  * CRUD controller for user address.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class AddressController extends Controller
+final class AddressController extends Controller
 {
+
     /**
      * Display a listing of all the addresses.
      *
@@ -31,10 +32,8 @@ class AddressController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $address = $user->addresses->all();
-
-        return View::make('account.address.index')
-            ->with('addresses', $address);
+        $addresses = $user->addresses->all();
+        return view('account.address.index', compact('addresses'));
     }
 
     /**
@@ -44,7 +43,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return View::make('account.address.create');
+        return view('account.address.create');
     }
 
     /**
@@ -63,13 +62,12 @@ class AddressController extends Controller
 
         if (isset($request)) {
             if ($request->next_page) {
-                return Redirect::to('shop/check_out');
+                return redirect('shop/check_out');
             }
         }
 
-        Session::flash('message', 'Successfully added address');
-
-        return Redirect::to('account/addresses');
+        $request->session()->flash('message', 'Successfully added address!');
+        return redirect('account/addresses');
     }
 
     /**
@@ -81,10 +79,9 @@ class AddressController extends Controller
      */
     public function edit($slug)
     {
-        $address = Address::GetInfo($slug);
-
-        return View::make('account.address.edit')
-            ->with('address', $address[0]);
+        $address = Address::GetInfo($slug)->get(0);
+        $this->authorize('show', $address);
+        return view('account.address.edit', compact('address'));
     }
 
     /**
@@ -93,31 +90,32 @@ class AddressController extends Controller
      * @param AddressRequest $request request
      * @param string         $slug    address_id
      *
-     * @return Response
+     * @return Redirect
      */
     public function update(AddressRequest $request, $slug)
     {
-        $address = Address::GetInfo($slug);
-        $address = $address[0];
+        $address = Address::GetInfo($slug)->get(0);
+        $this->authorize('update', $address);
         $address->update($request->all());
-        Session::flash('message', 'Successfully updated address');
-
-        return Redirect::to('account/addresses');
+        $request->session()->flash('message', 'Successfully updated address');
+        return redirect('account/addresses');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param string $slug address_id
+     * @param Request $request
+     * @param string $slug address_id
      *
-     * @return Response
+     * @return Redirect
      */
-    public function destroy($slug)
+    public function destroy(Request $request, $slug)
     {
-        $address = Address::GetInfo($slug);
-        $address[0]->delete();
-        Session::flash('message', 'Successfully deleted the entry!');
-
-        return Redirect::to('account/addresses');
+        $address=Address::GetInfo($slug)->get(0);
+        $this->authorize('delete', $address);
+        $address->delete();
+        $request->session()->flash('message', 'Successfully deleted the entry!');
+        return redirect('account/addresses');
     }
 }

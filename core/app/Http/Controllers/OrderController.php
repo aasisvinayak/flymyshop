@@ -6,18 +6,19 @@ use App\Http\Models\Invoice;
 use App\Http\Models\Product;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class OrderController.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class OrderController extends Controller
+final class OrderController extends Controller
 {
     /**
      * Display a listing of all the orders/invoices.
@@ -28,7 +29,6 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $invoices = Invoice::ByUser($user->id)->paginate(10);
-
         return view('account/order-list', compact('invoices'));
     }
 
@@ -41,8 +41,10 @@ class OrderController extends Controller
      */
     public function view($slug)
     {
+
         $invoice_details = Invoice::GetID($slug);
         $invoice_id = ($invoice_details->get()[0]['id']);
+        $this->authorize('show', $invoice_details->get()[0]);
         $invoice = Invoice::findorFail($invoice_id);
         $invoice_items = $invoice->invoice_items->all();
         $order_no = $invoice_details->get()[0]['order_no'];
@@ -62,8 +64,14 @@ class OrderController extends Controller
 
 
         return view(
-            'account/order', compact(
-                'products', 'order_no', 'sub_total', 'shipping', 'tax', 'invoice_date'
+            'account/order',
+            compact(
+                'products',
+                'order_no',
+                'sub_total',
+                'shipping',
+                'tax',
+                'invoice_date'
             )
         );
     }

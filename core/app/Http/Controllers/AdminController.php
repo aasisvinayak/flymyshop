@@ -17,14 +17,14 @@ use View;
  * Class AdminController
  * Controller for admin area.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class AdminController extends Controller
+final class AdminController extends Controller
 {
     /**
      * Display admin dashboard.
@@ -33,62 +33,20 @@ class AdminController extends Controller
      */
     public function welcome()
     {
-        //TODO: account for previous year and change order
-        $graph = $this->salesGraphData()->toArray();
-        $stats = $this->stats();
-        $formattedGraph = [];
-        for ($i = 1; $i < 13; $i++) {
-            $num_padded = sprintf('%02d', $i);
-            array_key_exists($num_padded, $graph) ?
-                $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string) $num_padded] = 0;
-        }
-
-        $months = array_keys($formattedGraph);
-        $monthNames = [];
-        foreach ($months as $number) {
-            $mName = date('F', mktime(0, 0, 0, $number, 10));
-            array_push($monthNames, $mName);
-        }
-
-        $valueArray = [];
-        foreach ($formattedGraph as $item) {
-            array_push($valueArray, $item['sum']);
-        }
-        $arrayInJson = json_encode($valueArray);
-        $graphY = 'var value_array = '.$arrayInJson.";\n";
-
-        return view('admin/welcome', compact('graph', 'graphY', 'monthNames', 'stats'));
+        //TODO: account for previous year and change order by getting the full date
+        $reportValues = $this->generateReport()[0];
+        return view('admin/welcome', $reportValues);
     }
 
-    //TODO reuse code
+    /**
+     * Generate reports view
+     *
+     * @return View
+     */
     public function reports()
     {
-        $graph = $this->salesGraphData()->toArray();
-        $stats = $this->stats();
-        $formattedGraph = [];
-        for ($i = 1; $i < 13; $i++) {
-            $num_padded = sprintf('%02d', $i);
-            array_key_exists($num_padded, $graph) ?
-                $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string) $num_padded] = 0;
-        }
-
-        $months = array_keys($formattedGraph);
-        $monthNames = [];
-        foreach ($months as $number) {
-            $mName = date('F', mktime(0, 0, 0, $number, 10));
-            array_push($monthNames, $mName);
-        }
-
-        $valueArray = [];
-        foreach ($formattedGraph as $item) {
-            array_push($valueArray, $item['sum']);
-        }
-        $arrayInJson = json_encode($valueArray);
-        $graphY = 'var value_array = '.$arrayInJson.";\n";
-
-        return view('admin/reports', compact('graph', 'graphY', 'monthNames', 'stats'));
+        $reportValues = $this->generateReport()[0];
+        return view('admin/reports', $reportValues);
     }
 
     /**
@@ -99,7 +57,6 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::paginate(10);
-
         return view('admin/users', compact('users'));
     }
 
@@ -129,7 +86,7 @@ class AdminController extends Controller
      */
     public function orders()
     {
-        $orders = Invoice::IdDescending()->paginate(10);
+        $orders = Invoice::IdDescending()->paginate(10); // to get the latest
         foreach ($orders as $item) {
             $item->user_id = User::findorFail($item->user_id)->email;
 
@@ -182,7 +139,7 @@ class AdminController extends Controller
 
     /**
      * View individual order
-     * TODO: reuse code in account controller.
+     * TODO: reuse code in account controller. Move to helper
      *
      * @param int $id order_id
      *
@@ -207,68 +164,80 @@ class AdminController extends Controller
         }
 
         return view(
-            'admin/order', compact(
-                'products', 'order_no', 'sub_total', 'shipping', 'tax', 'invoice_date'
+            'admin/order',
+            compact(
+                'products',
+                'order_no',
+                'sub_total',
+                'shipping',
+                'tax',
+                'invoice_date'
             )
         );
     }
 
-    //total orders today
-    // total orders this month
-    //total orders this year
-    //total orders all time
 
-    //repeat for
-    //  payment this month
-    // no of products
-    // users
+    /**
+     * Get sales stats for admin pages
+     *
+     * @return array
+     */
+    protected function stats()
+    {
+        $today = Carbon::now();
+        $lastYearThisDate = Carbon::now()->subYear();
+        $lastMonthThisDate = Carbon::now()->subMonth();
+        $yesterday = Carbon::now()->subDay();
+        $invoiceItem = new InvoiceItem();
+        $productsSoldAllTime = $this->returnNumber($invoiceItem->productsSold(0));
+        $productsSoldInYear = $this->returnNumber($invoiceItem->productsSold($lastYearThisDate));
+        $productsSoldInMonth = $this->returnNumber($invoiceItem->productsSold($lastMonthThisDate));
+        $productsSoldToday = $this->returnNumber($invoiceItem->productsSold($yesterday));
 
+        $invoice = new Invoice();
 
-    // graph for payment received over last year
-    // graph for users  over last year
+        $revenueAllTime = $this->returnNumber($invoice->sales(0));
+        $revenueInYear = $this->returnNumber($invoice->sales($lastYearThisDate));
+        $revenueInMonth = $this->returnNumber($invoice->sales($lastMonthThisDate));
+        $revenueToday = $this->returnNumber($invoice->sales($yesterday));
 
-     public function stats()
-     {
-         $today = Carbon::now();
-         $lastYearThisDate = Carbon::now()->subYear();
-         $lastMonthThisDate = Carbon::now()->subMonth();
-         $yesterday = Carbon::now()->subDay();
-
-         $invoiceItem = new InvoiceItem();
-
-         $productsSoldAllTime = $this->returnNumber($invoiceItem->productsSold(0));
-         $productsSoldInYear = $this->returnNumber($invoiceItem->productsSold($lastYearThisDate));
-         $productsSoldInMonth = $this->returnNumber($invoiceItem->productsSold($lastMonthThisDate));
-         $productsSoldToday = $this->returnNumber($invoiceItem->productsSold($yesterday));
-
-
-         $invoice = new Invoice();
-
-         $revenueAllTime = $this->returnNumber($invoice->sales(0));
-         $revenueInYear = $this->returnNumber($invoice->sales($lastYearThisDate));
-         $revenueInMonth = $this->returnNumber($invoice->sales($lastMonthThisDate));
-         $revenueToday = $this->returnNumber($invoice->sales($yesterday));
-
-         $invoiceCountAllTime = $this->returnNumber($invoice->invoiceCount(0));
-         $invoiceCountInYear = $this->returnNumber($invoice->invoiceCount($lastYearThisDate));
-         $invoiceCountInMonth = $this->returnNumber($invoice->invoiceCount($lastMonthThisDate));
-         $invoiceCountToday = $this->returnNumber($invoice->invoiceCount($yesterday));
+        $invoiceCountAllTime = $this->returnNumber($invoice->invoiceCount(0));
+        $invoiceCountInYear = $this->returnNumber($invoice->invoiceCount($lastYearThisDate));
+        $invoiceCountInMonth = $this->returnNumber($invoice->invoiceCount($lastMonthThisDate));
+        $invoiceCountToday = $this->returnNumber($invoice->invoiceCount($yesterday));
 
 
-         $userCountAllTime = $this->returnNumber(User::userCount(0));
-         $userCountInYear = $this->returnNumber(User::userCount($lastYearThisDate));
-         $userCountInMonth = $this->returnNumber(User::userCount($lastMonthThisDate));
-         $userCountToday = $this->returnNumber(User::userCount($yesterday));
+        $userCountAllTime = $this->returnNumber(User::userCount(0));
+        $userCountInYear = $this->returnNumber(User::userCount($lastYearThisDate));
+        $userCountInMonth = $this->returnNumber(User::userCount($lastMonthThisDate));
+        $userCountToday = $this->returnNumber(User::userCount($yesterday));
 
-         return compact(
-            'productsSoldAllTime', 'productsSoldInYear', 'productsSoldInMonth', 'productsSoldToday',
-            'revenueAllTime', 'revenueInYear', 'revenueInMonth', 'revenueToday',
-            'invoiceCountAllTime', 'invoiceCountInYear', 'invoiceCountInMonth', 'invoiceCountToday',
-            'userCountAllTime', 'userCountInYear', 'userCountInMonth', 'userCountToday'
+        return compact(
+            'productsSoldAllTime',
+            'productsSoldInYear',
+            'productsSoldInMonth',
+            'productsSoldToday',
+            'revenueAllTime',
+            'revenueInYear',
+            'revenueInMonth',
+            'revenueToday',
+            'invoiceCountAllTime',
+            'invoiceCountInYear',
+            'invoiceCountInMonth',
+            'invoiceCountToday',
+            'userCountAllTime',
+            'userCountInYear',
+            'userCountInMonth',
+            'userCountToday'
         );
-     }
+    }
 
-    public function salesGraphData()
+    /**
+     * Generate data for the last one year
+     *
+     * @return mixed
+     */
+    protected function salesGraphData()
     {
         $lastYearThisDate = Carbon::now()->subYear();
         $invoices = Invoice::select('sub_total', 'created_at')
@@ -276,7 +245,7 @@ class AdminController extends Controller
             ->get()
             ->groupBy(
                 function ($date) {
-                    return Carbon::parse($date->created_at)->format('m');
+                    return Carbon::parse($date->created_at)->format('Y-m');
                 }
             );
 
@@ -288,22 +257,22 @@ class AdminController extends Controller
             $item['sum'] = $sub_total;
         }
 
-        return $invoices;
+        return $invoices->toArray();
     }
 
-     /**
-      * TODO: move as helper.
-      *
-      * @param $value
-      * @return int|string
-      */
-     public function returnNumber($value)
-     {
-         return is_numeric($value) ? $value : 0;
-     }
+    /**
+     * TODO: move as helper.
+     *
+     * @param $value
+     * @return int|string
+     */
+    public function returnNumber($value)
+    {
+        return is_numeric($value) ? $value : 0;
+    }
 
     /**
-     * TODO: change to row by row approach (key->value).
+     * TODO: change to row by row approach (key->value) on database table settings.
      *
      * @return View
      */
@@ -314,7 +283,99 @@ class AdminController extends Controller
         return view('admin/settings', compact('settings'));
     }
 
+    /**
+     * TODO: update settings from admin panel than by manually editing .env
+     */
     public function updateSettings()
     {
+    }
+
+
+    /**
+     * Fill-in the missing months with revenue =0
+     *
+     * @param $graph
+     * @return array
+     */
+    protected function getGraphWithCompleteValues($graph)
+    {
+        $formattedGraph = array();
+        $current = Carbon::now();
+        $month=$current->month;
+
+        for ($i = 1; $i < 13; $i++) {
+            $num_padded = sprintf('%02d', $i);
+            if ($i>$month) {
+                $year=$current->year;
+                $num_padded=($year-1)."-".$num_padded;
+            } else {
+                $num_padded=$current->year."-".$num_padded;
+            }
+            array_key_exists($num_padded, $graph) ?
+                $formattedGraph[$num_padded] = $graph[$num_padded] :
+                $formattedGraph[(string)$num_padded] = 0;
+        }
+        return $formattedGraph;
+    }
+
+    /**
+     * Convert month number to name
+     *
+     * @param $months
+     * @return array
+     */
+    protected function getMonthNamesFromNumbers($months)
+    {
+        $monthNames = array();
+
+        foreach ($months as $number) {
+            $number = explode("-", $number);
+            $mName = date('F', mktime(0, 0, 0, $number[1], 10));
+            array_push($monthNames, $number[0]."-".$mName);
+        }
+
+        return $monthNames;
+    }
+
+    /**
+     * Extract the sum key from the main array and create a sub-array
+     *
+     * @param $fullGraph
+     * @return array
+     */
+    protected function getSumArray($fullGraph)
+    {
+        $valueArray = array();
+        foreach ($fullGraph as $item) {
+            array_push($valueArray, $item['sum']);
+        }
+        return ($valueArray);
+    }
+
+    /**
+     * Grab data for the last one year
+     *
+     * @return array
+     */
+    protected function generateReport()
+    {
+        $graph = $this->salesGraphData();
+        $stats = $this->stats();
+        $fullGraph = $this->getGraphWithCompleteValues($graph);
+        $months = array_keys($fullGraph);
+        $formattedMonthName=array();
+
+        foreach ($months as $month) {
+            array_push($formattedMonthName, Carbon::createFromFormat('Y-m', $month)->toDateString());
+        }
+
+        $sumInArray = $this->getSumArray($fullGraph);
+        $data = array_combine($formattedMonthName, $sumInArray);
+        ksort($data);
+        $monthNames= array_keys($data);
+        $monthNames = $this->getMonthNamesFromNumbers($monthNames);
+        $sumInArray= json_encode(array_values($data)) ;
+        $graphY = 'var value_array = ' . ($sumInArray) . ";\n";
+        return array(compact('stats', 'graphY', 'graph', 'monthNames'));
     }
 }

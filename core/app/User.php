@@ -73,4 +73,5 @@ class User extends Authenticatable
         return $query->select('id')
             ->where('created_at', '>', $time)->count();
     }
+
 }

@@ -11,23 +11,24 @@ use Flymyshop\Helpers\PluginHelper;
  */
 class EnablePlugins
 {
+    /**
+     * EnablePlugins constructor.
+     */
     public function __construct()
     {
-        $hookContainer = HookContainer::instance();
-        $pluginNames = new PluginHelper();
+        $hookContainer = HookContainer::instance(); // getting HookContainer instance
+        $pluginNames = new PluginHelper(); // getting list of all plugins
         $plugins = $pluginNames->getPluginNames();
         foreach ($plugins as $plugin) {
-            $reflector = new \ReflectionClass('Flymyshop\Plugins\\'.$plugin.'\\'.$plugin);
+            $reflector = new \ReflectionClass('Flymyshop\Plugins\\' . $plugin . '\\' . $plugin);
             $main = $reflector->getMethod('main');
             $methods = $reflector->getMethods();
-           // var_dump($methods);
-             foreach ($methods as $method) {
-                 if ($method->name == 'i_order_hook') {
-                     $hookContainer->setHook(['i_order_hook' => $reflector->getName()]);
-                 }
-             }
-
-            $main->invoke('');
+            foreach ($methods as $method) {
+                if ($method->name == 'i_order_hook') {
+                    $hookContainer->setHook(['i_order_hook' => $reflector->getName()]);
+                }
+            }
+            $main->invoke(''); //invoke main() method
         }
     }
 }

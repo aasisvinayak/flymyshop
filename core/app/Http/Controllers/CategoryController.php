@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Input;
 use Redirect;
@@ -13,14 +14,14 @@ use View;
  * Class CategoryController
  * CRUD for category (/admin/categories).
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class CategoryController extends Controller
+final class CategoryController extends Controller
 {
     /**
      * Paginated listing of shop categories.
@@ -30,7 +31,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(10);
-
         return view('admin/categories', compact('categories'));
     }
 
@@ -46,30 +46,18 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * TODO: Change to CategoryRequest.
      *
+     * @param CategoryRequest $request
      * @return Response
      */
-    public function store()
+    public function store(CategoryRequest $request)
     {
-        $rules = [
-            'title'       => 'required',
-        ];
-
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return Redirect::to('shop/categories/create')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $data = Input::all();
+            $data = $request->all();
             $data['status'] = 1;
             $data['category_id'] = str_random(50);
             $data['parent_id'] = '';
             Category::create($data);
-        }
-
-        return redirect('admin/categories/');
+            return redirect('admin/categories/');
     }
 
     /**
@@ -83,7 +71,6 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::findorFail($id);
-
         return $category;
     }
 
@@ -97,22 +84,19 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorFail($id);
-
         return view('admin.edit-category', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request update request
-     * @param int                      $id      category id
-     *
+     * @param CategoryRequest|Request $request update request
+     * @param int $id category id
      * @return Redirect
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         Category::findorFail($id)->update($request->all());
-
         return redirect('admin/categories/');
     }
 
@@ -126,10 +110,14 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findorFail($id)->delete();
-
         return redirect('admin/categories/');
     }
 
+    /**
+     * Return all categories as json object
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public static function getAllCategories()
     {
         return Category::all();

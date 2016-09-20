@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 /**
  * Class PageController.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0

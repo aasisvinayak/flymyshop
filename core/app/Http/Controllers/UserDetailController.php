@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Session;
 /**
  * Class UserDetailController.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class UserDetailController extends Controller
+final class UserDetailController extends Controller
 {
     /**
      * Return profile (user details).
@@ -30,10 +30,8 @@ class UserDetailController extends Controller
         $user = Auth::user();
         $profile = $user->profile()->get();
 
-
         if (count($profile) < 1) {
             Session::flash('message', 'Your profile is empty!');
-
             return redirect('account/profile/edit');
         } else {
             return view('account.profile.profile', compact('profile'));
@@ -63,7 +61,6 @@ class UserDetailController extends Controller
         }
 
         Session::flash('alert-success', 'Profile updated');
-
         return redirect('account/profile');
     }
 
@@ -76,7 +73,6 @@ class UserDetailController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile()->get();
-
         return view('account.profile.edit', compact('profile'));
     }
 
@@ -93,7 +89,6 @@ class UserDetailController extends Controller
         $profile = UserDetail::findorFail($id[0]->id);
         $profile->update($request->all());
         Session::flash('alert-success', 'Profile updated');
-
         return redirect('account/profile');
     }
 }

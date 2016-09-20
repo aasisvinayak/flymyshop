@@ -24,14 +24,14 @@ use View;
  * Class ShopController
  * Default controller for FlyMyShop.
  *
- * @category Main
+ * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
  * @license https://github.com/aasisvinayak/flymyshop/blob/master/LICENSE  GPL-3.0
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-class ShopController extends Controller
+final class ShopController extends Controller
 {
     use TelegramTrait;
 
