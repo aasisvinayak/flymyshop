@@ -31,5 +31,5 @@ And dev:
 - lavary/laravel-menu: 1.6.*
 - mockery/mockery: 0.9.*
 - phpunit/phpunit: ~4.0
-- symfony/css-selector: 2.8.*|3.0.*
-- symfony/dom-crawler: 2.8.*|3.0.*
+- symfony/css-selector: 3.0.*
+- symfony/dom-crawler: 3.0.*

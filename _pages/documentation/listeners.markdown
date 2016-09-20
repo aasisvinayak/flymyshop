@@ -1,14 +1,11 @@
 ---
-title: "Custom Artisan Commands"
+title: "Listeners"
 sidebar:
   nav: "docs"
 layout: single
-excerpt: "Custom Artisan Commands"
 sitemap: true
 share: true
-permalink: /docs/artisan-commands/
+permalink: /docs/listeners/
 ---
 
 This page is currently being updated. Please refer to API for more information.
-
-# Custom commands

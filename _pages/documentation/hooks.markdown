@@ -4,7 +4,7 @@ sidebar:
   nav: "docs"
 layout: single
 excerpt: "Hooks available for FlyMyShop"
-sitemap: false
+sitemap: true
 share: true
 permalink: /docs/hooks/
 ---

@@ -4,7 +4,7 @@ sidebar:
   nav: "docs"
 layout: single
 excerpt: "Seeding Test Data for testing FlyMyShop"
-sitemap: false
+sitemap: true
 share: true
 permalink: /docs/seeding-test-data/
 ---

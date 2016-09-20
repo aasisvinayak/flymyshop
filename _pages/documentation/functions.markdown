@@ -4,7 +4,7 @@ sidebar:
   nav: "docs"
 layout: single
 excerpt: "Functions for FlyMyShop"
-sitemap: false
+sitemap: true
 share: true
 permalink: /docs/functions/
 ---

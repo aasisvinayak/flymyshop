@@ -4,7 +4,7 @@ sidebar:
   nav: "docs"
 layout: single
 excerpt: "FlyMyShop Core"
-sitemap: false
+sitemap: true
 share: true
 permalink: /docs/flymyshop-core/
 ---
