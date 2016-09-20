@@ -1,0 +1,5 @@
+plugin_name: ProcessOrder
+plugin_version: 0.0.1
+author_name: acev
+plugin_support_email: test@example.com
+plugin_description: The tes plugin for shop showing content insertion to view

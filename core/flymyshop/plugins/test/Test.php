@@ -3,6 +3,7 @@
 namespace Flymyshop\Plugins\Test;
 
 use Flymyshop\Containers\DataContainer;
+use Flymyshop\Plugins\Plugin;
 
 /**
  * Class Test
@@ -10,7 +11,7 @@ use Flymyshop\Containers\DataContainer;
  *
  * @package Flymyshop\Plugins\Test
  */
-class Test{
+class Test implements Plugin{
 
     /**
      * Main class of the plugin which is invoked by the reflector class

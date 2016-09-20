@@ -2,12 +2,13 @@
 
 namespace Flymyshop\Plugins\ProcessOrder;
 use App\Http\Models\Invoice;
+use Flymyshop\Plugins\Plugin;
 
 /**
  * Class ProcessOrder
  * @package Flymyshop\Plugins\ProcessOrder
  */
-class ProcessOrder
+class ProcessOrder  implements Plugin
 {
          /**
          * Main class of the plugin which is invoked by the reflector class
@@ -17,7 +18,7 @@ class ProcessOrder
         {
         }
 
-        public static function order_hook(Invoice $order)
+        public static function i_order_hook(Invoice $order)
         {
 
                // dd($order);

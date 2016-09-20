@@ -2,7 +2,9 @@
 
 namespace Flymyshop\Plugins\Sample;
 
-class Sample
+use Flymyshop\Plugins\Plugin;
+
+class Sample implements Plugin
 {
     public static function main()
     {

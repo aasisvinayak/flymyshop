@@ -10,7 +10,7 @@
  *
  * @return mixed
  */
-function fmsFooter()
+function fmc_footer()
 {
     $dataContainer =  \Flymyshop\Containers\DataContainer::instance();
     foreach ($dataContainer->data as $item){

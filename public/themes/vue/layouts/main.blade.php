@@ -24,7 +24,7 @@
 
     <footer class="row">
 
-        {{fmsFooter()}}
+        {{fmc_footer()}}
 
         @include('includes.footer')
 

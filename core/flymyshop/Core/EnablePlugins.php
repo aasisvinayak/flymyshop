@@ -24,8 +24,8 @@ class EnablePlugins{
         $methods=    $reflector->getMethods();
            // var_dump($methods);
              foreach ($methods as $method){
-                 if($method->name=="order_hook"){
-                     $hookContainer->setHook(array('order_hook'=>$reflector->getName()));
+                 if($method->name=="i_order_hook"){
+                     $hookContainer->setHook(array('i_order_hook'=>$reflector->getName()));
                  }
              }
 

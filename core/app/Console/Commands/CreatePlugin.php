@@ -47,7 +47,14 @@ class CreatePlugin extends Command
             $stubs = $this->getStubs();
             $pluginStub = $this->getPluginStub();
             foreach ($stubs as $key => $value) {
-                $this->files->put(base_path() . "/flymyshop/plugins/" . $pluginName . "/" . $key . ".php", $value);
+                $key= str_replace('plugin-','',$key);
+                if($key=="yml"){
+                    $key="plugin";
+                    $this->files->put(base_path() . "/flymyshop/plugins/" . $pluginName . "/" . $key . ".yml", $value);
+                }
+                else{
+                    $this->files->put(base_path() . "/flymyshop/plugins/" . $pluginName . "/" . $key . ".php", $value);
+                }
             }
             $this->files->put(base_path() . "/flymyshop/plugins/" . $pluginName . "/" . $pluginName . ".php", $this->buildPluginClass($pluginName, $pluginStub));
 
