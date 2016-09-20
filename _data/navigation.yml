@@ -29,8 +29,12 @@ docs:
         url: /docs/themes/
       - title: "Functions"
         url: /docs/functions/
+      - title: "List of Functions"
+        url: /docs/function-list/
       - title: "Hooks"
         url: /docs/hooks/
+      - title: "List of hooks"
+        url: /docs/hook-list/
       - title: "Helpers"
         url: /docs/helpers/
       - title: "Installing new plugins and themes"

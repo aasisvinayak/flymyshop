@@ -86,7 +86,7 @@ This contains the core of the application.
 
 ### Helpers
 
-Helper classes for application, plugins and themes.
+Helper classes for application and plugins.
 
 <li>PluginHelper: Helps identify list of plugins already installed</li>
 
