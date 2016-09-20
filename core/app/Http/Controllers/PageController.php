@@ -26,7 +26,6 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page ::paginate(10);
-
         return view('admin/pages', compact('pages'));
     }
 
@@ -53,7 +52,6 @@ class PageController extends Controller
         $page->status = 1;
         $page->page_id = str_random(50);
         $page->save();
-
         return redirect('admin/pages/');
     }
 
@@ -67,7 +65,6 @@ class PageController extends Controller
     public function show($id)
     {
         $page = Page::findorFail($id);
-
         return view('shop/page', compact('page'));
     }
 
@@ -81,7 +78,6 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Page::findorFail($id);
-
         return view('admin/edit-page', compact('page'));
     }
 
@@ -97,7 +93,6 @@ class PageController extends Controller
     {
         $page = Page::findorFail($id);
         $page->update($request->all());
-
         return redirect('admin/pages/');
     }
 
@@ -111,7 +106,6 @@ class PageController extends Controller
     public function destroy($id)
     {
         Page::findorFail($id)->delete();
-
         return redirect('admin/pages/');
     }
 }

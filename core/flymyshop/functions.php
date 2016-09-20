@@ -2,10 +2,15 @@
 
 /**
  * Functions for views (custom themes).
+ *
+ * For function names FlyMyShop's own standard are used.
+ * If you are using PHP_CodeSniffer please add the custom standard to stop
+ * receiving errors
  */
 
 
 /**
+ * Returns the footer content
  * @return mixed
  */
 function fmc_footer()
@@ -20,11 +25,11 @@ function fmc_footer()
 }
 
 
-function themes()
+function fms_themes()
 {
 }
 
-function plugins()
+function fms_plugins()
 {
 }
 
@@ -59,7 +64,7 @@ function get_shop_name()
 /**
  * Get current version of Flymyshop.
  */
-function get_version()
+function get_fms_version()
 {
 }
 
