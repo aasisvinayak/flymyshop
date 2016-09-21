@@ -55,7 +55,6 @@ final class AddressController extends Controller
      */
     public function store(AddressRequest $request)
     {
-
         $address = Address::create($request->all());
         $address->user_id = Auth::user()->id;
         $address->address_id = str_random(50);

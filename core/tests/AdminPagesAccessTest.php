@@ -3,7 +3,6 @@
 
 class AdminPagesAccessTest extends TestCase
 {
-
     public function testAdminCanViewUsers()
     {
         $this->adminLogin();
@@ -24,7 +23,6 @@ class AdminPagesAccessTest extends TestCase
         $this->visit('admin/categories')
             ->assertViewHas('categories');
     }
-
 
     public function testAdminCanViewShopPages()
     {
@@ -53,7 +51,4 @@ class AdminPagesAccessTest extends TestCase
         $this->visit('admin/settings')
             ->assertViewHas('settings');
     }
-
-
-
 }

@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CartTest extends TestCase
 {
@@ -17,6 +14,4 @@ class CartTest extends TestCase
             ->seePageIs('/')
             ->see('Empty Cart!');
     }
-
-    
 }

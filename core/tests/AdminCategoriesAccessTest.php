@@ -8,7 +8,6 @@ class AdminCategoriesAccessTest extends TestCase
      *
      * @return void
      */
-
     public function testAdminCanViewCategories()
     {
         $this->adminLogin();
@@ -45,8 +44,5 @@ class AdminCategoriesAccessTest extends TestCase
             ->press('deleteButton1')
             ->seePageIs('/admin/categories')
             ->see('Category has been deleted!');
-
     }
 }
-
-

@@ -8,6 +8,5 @@ class AdminSalesAccessTest extends TestCase
         $this->adminLogin();
         $this->visit('admin/reports')
             ->assertViewHas('stats');
-
     }
 }

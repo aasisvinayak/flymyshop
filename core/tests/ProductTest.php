@@ -15,14 +15,14 @@ class ProductTest extends TestCase
 
     public function testProductPageIsViewable()
     {
-        $product= $this->getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('shop/product/'.$product->product_id)
             ->see($product->title);
     }
 
     public function testProductCanBeAddedToCart()
     {
-        $product= $this->getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
@@ -31,12 +31,10 @@ class ProductTest extends TestCase
 
     public function testProductCanBeAddedToFavourites()
     {
-        $product= $this->getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Favourite')
             ->seePageIs('/shop/favourites');
     }
-    
-
 }

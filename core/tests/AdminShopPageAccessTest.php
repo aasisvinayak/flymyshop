@@ -32,10 +32,10 @@ class AdminShopPageAccessTest extends TestCase
         $this->testAdminCanAddPage();
         $this->visit('/admin/pages')
             ->click('Edit')
-            ->type('New Content','content')
+            ->type('New Content', 'content')
             ->press('Update Page')
             ->seePageIs('/admin/pages')
-            ->see('Page has been updated');;
+            ->see('Page has been updated');
     }
 
     public function testAdminCanDeletePage()

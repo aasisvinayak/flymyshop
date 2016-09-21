@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-//        if ($e instanceof \RuntimeException) {
+        //        if ($e instanceof \RuntimeException) {
 //            if (strlen(env('APP_KEY')) < 20) {
 //                Artisan::call('key:generate');
 //
