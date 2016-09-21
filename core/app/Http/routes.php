@@ -4,8 +4,6 @@ Route::get('install', 'InstallController@index');
 Route::post('install', 'InstallController@installShop');
 Route::get('install/step-2', 'InstallController@postInstall');
 Route::post('install/step-2', 'InstallController@process');
-
-
 Route::group(
     ['middleware' => ['install', 'menu']],
     function () {
@@ -40,12 +38,12 @@ Route::group(
             function () {
                 Route::get('/', 'UserDetailController@profile');
                 //TODO complete support for third-party address retrieval
-//                Route::get('address', 'ShopController@address');
-//                Route::get('add_address', 'ShopController@addAddress');
-//                Route::get('update_address', 'ShopController@updateAddress');
+                Route::get('address', 'ShopController@address');
+                Route::get('add_address', 'ShopController@addAddress');
+                Route::get('update_address', 'ShopController@updateAddress');
                 Route::resource('/payment_cards', 'PaymentCardController');
-//                Route::get('/payment_cards/pay', 'PaymentCardController@pay');
-//                Route::post('/payment_cards/make', 'PaymentCardController@orderPost');
+                Route::get('/payment_cards/pay', 'PaymentCardController@pay');
+                Route::post('/payment_cards/make', 'PaymentCardController@orderPost');
                 Route::get('/profile', 'UserDetailController@profile');
                 Route::get('/profile/edit', 'UserDetailController@edit');
                 Route::post('/profile/edit', 'UserDetailController@update');
