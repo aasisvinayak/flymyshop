@@ -176,6 +176,7 @@ final class ShopController extends Controller
         $category_info = Category::GetInfo($slug)->get()->toArray();
         $category_name = '';
         $products = '';
+
         if (count($category_info) > 0) {
             $category_id = $category_info[0]['id'];
             $category_name = $category_info[0]['title'];
@@ -230,7 +231,6 @@ final class ShopController extends Controller
             ),
             $product_summary
         );
-
         return redirect('/shop/cart');
     }
 
@@ -257,7 +257,6 @@ final class ShopController extends Controller
         $rowId = Input::get('row_id');
         $qty = Input::get('qty');
         Cart::update($rowId, $qty);
-
         return redirect('/shop/cart');
     }
 
@@ -271,6 +270,7 @@ final class ShopController extends Controller
         $item = Input::get('product_id');
         $product_summary = Product::ProductSummaryProductID($item)
             ->get()->toArray()[0];
+        
         Cart::instance('favourites')->add(
             $item, $product_summary['title'], 1, filter_var(
                 $product_summary['price'],

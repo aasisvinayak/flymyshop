@@ -1,6 +1,6 @@
 Un-publish categories
 Un-publish products
-Check policies in place -- add the ones that are missing
+Use contextual binds for selected plugin hooks
 Add reports
 Promo codes
 "Danger Zone" implementation (admin menu)

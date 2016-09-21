@@ -14,8 +14,8 @@ Route::group(
         Route::get(
             'images/{slug}',
             function ($slug) {
-                $path = 'public/uploads/'.$slug;
-                if (! File::exists($path)) {
+                $path = 'public/uploads/' . $slug;
+                if (!File::exists($path)) {
                     abort(404);
                 }
                 $file = File::get($path);
@@ -27,7 +27,7 @@ Route::group(
             }
         );
 
-        Route::pattern('id', '[a-z0-9-]+');
+//        Route::pattern('id', '[a-z0-9-]+');
         Route::get('contact', 'ShopController@contact');
         Route::post('contact', 'ShopController@sendEmail');
         Route::post('newsletter', 'ShopController@newsletter');
@@ -36,16 +36,16 @@ Route::group(
 
         Route::group(
             ['prefix' => 'account',
-                    'middleware' => 'auth', ],
+                'middleware' => 'auth',],
             function () {
                 Route::get('/', 'UserDetailController@profile');
-                        //TODO complete support for third-party address retrieval
-                        Route::get('address', 'ShopController@address');
-                Route::get('add_address', 'ShopController@addAddress');
-                Route::get('update_address', 'ShopController@updateAddress');
+                //TODO complete support for third-party address retrieval
+//                Route::get('address', 'ShopController@address');
+//                Route::get('add_address', 'ShopController@addAddress');
+//                Route::get('update_address', 'ShopController@updateAddress');
                 Route::resource('/payment_cards', 'PaymentCardController');
-                Route::get('/payment_cards/pay', 'PaymentCardController@pay');
-                Route::post('/payment_cards/make', 'PaymentCardController@orderPost');
+//                Route::get('/payment_cards/pay', 'PaymentCardController@pay');
+//                Route::post('/payment_cards/make', 'PaymentCardController@orderPost');
                 Route::get('/profile', 'UserDetailController@profile');
                 Route::get('/profile/edit', 'UserDetailController@edit');
                 Route::post('/profile/edit', 'UserDetailController@update');
@@ -59,7 +59,7 @@ Route::group(
 
         Route::group(
             ['prefix' => 'shop',
-                    'middleware' => ['auth', 'checkout'], ],
+                'middleware' => ['auth', 'checkout'],],
             function () {
                 Route::get('check_out', 'ShopController@checkOut');
             }
@@ -79,10 +79,9 @@ Route::group(
             }
         );
 
-
         Route::group(
             ['prefix' => 'admin',
-                    'middleware' => ['auth', 'admin'], ],
+                'middleware' => ['auth', 'admin'],],
             function () {
                 Route::get('/', 'AdminController@welcome');
                 Route::get('/payments', 'AdminController@payment');
@@ -110,7 +109,6 @@ Route::group(
         Route::get('pages/{title}/{page_id}', 'ShopController@page');
         Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
         Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-
         Route::get('/plugins', 'PluginController@index');
         Route::get('/plugin_list', 'PluginController@pluginList');
     }
