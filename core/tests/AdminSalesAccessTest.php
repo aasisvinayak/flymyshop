@@ -3,13 +3,11 @@
 
 class AdminSalesAccessTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function testStatsAvailabe()
     {
-        $this->assertTrue(true);
+        $this->adminLogin();
+        $this->visit('admin/reports')
+            ->assertViewHas('stats');
+
     }
 }

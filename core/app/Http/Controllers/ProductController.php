@@ -52,6 +52,13 @@ class ProductController extends Controller
         $product = Product::findorFail($request->get('id'));
         $product->update(['status' => $request->get('status')]);
 
+        if($request->get('status')=="1"){
+            $request->session()->flash('alert-success','Product has been published!');
+        }
+        else{
+            $request->session()->flash('alert-success','Product has been un-published!');
+        }
+
         return redirect('admin/products');
     }
 
@@ -63,7 +70,6 @@ class ProductController extends Controller
     public function create()
     {
         $categories_list = Category::lists('title', 'category_id');
-
         return view('admin/add-product', compact('categories_list'));
     }
 
@@ -153,7 +159,8 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('admin/products/');
+        $request->session()->flash('alert-success','Product has been added!');
+        return redirect('/admin/products/');
     }
 
     /**
@@ -194,12 +201,13 @@ class ProductController extends Controller
     {
         $product = Product::findorFail($id);
         $categories_list = Category::lists('title', 'category_id');
-
         return view('admin.edit-product', compact('product', 'categories_list'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * //TODO: add support for replaces images
      *
      * @param \Illuminate\Http\Request $request product request
      * @param int $id product id
@@ -208,15 +216,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Product::findorFail($id)->update($request->all());
 
+        unset($request['image']);
+        unset($request['image1']);
+        unset($request['image2']);
+        unset($request['image3']);
+        Product::findorFail($id)->update($request->all());
+        $request->session()->flash('alert-success','Product has been updated!');
         return redirect('admin/products');
     }
 
     public function stocks()
     {
         $products = Product::paginate(10);
-
         return view('admin/stocks', compact('products'));
     }
 
@@ -226,7 +238,6 @@ class ProductController extends Controller
         $product->update([
             'stock' => $request->get('stock'),
         ]);
-
         return redirect('admin/stocks');
     }
 
@@ -235,12 +246,13 @@ class ProductController extends Controller
      *
      * @param int $id product id
      *
+     * @param Request $request
      * @return Redirect
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         Product::findorFail($id)->delete();
-
+        $request->session()->flash('alert-success','Product has been deleted!');
         return redirect('admin/products');
     }
 

@@ -32,6 +32,7 @@
 
         <table class="table table-striped shop_tab">
             <thead>
+
             <tr>
                 <th>Product Name</th>
                 <th>Price</th>
@@ -40,10 +41,14 @@
                 <th class="text-center">Action</th>
                 <th class="text-center">Update Status</th>
             </tr>
+
             </thead>
 
 
+            <?php $i=0 ?>
+
             @foreach($products as $item)
+                <?php $i++ ?>
                 <tr>
                     <td>{{$item->title}}</td>
                     <td>{{$item->price}}</td>
@@ -63,11 +68,11 @@
                         {{ Form::select('status', [
                                        '1' => 'Publish',
                                        '0' => 'Un-publish'
-                                       ]
+                                       ], null, array('id'=>'selectStatus'.$i)
                                         ) }}
 
                         <br> <br>
-                        {{Form::submit('Update', array('class' =>" btn-primary  btn-sm"))}}
+                        {{Form::submit('Update', array('class' =>" btn-primary  btn-sm", 'id'=> 'updateButton'.$i))}}
 
                         {{Form::close()}}
 

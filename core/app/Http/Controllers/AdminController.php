@@ -33,9 +33,7 @@ final class AdminController extends Controller
      */
     public function welcome()
     {
-        //TODO: account for previous year and change order by getting the full date
         $reportValues = $this->generateReport()[0];
-
         return view('admin/welcome', $reportValues);
     }
 
@@ -47,7 +45,6 @@ final class AdminController extends Controller
     public function reports()
     {
         $reportValues = $this->generateReport()[0];
-
         return view('admin/reports', $reportValues);
     }
 
@@ -59,7 +56,6 @@ final class AdminController extends Controller
     public function users()
     {
         $users = User::paginate(10);
-
         return view('admin/users', compact('users'));
     }
 

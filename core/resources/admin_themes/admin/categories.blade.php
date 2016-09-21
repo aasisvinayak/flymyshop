@@ -36,8 +36,10 @@
                 </tr>
                 </thead>
 
+                <?php $i=0;?>
 
                 @foreach($categories as $item)
+                    <?php $i++?>
                     <tr>
                         <td>{{$item->title}}</td>
                         <td class="text-center">
@@ -48,7 +50,7 @@
 
                             {{ Form::open(array('url' => '/admin/categories/' . $item->id, 'class' => 'pull-right')) }}
                             {{ Form::hidden('_method', 'DELETE') }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-warning btn-xs')) }}
+                            {{ Form::submit('Delete', array('class' => 'btn btn-warning btn-xs', 'id'=>'deleteButton'.$i)) }}
                             {{ Form::close() }}
 
                         </td>

@@ -30,6 +30,8 @@ class Address extends Model
     {
         return $query->where('address_id', '=', $slug)->get();
     }
+    
+
 
     /**
      * Each address belong to a user.

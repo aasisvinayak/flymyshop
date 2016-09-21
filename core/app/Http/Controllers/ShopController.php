@@ -291,7 +291,6 @@ final class ShopController extends Controller
     {
         $rowId = Input::get('row_id');
         Cart::instance('favourites')->remove($rowId);
-
         return redirect('/shop/favourites');
     }
 
@@ -369,7 +368,6 @@ final class ShopController extends Controller
             return redirect('/account');
         } catch (Exception $e) {
             Session::flash('alert-danger', 'Payment failed! Please update your payment card');
-
             return redirect('/account/payment_cards');
         }
     }
@@ -386,7 +384,6 @@ final class ShopController extends Controller
     {
         $request->session()->flush();
         Session::put('shop_currency', $iso);
-
         return redirect(url()->previous());
     }
 
@@ -398,7 +395,6 @@ final class ShopController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
-
         return redirect('/');
     }
 
@@ -413,7 +409,6 @@ final class ShopController extends Controller
     public function page($title, $page_id)
     {
         $page = Page::GetPage($page_id)[0];
-
         return view('shop/page', compact('page'));
     }
 
@@ -497,7 +492,6 @@ final class ShopController extends Controller
         } else {
             Newsletter::subscribe(Input::get('email'));
             Session::flash('alert-success', 'Thank you for subscribing to our newsletter');
-
             return redirect('/');
         }
     }
