@@ -34,6 +34,7 @@ final class AdminController extends Controller
     public function welcome()
     {
         $reportValues = $this->generateReport()[0];
+
         return view('admin/welcome', $reportValues);
     }
 
@@ -45,6 +46,7 @@ final class AdminController extends Controller
     public function reports()
     {
         $reportValues = $this->generateReport()[0];
+
         return view('admin/reports', $reportValues);
     }
 
@@ -56,6 +58,7 @@ final class AdminController extends Controller
     public function users()
     {
         $users = User::paginate(10);
+
         return view('admin/users', compact('users'));
     }
 

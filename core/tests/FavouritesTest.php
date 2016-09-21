@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FavouritesTest extends TestCase
 {
@@ -11,8 +8,6 @@ class FavouritesTest extends TestCase
      *
      * @return void
      */
-
-
     public function testEmptyFavouritesRedirectToHomePage()
     {
         $this->visit('/shop/favourites')

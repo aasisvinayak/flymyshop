@@ -12,8 +12,8 @@ Route::group(
         Route::get(
             'images/{slug}',
             function ($slug) {
-                $path = 'public/uploads/' . $slug;
-                if (!File::exists($path)) {
+                $path = 'public/uploads/'.$slug;
+                if (! File::exists($path)) {
                     abort(404);
                 }
                 $file = File::get($path);
@@ -34,7 +34,7 @@ Route::group(
 
         Route::group(
             ['prefix' => 'account',
-                'middleware' => 'auth',],
+                'middleware' => 'auth', ],
             function () {
                 Route::get('/', 'UserDetailController@profile');
                 //TODO complete support for third-party address retrieval
@@ -57,7 +57,7 @@ Route::group(
 
         Route::group(
             ['prefix' => 'shop',
-                'middleware' => ['auth', 'checkout'],],
+                'middleware' => ['auth', 'checkout'], ],
             function () {
                 Route::get('check_out', 'ShopController@checkOut');
             }
@@ -79,7 +79,7 @@ Route::group(
 
         Route::group(
             ['prefix' => 'admin',
-                'middleware' => ['auth', 'admin'],],
+                'middleware' => ['auth', 'admin'], ],
             function () {
                 Route::get('/', 'AdminController@welcome');
                 Route::get('/payments', 'AdminController@payment');

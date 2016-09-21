@@ -1,29 +1,23 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CheckoutTest extends TestCase
 {
-
     public function testCheckoutButtonIsVisible()
     {
-
         $product = $this->getSampleProduct();
-        $this->visit('shop/product/' . $product->product_id)
+        $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
             ->seePageIs('/shop/cart')
             ->see('Checkout');
-
     }
 
     public function testCheckoutFailsWithoutProfileInfo()
     {
         $product = $this->getSampleProduct();
         //TODO: replace with Mock object
-        $this->visit('shop/product/' . $product->product_id)
+        $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
             ->seePageIs('/shop/cart')
@@ -35,7 +29,7 @@ class CheckoutTest extends TestCase
     {
         $this->userLogin();
         $product = $this->getSampleProduct();
-        $this->visit('shop/product/' . $product->product_id)
+        $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
             ->seePageIs('/shop/cart')
@@ -43,12 +37,11 @@ class CheckoutTest extends TestCase
             ->seePageIs('account/profile/edit');
     }
 
-
     public function testCheckoutFailsWithoutAddress()
     {
         $this->userLogin();
         $product = $this->getSampleProduct();
-        $this->visit('shop/product/' . $product->product_id)
+        $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
             ->seePageIs('/shop/cart')
@@ -67,7 +60,7 @@ class CheckoutTest extends TestCase
     {
         $this->userLogin();
         $product = $this->getSampleProduct();
-        $this->visit('shop/product/' . $product->product_id)
+        $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
             ->seePageIs('/shop/cart')

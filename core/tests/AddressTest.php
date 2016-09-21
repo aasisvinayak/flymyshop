@@ -3,7 +3,6 @@
 
 class AddressTest extends TestCase
 {
-
     public function testCannotAddAddressWihoutFillingAllFields()
     {
         $this->userLogin();
@@ -15,7 +14,6 @@ class AddressTest extends TestCase
         ->type('UK', 'country')
         ->press('Add Address')
         ->see('required');
-
     }
 
     public function testAddAddress()
@@ -39,12 +37,11 @@ class AddressTest extends TestCase
             ->see('Test')
             ->click('Edit this Address')
             ->see('Test')
-            ->type('Test10000','address_l1')
+            ->type('Test10000', 'address_l1')
             ->press('Update Address')
             ->seePageIs('account/addresses')
            ->see('Successfully updated address');
     }
-
 
     public function testDeleteAddress()
     {

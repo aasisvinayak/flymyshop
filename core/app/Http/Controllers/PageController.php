@@ -97,7 +97,8 @@ class PageController extends Controller
     {
         $page = Page::findorFail($id);
         $page->update($request->all());
-        $request->session()->flash('alert-success','Page has been updated');
+        $request->session()->flash('alert-success', 'Page has been updated');
+
         return redirect('admin/pages/');
     }
 
@@ -111,7 +112,8 @@ class PageController extends Controller
     public function destroy(Request $request, $id)
     {
         Page::findorFail($id)->delete();
-        $request->session()->flash('alert-danger','Page has been deleted!');
+        $request->session()->flash('alert-danger', 'Page has been deleted!');
+
         return redirect('admin/pages/');
     }
 }

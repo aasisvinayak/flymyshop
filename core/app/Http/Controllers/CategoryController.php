@@ -29,6 +29,7 @@ final class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(10);
+
         return view('admin/categories', compact('categories'));
     }
 
@@ -55,7 +56,8 @@ final class CategoryController extends Controller
         $data['category_id'] = str_random(50);
         $data['parent_id'] = '';
         Category::create($data);
-        $request->session()->flash('alert-success','Category added!');
+        $request->session()->flash('alert-success', 'Category added!');
+
         return redirect('admin/categories/');
     }
 
@@ -70,6 +72,7 @@ final class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::findorFail($id);
+
         return $category;
     }
 
@@ -83,6 +86,7 @@ final class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorFail($id);
+
         return view('admin.edit-category', compact('category'));
     }
 
@@ -96,7 +100,8 @@ final class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         Category::findorFail($id)->update($request->all());
-        $request->session()->flash('alert-success','Category name has been updated!');
+        $request->session()->flash('alert-success', 'Category name has been updated!');
+
         return redirect('admin/categories/');
     }
 
@@ -110,7 +115,8 @@ final class CategoryController extends Controller
     public function destroy(Request $request, $id)
     {
         Category::findorFail($id)->delete();
-        $request->session()->flash('alert-success','Category has been deleted!');
+        $request->session()->flash('alert-success', 'Category has been deleted!');
+
         return redirect('admin/categories/');
     }
 

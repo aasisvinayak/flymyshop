@@ -75,6 +75,7 @@ final class UserDetailController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile()->get();
+
         return view('account.profile.edit', compact('profile'));
     }
 
@@ -92,6 +93,7 @@ final class UserDetailController extends Controller
         $this->authorize('update', $profile);
         $profile->update($request->all());
         $request->session()->flash('alert-success', 'Profile updated');
+
         return redirect('account/profile');
     }
 }

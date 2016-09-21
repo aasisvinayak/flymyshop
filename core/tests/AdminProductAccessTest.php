@@ -4,7 +4,7 @@
 class AdminProductAccessTest extends TestCase
 {
     /**
-     * Test to make sure that admin can view products
+     * Test to make sure that admin can view products.
      */
     public function testAdminCanViewProducts()
     {
@@ -14,8 +14,7 @@ class AdminProductAccessTest extends TestCase
     }
 
     /**
-     * Test admin cannot add product without filling in all the details
-     *
+     * Test admin cannot add product without filling in all the details.
      */
     public function testAdminCannotAddProductWithOutFillingAllDetails()
     {
@@ -27,7 +26,7 @@ class AdminProductAccessTest extends TestCase
     }
 
     /**
-     * Test that admin can add the product
+     * Test that admin can add the product.
      */
     public function testAdminCanAddProduct()
     {
@@ -44,7 +43,7 @@ class AdminProductAccessTest extends TestCase
     }
 
     /**
-     * Test admin can edit existing products
+     * Test admin can edit existing products.
      */
     public function testAdminCanEditProduct()
     {
@@ -59,12 +58,12 @@ class AdminProductAccessTest extends TestCase
     }
 
     /**
-     * Test admin can change the product status to published
+     * Test admin can change the product status to published.
      */
     public function testAdminCanPublishProduct()
     {
-            $this->adminLogin();
-            $this->visit('admin/products/')
+        $this->adminLogin();
+        $this->visit('admin/products/')
             ->see('Test Product No. 1')
 //            ->select('1','select1')
             ->press('updateButton1')
@@ -83,7 +82,4 @@ class AdminProductAccessTest extends TestCase
 //            ->seePageIs('/admin/products')
 //            ->see('Product has been un-published!');
 //    }
-
-
-
 }
