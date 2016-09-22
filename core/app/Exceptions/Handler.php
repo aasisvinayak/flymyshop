@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
             $env = file($env_path);
             $newLinesArray = [];
             foreach ($env as $line) {
-                if (!(strpos($line, 'DB_DATABASE') !== false)) {
+                if (! (strpos($line, 'DB_DATABASE') !== false)) {
                     array_push($newLinesArray, $line);
                 }
             }
