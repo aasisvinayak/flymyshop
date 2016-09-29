@@ -42,7 +42,23 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function getSampleProduct()
     {
         $product = Product::findorFail(1);
-
         return $product;
     }
+
+    public function randomCart()
+    {
+        $product=$this-> getSampleProduct();
+        $this->visit('/shop/product/'.$product['product_id'])
+            ->press('Buy');
+       // return $product;
+    }
+
+    public function randomFavourite()
+    {
+        $product=$this-> getSampleProduct();
+        $this->visit('/shop/product/'.$product['product_id'])
+            ->press('Favourite');
+        // return $product;
+    }
+
 }

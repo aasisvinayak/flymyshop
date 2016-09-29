@@ -59,9 +59,9 @@
             </thead>
             <tbody>
 
-
+            <?php $i=0;?>
             @foreach($favourites as $item)
-
+                <?php $i++;?>
 
                 <tr>
                     <td data-th="Product">
@@ -83,12 +83,16 @@
 
 
 
-                        {{Form::open(array('action' => "ShopController@removeFavourite"))}}
+                        {{Form::open(array('action' => "ShopController@removeFavourite" , 'name'=>'deleteForm'.$i))}}
 
                         <input type="hidden" name="row_id" value="{{$item->rowId}}">
 
-                        {{Form::button('<i class="fa fa-trash-o"></i>', array("class" =>"btn btn-danger btn-sm", 'type'=>'submit') )}}
+                        <a id="delete-btn" class="btn btn-danger btn-sm" href="javascript:document.deleteForm{{$i}}.submit();"><i class="fa fa-trash-o"></i></a>
 
+
+                        <span style="display: none;">
+                        {{Form::button('Remove', array("class" =>"btn btn-danger btn-sm", 'type'=>'submit') )}}
+                        </span>
                         {{Form::close()}}
                     </td>
                 </tr>

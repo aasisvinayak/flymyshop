@@ -144,9 +144,8 @@
                                 {{Form::open(array('action' => "ShopController@addCart"))}}
 
                                 <input type="hidden" name="product_id" value="{{$product->product_id}}">
-
                                 {{--<span class="glyphicon glyphicon-shopping-cart"></span>--}}
-                                {{Form::submit('  Buy', array("class" =>"btn btn-success btn-product") )}}
+                                {{Form::submit('Buy', array("class" =>"btn btn-success btn-product") )}}
 
                                 {{Form::close()}}
                             </div>
@@ -156,7 +155,7 @@
                                 <input type="hidden" name="product-id" value="{{$product->product_id}}">
 
                                 {{--<span class="glyphicon glyphicon-heart"></span>--}}
-                                {{Form::submit(' Favourite', array("class" =>"btn btn-primary btn-product") )}}
+                                {{Form::submit('Favourite', array("class" =>"btn btn-primary btn-product") )}}
                                 <input type="hidden" name="product_id" value="{{$product->product_id}}">
 
                                 {{Form::close()}}

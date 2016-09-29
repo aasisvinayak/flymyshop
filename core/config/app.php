@@ -110,6 +110,7 @@ return [
 
     'log' => env('APP_LOG', 'single'),
 
+    
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

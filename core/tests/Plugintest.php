@@ -1,7 +1,7 @@
 <?php
 
 
-class Plugintest extends TestCase
+class PluginTest extends TestCase
 {
     /**
      * A basic test example.

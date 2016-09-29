@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af37ae299baa79559ed75855fcbb7967",
+    "hash": "514615cbfb91156a1b28530144452046",
     "content-hash": "d3ccfc95fbb324bb2310d8e58ad40cb3",
     "packages": [
         {
@@ -1741,22 +1741,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
+                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1770,12 +1778,13 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-09-19 16:02:08"
         },
         {
             "name": "psy/psysh",
@@ -1851,16 +1860,16 @@
         },
         {
             "name": "spatie/laravel-newsletter",
-            "version": "3.0.4",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-newsletter.git",
-                "reference": "c4e16ae646f81eb25d20b09627b0263b80d98cb0"
+                "reference": "46b5435857c3165d449eb2eaef653f0d48c1bf2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-newsletter/zipball/c4e16ae646f81eb25d20b09627b0263b80d98cb0",
-                "reference": "c4e16ae646f81eb25d20b09627b0263b80d98cb0",
+                "url": "https://api.github.com/repos/spatie/laravel-newsletter/zipball/46b5435857c3165d449eb2eaef653f0d48c1bf2c",
+                "reference": "46b5435857c3165d449eb2eaef653f0d48c1bf2c",
                 "shasum": ""
             },
             "require": {
@@ -1897,7 +1906,7 @@
                 "mailchimp",
                 "newsletter"
             ],
-            "time": "2016-08-24 05:54:14"
+            "time": "2016-09-20 06:44:19"
         },
         {
             "name": "stripe/stripe-php",
@@ -3045,16 +3054,16 @@
         },
         {
             "name": "lavary/laravel-menu",
-            "version": "1.6.1",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lavary/laravel-menu.git",
-                "reference": "9a089f83333af3d906c3eb20ce20a4b291f8ad08"
+                "reference": "1617add78aa8ec8e4657aba3d88d2b86fc534b9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/9a089f83333af3d906c3eb20ce20a4b291f8ad08",
-                "reference": "9a089f83333af3d906c3eb20ce20a4b291f8ad08",
+                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/1617add78aa8ec8e4657aba3d88d2b86fc534b9f",
+                "reference": "1617add78aa8ec8e4657aba3d88d2b86fc534b9f",
                 "shasum": ""
             },
             "require": {
@@ -3083,7 +3092,7 @@
             "keywords": [
                 "laravel"
             ],
-            "time": "2016-02-10 08:07:47"
+            "time": "2016-09-12 13:17:45"
         },
         {
             "name": "mockery/mockery",
