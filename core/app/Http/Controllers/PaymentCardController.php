@@ -102,4 +102,27 @@ class PaymentCardController extends Controller
 
         return redirect('account/addresses');
     }
+
+
+
+    public static function addSamplePaymentCard()
+    {
+        $payment_card = new PaymentCard();
+        $payment_card->user_id = 2;
+        $payment_card->card_id = 'ahwo91hshgaonGslnafJxnalk';
+        $payment_card->expiry_month = '12';
+        $payment_card->expiry_year = '2020';
+        $payment_card->card_four_digit = '1234';
+        $payment_card->vendor = 'visa';
+        $payment_card->country = 'uk';
+        $payment_card->customer_id = 'cus_32327891872192';
+        $payment_card->save();
+    }
+
+    public function deleteSamplePaymentCard()
+    {
+        $paymentCard= new \App\Http\Models\PaymentCard();
+        $paymentCard->destroy(2);
+    }
+
 }

@@ -24,7 +24,7 @@ use View;
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-final class AdminController extends Controller
+ class AdminController extends Controller
 {
     /**
      * Display admin dashboard.
@@ -359,7 +359,7 @@ final class AdminController extends Controller
      *
      * @return array
      */
-    protected function generateReport()
+     function generateReport()
     {
         $graph = $this->salesGraphData();
         $stats = $this->stats();
@@ -381,4 +381,18 @@ final class AdminController extends Controller
 
         return [compact('stats', 'graphY', 'graph', 'monthNames')];
     }
+
+     public function test1()
+     {
+         return $this->test2();
+
+     }
+
+     public function test2()
+     {
+         return 'blah';
+
+     }
+
+
 }

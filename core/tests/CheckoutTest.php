@@ -60,6 +60,7 @@ class CheckoutTest extends TestCase
     {
         $this->userLogin();
         $product = $this->getSampleProduct();
+        $this->addAddress();
         $this->visit('shop/product/'.$product->product_id)
             ->see($product->title)
             ->press('Buy')
@@ -68,21 +69,36 @@ class CheckoutTest extends TestCase
             ->seePageIs('account/profile/edit')
             ->type('Test', 'name')
             ->type('1234', 'phone')
-            ->type('01/01/1970', 'dob')
+            ->type('01/01/1970', 'dob') // note that this field is already pre-filled
             ->press('Update')
-            ->seePageIs('account/addresses/create')
-            ->type('Test', 'address_l1')
-            ->type('Test', 'address_l2')
-            ->type('Test', 'city')
-            ->type('Test', 'state')
-            ->type('Test', 'postcode')
-            ->type('UK', 'country')
-            ->press('Add Address');
-//            ->seePageIs('account/payment_cards/create')
-//            ->type('4242424242424242', 'card')
-//            ->type('123', 'cvc')
-//            ->select('2018', 'year')
-//            ->press('Save card')
-//            ->seePageIs('account');
+           ->seePageIs('account/payment_cards/create');
+     //   echo   $this->response->getOriginalContent();
+
+    }
+
+    public function testCheckOut()
+    {
+        $this->expectsEvents(\App\Events\ProcessPayment::class);
+        $this->expectsEvents(\App\Events\OrderPlaced::class);
+        $this->userLogin();
+
+        $product = $this->getSampleProduct();
+        $this->addAddress();
+
+        \App\Http\Controllers\PaymentCardController::addSamplePaymentCard();
+
+        $this->visit('shop/product/'.$product->product_id)
+            ->see($product->title)
+            ->press('Buy')
+            ->seePageIs('/shop/cart')
+            ->click('Checkout')
+            ->seePageIs('account/profile/edit')
+            ->type('Test', 'name')
+            ->type('1234', 'phone')
+            ->type('01/01/1970', 'dob') // note that this field is already pre-filled
+            ->press('Update')
+            ->seePageIs('account');
+
+       // $this->deleteSamplePaymentCard();
     }
 }

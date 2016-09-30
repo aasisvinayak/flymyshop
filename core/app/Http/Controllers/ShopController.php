@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OrderPlaced;
+use App\Events\ProcessPayment;
 use App\Http\Models\Category;
 use App\Http\Models\Invoice;
 use App\Http\Models\InvoiceItem;
@@ -332,11 +333,15 @@ final class ShopController extends Controller
 
         $user = Auth::user();
 
-        //TODO catch error and set which card to use
-        $user->charge($total_price * 100);
+      //  $user->charge($total_price * 100);
+
+
 
         try {
-            $user->charge($total_price * 100);
+
+            event(new  ProcessPayment($user,$total_price));
+
+          //  $user->charge($total_price * 100);
             $invoice = new Invoice();
             $invoice->user_id = $user->id;
             $invoice->invoice_id = str_random(50);
@@ -345,6 +350,7 @@ final class ShopController extends Controller
             $invoice->tax = env('TAX_RATE') * $total_price;
             $invoice->save();
             $invoice_id = $invoice->id;
+
 
             foreach ($cart_content as $item) {
                 $invoice_item = new InvoiceItem();
@@ -449,8 +455,8 @@ final class ShopController extends Controller
                 $message->to(env('MAIL_TO'), env('MAIL_NAME'))->subject('Contact Form');
             }
         );
-
-        return Redirect::to('contact')->with('message', 'Thanks for contacting us!');
+        $request->session()->flash('message', 'Thanks for contacting us!');
+        return redirect('/');
     }
 
     /**
@@ -473,6 +479,8 @@ final class ShopController extends Controller
             return redirect('/');
         } else {
             $products = Product::search(Input::get('q'));
+
+
 
             return view('shop/search', compact('products'));
         }

@@ -26,7 +26,7 @@ class FmsContainerServiceProvider extends ServiceProvider
     public function register()
     {
 
-        //TODO register provider and return singleton than
+        //TODO register provider and return singleton
 //        App::singleton('DataContainer', function () {
 //            return  DataContainer::instance();
 //        });

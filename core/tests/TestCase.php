@@ -11,6 +11,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
+    private $mock;
     protected $baseUrl = 'http://localhost';
     use DatabaseTransactions;
 
@@ -50,6 +51,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $product=$this-> getSampleProduct();
         $this->visit('/shop/product/'.$product['product_id'])
             ->press('Buy');
+
        // return $product;
     }
 
@@ -60,5 +62,45 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->press('Favourite');
         // return $product;
     }
+
+
+    public function addAddress()
+    {
+        $this->userLogin();
+        $this->visit('account/addresses/create')
+            ->type('Test', 'address_l1')
+            ->type('Test', 'address_l2')
+            ->type('Test', 'city')
+            ->type('Test', 'state')
+            ->type('Test', 'postcode')
+            ->type('UK', 'country')
+            ->press('Add Address');
+    }
+
+
+
+
+    public function addMockPaymentCardInfo()
+    {
+        $mock = Mockery::mock(\App\Http\Models\PaymentCard::class);
+        $input = [
+            'user_id' => '1',
+            'customer_id'=> 'badjhasbjhda',
+            'card_id' => 'ahwo91hshgaonGslnafJxnalk',
+            'card_four_digit' => '1234',
+            'expiry_month' => '04',
+            'expiry_year' => '2020',
+            'vendor' => 'Test',
+            'country' => 'Test'
+        ];
+        $mock->shouldReceive('create')
+            ->once()->with($input)->andReturnSelf();
+    }
+
+
+
+
+
+
 
 }

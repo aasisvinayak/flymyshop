@@ -21,7 +21,7 @@ use View;
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-final class AddressController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of all the addresses.

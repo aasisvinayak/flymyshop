@@ -2797,16 +2797,16 @@
         },
         {
             "name": "torann/currency",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-currency.git",
-                "reference": "18aeb028b3a7efec07d98a94da7c41b57786f640"
+                "reference": "f44abe12ec8e0783dc944f290bdfe9ede2aa3eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-currency/zipball/18aeb028b3a7efec07d98a94da7c41b57786f640",
-                "reference": "18aeb028b3a7efec07d98a94da7c41b57786f640",
+                "url": "https://api.github.com/repos/Torann/laravel-currency/zipball/f44abe12ec8e0783dc944f290bdfe9ede2aa3eb4",
+                "reference": "f44abe12ec8e0783dc944f290bdfe9ede2aa3eb4",
                 "shasum": ""
             },
             "require": {
@@ -2851,7 +2851,7 @@
                 "openexchangerates",
                 "yahoo finance"
             ],
-            "time": "2016-09-01 17:52:08"
+            "time": "2016-09-29 20:42:20"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3215,16 +3215,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
                 "shasum": ""
             },
             "require": {
@@ -3256,7 +3256,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",

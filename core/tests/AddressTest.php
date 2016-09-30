@@ -7,13 +7,13 @@ class AddressTest extends TestCase
     {
         $this->userLogin();
         $this->visit('account/addresses/create')
-        ->type('Test', 'address_l1')
-        ->type('Test', 'city')
-        ->type('Test', 'state')
-        ->type('Test', 'postcode')
-        ->type('UK', 'country')
-        ->press('Add Address')
-        ->see('required');
+            ->type('Test', 'address_l1')
+            ->type('Test', 'city')
+            ->type('Test', 'state')
+            ->type('Test', 'postcode')
+            ->type('UK', 'country')
+            ->press('Add Address')
+            ->see('required');
     }
 
     public function testAddAddress()
@@ -21,7 +21,7 @@ class AddressTest extends TestCase
         $this->userLogin();
         $this->visit('account/addresses/create')
             ->type('Test', 'address_l1')
-           ->type('Test', 'address_l2')
+            ->type('Test', 'address_l2')
             ->type('Test', 'city')
             ->type('Test', 'state')
             ->type('Test', 'postcode')
@@ -40,7 +40,7 @@ class AddressTest extends TestCase
             ->type('Test10000', 'address_l1')
             ->press('Update Address')
             ->seePageIs('account/addresses')
-           ->see('Successfully updated address');
+            ->see('Successfully updated address');
     }
 
     public function testDeleteAddress()
@@ -52,4 +52,28 @@ class AddressTest extends TestCase
             ->seePageIs('account/addresses')
             ->see('Successfully deleted the entry!');
     }
+
+//    public function testMockAddressCreation()
+//    {
+//        $mock = Mockery::mock(\App\Http\Models\Address::class);
+//        $input = [
+//            'user_id' => '1',
+//            'address_id'=> 'badjhasbjhda',
+//            'address_l1' => 'Sample Test',
+//            'address_l2' => 'Test',
+//            'city' => 'Test',
+//            'state' => 'Test',
+//            'country' => 'Test',
+//            'postcode' => 'Test'
+//        ];
+//        $mock->shouldReceive('create')
+//            ->once()->with($input);
+//        $this->app->instance(\App\Http\Models\Address::class, $mock);
+//        $mock->create($input);
+//        $this->visit('account/addresses/')
+//            ->see('Sample Test');
+//
+//    }
+
+
 }
