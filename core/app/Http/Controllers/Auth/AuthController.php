@@ -52,10 +52,26 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+
+        $minRequest=array(
             'email'                => 'required|email|max:255|unique:users',
-            'password'             => 'required|min:6|confirmed',
-            'g-recaptcha-response' => 'required|recaptcha',
+            'password'             => 'required|min:6|confirmed'
+            );
+
+
+        $_SERVER['REMOTE_ADDR'] = isset($_SERVER['REMOTE_ADDR'])? $_SERVER['REMOTE_ADDR']:'127.0.0.1';
+
+        $localHost = array(
+            '127.0.0.1',
+            '::1'
+        );  
+
+        if(in_array($_SERVER['REMOTE_ADDR'], $localHost)){
+            array_push($minRequest, array('g-recaptcha-response' => 'required|recaptcha'));
+        }
+
+        return Validator::make($data, [
+            $minRequest
         ]);
     }
 

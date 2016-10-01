@@ -29,13 +29,16 @@
                 </thead>
 
 
+                <?php $i=0; ?>
                 @foreach($invoices as $item)
+
+                    <?php $i++ ?>
                 <tr>
                     <td>{{$item->order_no}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>{{$item->sub_total}}</td>
                     <td class="text-center">
-                        <a class='btn btn-info btn-xs' href="/account/orders/{{$item->invoice_id}} ">
+                        <a id="view-invoice-{{$i}}" class='btn btn-info btn-xs' href="/account/orders/{{$item->invoice_id}} ">
                             <span class="glyphicon glyphicon-edit"></span> View</a>
                        </td>
                 </tr>

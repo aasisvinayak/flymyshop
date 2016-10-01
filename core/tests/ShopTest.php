@@ -24,6 +24,7 @@ class ShopTest extends TestCase
      */
     public function testHomePageListing()
     {
-        $this->visit('/')->assertViewHas('products');
+        $this->visit('/')
+            ->assertViewHas('products');
     }
 }

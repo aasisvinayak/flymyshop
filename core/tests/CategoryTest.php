@@ -3,13 +3,15 @@
 
 class CategoryTest extends TestCase
 {
+
     /**
-     * A basic test example.
+     * Test see category item is visible
      *
      * @return void
      */
-    public function testExample()
+    public function testCategoriesVisible()
     {
-        $this->assertTrue(true);
+        $this->visit('/')
+            ->see('CAT 1');
     }
 }

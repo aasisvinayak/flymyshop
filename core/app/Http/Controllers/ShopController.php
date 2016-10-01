@@ -432,7 +432,7 @@ final class ShopController extends Controller
      */
     public function contact()
     {
-        return View::make('pages.contact');
+        return view('pages.contact');
     }
 
     /**

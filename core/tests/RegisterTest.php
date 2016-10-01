@@ -2,28 +2,24 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class RegisterTest
+ */
 class RegisterTest extends TestCase
 {
-    /*
-     * A basic test example.
+
+    /**
+     * Verify user registration is working
      *
      * @return void
      */
-
-    use DatabaseTransactions;
-
-    public function testExample()
+    public function testUserRegistration()
     {
-        $this->assertTrue(true);
+        $this->visit('/register')
+            ->type('unitTest@domain.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->press('Register')
+            ->seePageIs('/home');
     }
-
-//    public function testUserRegistration()
-//    {
-//        $this->visit('/register')
-//            ->type('example@domain.com', 'email')
-//            ->type('password', 'password')
-//           ->type('password', 'confirm_password')
-//            ->press('Register')
-//            ->seePageIs('/login');
-//    }
 }

@@ -35,7 +35,7 @@ function fms_plugins()
 
 function categories()
 {
-    return \App\Http\Controllers\CategoryController::getAllCategories();
+    return (array)\App\Http\Controllers\CategoryController::getAllCategories();
 }
 
 /**
@@ -47,7 +47,7 @@ function categories()
  */
 function products($take, $skip)
 {
-    return \App\Http\Controllers\ProductController::getPublishedProducts($take, $skip);
+    return (array)\App\Http\Controllers\ProductController::getPublishedProducts($take, $skip);
 }
 
 function featured_products()
