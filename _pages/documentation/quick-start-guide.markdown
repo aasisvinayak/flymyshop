@@ -35,10 +35,11 @@ if you would like to clone it via HTTPS.
 Once you cloned the repository, then proceed with the following steps:
 
 {% highlight shell %}
-cd flymyshop/core
+cd flymyshop
+composer install
+cd core
 cp .env.example .env
 complete .env values (optional)
-composer install
 chmod -R 777 storage
 php artisan key:generate
 php artisan migrate  (if prompted say yes)

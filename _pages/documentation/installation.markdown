@@ -21,7 +21,7 @@ You can  install FlyMyShop in many ways:
 
 Please follow the steps below to install FlyMyShop on your web server
 
-1. Download  [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.1/flymyshop_v0.0.1.zip) file
+1. Download  [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.2/flymyshop-v0.0.2.zip) file
 2. Unzip and upload to your server 
 3. Visit the public folder
 4. Follow the instructions
@@ -42,10 +42,11 @@ composer create-project --prefer-dist aasisvinayak/shop
 
 {% highlight shell %}
 git clone https://github.com/aasisvinayak/flymyshop.git
-cd flymyshop/core
+cd flymyshop
+composer install
+cd core
 cp .env.example .env
 complete .env values (optional)
-composer install
 chmod -R 777 storage
 php artisan key:generate 
 php artisan migrate  (if prompted say yes)
