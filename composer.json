@@ -57,15 +57,14 @@
             "php core/artisan db:seed --no-interaction --class=CategoriesTableSeeder",
             "php core/artisan db:seed --no-interaction --class=ProductsTableSeeder"
         ],
-        "post-create-project-cmd": [
-            "php core/artisan key:generate"
-        ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php core/artisan key:generate",
             "php core/artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php core/artisan key:generate",
             "php core/artisan optimize"
         ]
     },
