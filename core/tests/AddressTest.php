@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Class AddressTest
+ * Class AddressTest.
  */
 class AddressTest extends TestCase
 {
     /**
-     * Test that user cannot submit address form without filling all the fields
+     * Test that user cannot submit address form without filling all the fields.
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class AddressTest extends TestCase
     }
 
     /**
-     * Test that user can add an address
+     * Test that user can add an address.
      *
      * @return void
      */
@@ -43,7 +43,7 @@ class AddressTest extends TestCase
     }
 
     /**
-     * Test that user can edit user's existing address
+     * Test that user can edit user's existing address.
      *
      * @return void
      */
@@ -61,7 +61,7 @@ class AddressTest extends TestCase
     }
 
     /**
-     * Test that user can delete user's existing address
+     * Test that user can delete user's existing address.
      *
      * @return void
      */

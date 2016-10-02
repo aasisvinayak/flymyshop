@@ -4,7 +4,7 @@
 class AdminCategoriesAccessTest extends TestCase
 {
     /**
-     * Test admin can view list of shop categories
+     * Test admin can view list of shop categories.
      *
      * @return void
      */
@@ -16,7 +16,7 @@ class AdminCategoriesAccessTest extends TestCase
     }
 
     /**
-     * Test admin can add a new category
+     * Test admin can add a new category.
      *
      * @return void
      */
@@ -31,7 +31,7 @@ class AdminCategoriesAccessTest extends TestCase
     }
 
     /**
-     * Test that admin can edit can existing category
+     * Test that admin can edit can existing category.
      *
      * @return void
      */
@@ -47,7 +47,7 @@ class AdminCategoriesAccessTest extends TestCase
     }
 
     /**
-     * Test that admin can delete an existing category
+     * Test that admin can delete an existing category.
      *
      * @return void
      */

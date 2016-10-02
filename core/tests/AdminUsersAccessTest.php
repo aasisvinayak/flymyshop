@@ -1,16 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class AdminUsersAccessTest
+ * Class AdminUsersAccessTest.
  */
 class AdminUsersAccessTest extends TestCase
 {
     /**
-     * Test admin user can view all the site users
+     * Test admin user can view all the site users.
      *
      * @return void
      */
@@ -23,7 +20,7 @@ class AdminUsersAccessTest extends TestCase
     }
 
     /**
-     * Test admin user cannot disable admin (current user) account
+     * Test admin user cannot disable admin (current user) account.
      *
      * @return void
      */
@@ -39,9 +36,8 @@ class AdminUsersAccessTest extends TestCase
             ->see('Cannot disable admin (you) account!');
     }
 
-
     /**
-     * Test admin user can disable/enable users
+     * Test admin user can disable/enable users.
      *
      * @return void
      */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class ProductTest
+ * Class ProductTest.
  */
 class ProductTest extends TestCase
 {
@@ -19,7 +19,7 @@ class ProductTest extends TestCase
 
     /**
      * Test that a product can be added to cart.
-     * TODO: move to cart check
+     * TODO: move to cart check.
      *
      * @return void
      */
@@ -34,7 +34,7 @@ class ProductTest extends TestCase
 
     /**
      * Verify that product can be added to favourites.
-     * TODO: move to favourites check
+     * TODO: move to favourites check.
      *
      * @return void
      */

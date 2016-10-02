@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Schema;
  */
 final class InstallController extends Controller
 {
-
     use ApplicationHelper;
+
     /**
      * TODO: Display form to save to .env.
      *
@@ -81,7 +81,7 @@ final class InstallController extends Controller
     }
 
     /**
-     * Save DB details to .env file
+     * Save DB details to .env file.
      *
      *
      * @param InstallRequest $request

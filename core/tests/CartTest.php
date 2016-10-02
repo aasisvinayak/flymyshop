@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class CartTest
+ * Class CartTest.
  */
 class CartTest extends TestCase
 {
@@ -24,7 +24,7 @@ class CartTest extends TestCase
      */
     public function testUserCanAddItemToCart()
     {
-        $product=$this-> getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('/shop/product/'.$product['product_id'])
             ->press('Buy')
             ->seePageIs('/shop/cart')
@@ -44,7 +44,7 @@ class CartTest extends TestCase
             ->type('2', 'qty')
             ->press('Update')
             ->seePageIs('/shop/cart')
-            ->seeInField('qty',2);
+            ->seeInField('qty', 2);
     }
 
     /**
@@ -59,5 +59,4 @@ class CartTest extends TestCase
             ->press('Remove')
             ->see('Empty Cart!');
     }
-
 }

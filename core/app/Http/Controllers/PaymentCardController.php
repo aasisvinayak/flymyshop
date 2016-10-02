@@ -103,10 +103,9 @@ class PaymentCardController extends Controller
         return redirect('account/addresses');
     }
 
-
     /**
      * Add a sample payment card for testing
-     *  TODO: return the payment card id for code reuse if required
+     *  TODO: return the payment card id for code reuse if required.
      *
      * @return void
      */
@@ -132,8 +131,7 @@ class PaymentCardController extends Controller
      */
     public static function deleteSamplePaymentCard()
     {
-        $paymentCard= new \App\Http\Models\PaymentCard();
+        $paymentCard = new \App\Http\Models\PaymentCard();
         $paymentCard->destroy(1);
     }
-
 }

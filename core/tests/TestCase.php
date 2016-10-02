@@ -5,7 +5,7 @@ use \App\Http\Models\Product;
 use App\User;
 
 /**
- * Class TestCase
+ * Class TestCase.
  */
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -31,7 +31,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     }
 
     /**
-     * Become admin user
+     * Become admin user.
      */
     public function adminLogin()
     {
@@ -40,7 +40,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     }
 
     /**
-     * Become regular user
+     * Become regular user.
      *
      * @return void
      */
@@ -51,43 +51,43 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     }
 
     /**
-     * Return a sample product
+     * Return a sample product.
      *
      * @return Product
      */
     public function getSampleProduct()
     {
         $product = Product::findorFail(1);
+
         return $product;
     }
 
     /**
-     * Add a random product to cart
+     * Add a random product to cart.
      *
      * @return void
      */
     public function randomCart()
     {
-        $product=$this-> getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('/shop/product/'.$product['product_id'])
             ->press('Buy');
     }
 
     /**
-     * Add a random product to Favourite
+     * Add a random product to Favourite.
      *
      * @return void
      */
     public function randomFavourite()
     {
-        $product=$this-> getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('/shop/product/'.$product['product_id'])
             ->press('Favourite');
     }
 
-
     /**
-     * Add Test Address
+     * Add Test Address.
      *
      * @return void
      */
@@ -104,9 +104,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->press('Add Address');
     }
 
-
     /**
-     * Mock Payment cart
+     * Mock Payment cart.
      *
      * @return \App\Http\Models\PaymentCard
      */
@@ -115,13 +114,13 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $mock = Mockery::mock(\App\Http\Models\PaymentCard::class);
         $input = [
             'user_id' => '1',
-            'customer_id'=> 'badjhasbjhda',
+            'customer_id' => 'badjhasbjhda',
             'card_id' => 'ahwo91hshgaonGslnafJxnalk',
             'card_four_digit' => '1234',
             'expiry_month' => '04',
             'expiry_year' => '2020',
             'vendor' => 'Test',
-            'country' => 'Test'
+            'country' => 'Test',
         ];
         $mock->shouldReceive('create')
             ->once()->with($input)->andReturnSelf();
@@ -151,6 +150,5 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->seePageIs('account');
 
         \App\Http\Controllers\PaymentCardController::deleteSamplePaymentCard();
-
     }
 }

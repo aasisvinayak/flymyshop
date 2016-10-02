@@ -52,26 +52,25 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-
-        $minRequest=array(
+        $minRequest = [
             'email'                => 'required|email|max:255|unique:users',
-            'password'             => 'required|min:6|confirmed'
-            );
+            'password'             => 'required|min:6|confirmed',
+            ];
 
 
-        $_SERVER['REMOTE_ADDR'] = isset($_SERVER['REMOTE_ADDR'])? $_SERVER['REMOTE_ADDR']:'127.0.0.1';
+        $_SERVER['REMOTE_ADDR'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 
-        $localHost = array(
+        $localHost = [
             '127.0.0.1',
-            '::1'
-        );  
+            '::1',
+        ];
 
-        if(in_array($_SERVER['REMOTE_ADDR'], $localHost)){
-            array_push($minRequest, array('g-recaptcha-response' => 'required|recaptcha'));
+        if (in_array($_SERVER['REMOTE_ADDR'], $localHost)) {
+            array_push($minRequest, ['g-recaptcha-response' => 'required|recaptcha']);
         }
 
         return Validator::make($data, [
-            $minRequest
+            $minRequest,
         ]);
     }
 
@@ -101,7 +100,6 @@ class AuthController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
-
 
     /**
      * Obtain the user information from Facebook.

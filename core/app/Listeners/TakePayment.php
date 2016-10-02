@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\ProcessPayment;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TakePayment
 {
@@ -26,8 +24,8 @@ class TakePayment
      */
     public function handle(ProcessPayment $event)
     {
-        $user=$event->user;
-        $total=$event->total;
+        $user = $event->user;
+        $total = $event->total;
 
         $user->charge($total * 100);
     }

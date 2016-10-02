@@ -1,22 +1,17 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class AdminSettingsTest
+ * Class AdminSettingsTest.
  */
 class AdminSettingsTest extends TestCase
 {
-
     //TODO: remove as the test below tests the same
     public function testAdminCanViewSettingsPage()
     {
         $this->adminLogin();
         $this->visit('/admin/settings')
             ->seePageIs('/admin/settings');
-
     }
 
     /**

@@ -1,16 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class AdminManagePaymentTest
+ * Class AdminManagePaymentTest.
  */
 class AdminManagePaymentTest extends TestCase
 {
     /**
-     * Test admin user can view charges
+     * Test admin user can view charges.
      *
      * @return void
      */

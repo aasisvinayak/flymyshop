@@ -12,7 +12,6 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('settings')->insert([
             'title' => 'SHOP_NAME',
             'value' => '',
@@ -219,6 +218,5 @@ class SettingsTableSeeder extends Seeder
             'title' => 'REDIS_PORT',
             'value' => '6379',
         ]);
-
     }
 }

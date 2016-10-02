@@ -1,4 +1,5 @@
 <?php
+
 //Add test for native and third-party support
 
 //class NewsletterTest extends TestCase

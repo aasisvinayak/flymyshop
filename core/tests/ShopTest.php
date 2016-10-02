@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class ShopTest
+ * Class ShopTest.
  */
 class ShopTest extends TestCase
 {

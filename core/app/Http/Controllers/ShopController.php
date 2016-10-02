@@ -338,8 +338,7 @@ final class ShopController extends Controller
 
 
         try {
-
-            event(new  ProcessPayment($user,$total_price));
+            event(new  ProcessPayment($user, $total_price));
 
           //  $user->charge($total_price * 100);
             $invoice = new Invoice();
@@ -456,6 +455,7 @@ final class ShopController extends Controller
             }
         );
         $request->session()->flash('message', 'Thanks for contacting us!');
+
         return redirect('/');
     }
 

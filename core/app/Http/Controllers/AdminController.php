@@ -29,7 +29,6 @@ use View;
  */
 class AdminController extends Controller
 {
-
     use ApplicationHelper;
 
     /**
@@ -67,7 +66,6 @@ class AdminController extends Controller
 
 
         foreach ($users as $item) {
-
             if (is_null($item->status)) {
                 $item->status = 'User active';
             } else {
@@ -161,9 +159,9 @@ class AdminController extends Controller
         $invoice = Invoice::findorFail($request->get('id'));
         $invoice->update(['status' => $request->get('status')]);
         $request->session()->flash('alert-success', 'Order Status Updated!');
+
         return redirect('admin/orders');
     }
-
 
     /**
      * Update status of the user.
@@ -178,18 +176,18 @@ class AdminController extends Controller
 
         if ($shopUser->id == Auth::user()->id) {
             $request->session()->flash('alert-danger', 'Cannot disable admin (you) account!');
+
             return redirect('admin/users');
         } else {
-            $shopUser->update(['status' => (int)$request->get('status')]);
+            $shopUser->update(['status' => (int) $request->get('status')]);
             $request->session()->flash('alert-success', 'User Status Updated!');
+
             return redirect('admin/users');
         }
-
     }
 
-
     /**
-     * Process refund for charge and redirect to payments
+     * Process refund for charge and redirect to payments.
      *
      * @param Request $request
      * @return Redirect
@@ -198,10 +196,11 @@ class AdminController extends Controller
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         \Stripe\Refund::create(
-            array(
-                "charge" => $request->get('charge_id'),
-            )
+            [
+                'charge' => $request->get('charge_id'),
+            ]
         );
+
         return redirect('admin/payments');
     }
 
@@ -339,16 +338,16 @@ class AdminController extends Controller
     }
 
     /**
-     * Settings view for FlyMyShop
+     * Settings view for FlyMyShop.
      *
      * @return View
      */
     public function settings()
     {
         $settings = Setting::all()->toArray();
+
         return view('admin/settings', compact('settings'));
     }
-
 
     /**
      * Update settings value in database and .env file.
@@ -360,15 +359,15 @@ class AdminController extends Controller
     public function updateSettings(Request $request)
     {
         $settings = new Setting();
-        $config=$request->all();
+        $config = $request->all();
         unset($config['_token']);
         $this->save($config);
         foreach ($config as $key => $value) {
             $item = $settings->row($key);
             $itemAsArray = ($item->toArray());
             if (count($itemAsArray) > 0) {
-                $row=Setting::findorFail($itemAsArray[0]['id']);
-                $row->update(array(  'value' => $value ));
+                $row = Setting::findorFail($itemAsArray[0]['id']);
+                $row->update(['value' => $value]);
             }
         }
 
@@ -391,13 +390,13 @@ class AdminController extends Controller
             $num_padded = sprintf('%02d', $i);
             if ($i > $month) {
                 $year = $current->year;
-                $num_padded = ($year - 1) . '-' . $num_padded;
+                $num_padded = ($year - 1).'-'.$num_padded;
             } else {
-                $num_padded = $current->year . '-' . $num_padded;
+                $num_padded = $current->year.'-'.$num_padded;
             }
             array_key_exists($num_padded, $graph) ?
                 $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string)$num_padded] = 0;
+                $formattedGraph[(string) $num_padded] = 0;
         }
 
         return $formattedGraph;
@@ -416,7 +415,7 @@ class AdminController extends Controller
         foreach ($months as $number) {
             $number = explode('-', $number);
             $mName = date('F', mktime(0, 0, 0, $number[1], 10));
-            array_push($monthNames, $number[0] . '-' . $mName);
+            array_push($monthNames, $number[0].'-'.$mName);
         }
 
         return $monthNames;
@@ -443,7 +442,7 @@ class AdminController extends Controller
      *
      * @return array
      */
-    function generateReport()
+    public function generateReport()
     {
         $graph = $this->salesGraphData();
         $stats = $this->stats();
@@ -461,7 +460,7 @@ class AdminController extends Controller
         $monthNames = array_keys($data);
         $monthNames = $this->getMonthNamesFromNumbers($monthNames);
         $sumInArray = json_encode(array_values($data));
-        $graphY = 'var value_array = ' . ($sumInArray) . ";\n";
+        $graphY = 'var value_array = '.($sumInArray).";\n";
 
         return [compact('stats', 'graphY', 'graph', 'monthNames')];
     }

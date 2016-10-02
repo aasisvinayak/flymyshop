@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Class CheckoutTest
+ * Class CheckoutTest.
  */
 class CheckoutTest extends TestCase
 {
     /**
-     * Verify that the checkout button is visible
+     * Verify that the checkout button is visible.
      *
      * @return false
      */
@@ -55,7 +55,7 @@ class CheckoutTest extends TestCase
     }
 
     /**
-     * Verify that checkout requires user to have at least one address on record
+     * Verify that checkout requires user to have at least one address on record.
      *
      * @return void
      */
@@ -100,7 +100,6 @@ class CheckoutTest extends TestCase
             ->press('Update')
            ->seePageIs('account/payment_cards/create');
      //   echo   $this->response->getOriginalContent();
-
     }
 
     /**

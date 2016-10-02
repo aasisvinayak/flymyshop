@@ -2,10 +2,8 @@
 
 namespace App\Events;
 
-use App\Events\Event;
 use App\User;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class ProcessPayment extends Event
 {
@@ -20,8 +18,8 @@ class ProcessPayment extends Event
      */
     public function __construct(User $user, $total)
     {
-        $this->user=$user;
-        $this->total=$total;
+        $this->user = $user;
+        $this->total = $total;
       //  $user->charge($total * 100);
     }
 
