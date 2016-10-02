@@ -2,8 +2,7 @@
 
 /**
  * Class InvoiceTest
- * Verify functions related to invoice
- *
+ * Verify functions related to invoice.
  */
 class InvoiceTest extends TestCase
 {

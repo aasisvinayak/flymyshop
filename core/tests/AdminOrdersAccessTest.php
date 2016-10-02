@@ -2,14 +2,12 @@
 
 
 /**
- * Class AdminOrdersAccessTest
- * 
+ * Class AdminOrdersAccessTest.
  */
 class AdminOrdersAccessTest extends TestCase
 {
-
     /**
-     * Test admin can view all orders
+     * Test admin can view all orders.
      *
      * @return void
      */
@@ -25,7 +23,7 @@ class AdminOrdersAccessTest extends TestCase
     }
 
     /**
-     * Test admin user can change the status of an order
+     * Test admin user can change the status of an order.
      *
      * @return void
      */
@@ -40,5 +38,4 @@ class AdminOrdersAccessTest extends TestCase
             ->press('Update')
             ->see('Order Status Updated!');
     }
-
 }

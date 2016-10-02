@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class SearchTest
+ * Class SearchTest.
  */
 class SearchTest extends TestCase
 {

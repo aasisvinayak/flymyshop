@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AdminAccessTest
- * 
+ * Class AdminAccessTest.
  */
 class AdminAccessTest extends TestCase
 {

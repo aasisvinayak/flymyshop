@@ -1,16 +1,15 @@
 <?php
 
 /**
- * Class LoginTest
+ * Class LoginTest.
  */
 class LoginTest extends TestCase
 {
-
     protected $user;
 
     /**
      * See login page is viewable.
-     * Not required any more because of the test below
+     * Not required any more because of the test below.
      *
      * @return void
      */
@@ -22,7 +21,7 @@ class LoginTest extends TestCase
     }
 
     /**
-     * Test login using a seed data
+     * Test login using a seed data.
      *
      * @return void
      */

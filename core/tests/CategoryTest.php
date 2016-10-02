@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Class CategoryTest
+ * Class CategoryTest.
  */
 class CategoryTest extends TestCase
 {
-
     /**
-     * Test see category item is visible
+     * Test see category item is visible.
      *
      * @return void
      */

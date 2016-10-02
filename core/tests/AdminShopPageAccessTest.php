@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class AdminShopPageAccessTest
+ * Class AdminShopPageAccessTest.
  */
 class AdminShopPageAccessTest extends TestCase
 {

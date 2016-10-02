@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class FavouritesTest
+ * Class FavouritesTest.
  */
 class FavouritesTest extends TestCase
 {
@@ -17,7 +17,6 @@ class FavouritesTest extends TestCase
             ->see('You have no saved items!');
     }
 
-
     /**
      * Test user can add a product to favourite.
      *
@@ -25,7 +24,7 @@ class FavouritesTest extends TestCase
      */
     public function testUserCanAddItemToFavourites()
     {
-        $product=$this-> getSampleProduct();
+        $product = $this->getSampleProduct();
         $this->visit('/shop/product/'.$product['product_id'])
             ->press('Favourite')
             ->seePageIs('/shop/favourites')
@@ -45,5 +44,4 @@ class FavouritesTest extends TestCase
             ->seePageIs('/')
             ->see('You have no saved items!');
     }
-
 }

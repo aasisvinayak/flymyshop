@@ -1,15 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class RegisterTest
+ * Class RegisterTest.
  */
 class RegisterTest extends TestCase
 {
-
     /**
-     * Verify user registration is working
+     * Verify user registration is working.
      *
      * @return void
      */

@@ -36,7 +36,7 @@ class CheckSettings
 
                         if ($currentuser->status == '0') {
                             Auth::logout();
-                            $request->session()->flash('alert-danger','Your account has been disabled!');
+                            $request->session()->flash('alert-danger', 'Your account has been disabled!');
                             redirect('/');
                         }
                     }

@@ -2,12 +2,12 @@
 
 /**
  * Class AdminPagesAccessTest
- * TODO: remove and add the relevant tests to individual scenarios
+ * TODO: remove and add the relevant tests to individual scenarios.
  */
 class AdminPagesAccessTest extends TestCase
 {
     /**
-     * Verify that admin can view shop users
+     * Verify that admin can view shop users.
      *
      * @return void
      */
@@ -19,7 +19,7 @@ class AdminPagesAccessTest extends TestCase
     }
 
     /**
-     * Verify that admin can view products
+     * Verify that admin can view products.
      *
      * @return void
      */
@@ -31,7 +31,7 @@ class AdminPagesAccessTest extends TestCase
     }
 
     /**
-     * Test that admin can view categories
+     * Test that admin can view categories.
      *
      * @return void
      */
@@ -43,7 +43,7 @@ class AdminPagesAccessTest extends TestCase
     }
 
     /**
-     * Test that admin can view shop pages
+     * Test that admin can view shop pages.
      *
      * @return void
      */

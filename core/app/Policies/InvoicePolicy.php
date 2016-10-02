@@ -22,20 +22,20 @@ class InvoicePolicy
     }
 
     /**
-     * User can view only his own invoice
+     * User can view only his own invoice.
      *
      * @param User    $user
      * @param Invoice $invoice
-     * 
+     *
      * @return bool
      */
     public function show(User $user, Invoice $invoice)
     {
-        return $user->id === (int)$invoice->user_id;
+        return $user->id === (int) $invoice->user_id;
     }
 
     /**
-     * Only an admin can update the invoice (for updating invoice status)
+     * Only an admin can update the invoice (for updating invoice status).
      *
      * @return bool
      */

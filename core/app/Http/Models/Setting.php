@@ -16,7 +16,7 @@ class Setting extends Model
 
     public function scopeRow($query, $title)
     {
-        return $query->select('id','title','value')
+        return $query->select('id', 'title', 'value')
             ->where('title', '=', $title)->get();
     }
 }
