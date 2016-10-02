@@ -1,7 +1,7 @@
 <?php
 
 //Mock by returning test charge items
-/**
+/*
  * Class AdminManagePaymentTest.
  */
 //class AdminManagePaymentTest extends TestCase
