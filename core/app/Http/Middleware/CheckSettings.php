@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Request;
 
@@ -26,6 +28,17 @@ class CheckSettings
                 if (! is_null((DB::connection()->getDatabaseName()))) {
                     if (Request::is('install')) {
                         return redirect('/');
+                    }
+
+                    if (Auth::check()) {
+                        $id = Auth::user()->id;
+                        $currentuser = User::find($id);
+
+                        if ($currentuser->status == '0') {
+                            Auth::logout();
+                            $request->session()->flash('alert-danger','Your account has been disabled!');
+                            redirect('/');
+                        }
                     }
 
                     return $next($request);

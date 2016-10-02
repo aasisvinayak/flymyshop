@@ -2,6 +2,9 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class SearchTest
+ */
 class SearchTest extends TestCase
 {
     use DatabaseTransactions;

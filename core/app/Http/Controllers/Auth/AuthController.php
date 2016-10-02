@@ -102,6 +102,7 @@ class AuthController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
+
     /**
      * Obtain the user information from Facebook.
      *

@@ -21,6 +21,7 @@
                     <li><a href="/admin/reports"><span class="glyphicon glyphicon-user"></span> Reports</a></li>
                     <li><a href="/admin/payments"><span class="glyphicon glyphicon-user"></span> Manage Payments</a> </li>
                     <li><a href="/admin/pages"><span class="glyphicon glyphicon-user"></span> Shop Pages</a></li>
+                    <li><a href="/admin/settings"><span class="glyphicon glyphicon-user"></span> Shop Settings</a></li>
 
 
                     {{--TODO--}}

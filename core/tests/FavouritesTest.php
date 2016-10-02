@@ -1,10 +1,12 @@
 <?php
 
-
+/**
+ * Class FavouritesTest
+ */
 class FavouritesTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Verify that user is redirected to homepage if the favourites list is empty.
      *
      * @return void
      */
@@ -16,6 +18,11 @@ class FavouritesTest extends TestCase
     }
 
 
+    /**
+     * Test user can add a product to favourite.
+     *
+     * @return void
+     */
     public function testUserCanAddItemToFavourites()
     {
         $product=$this-> getSampleProduct();
@@ -25,6 +32,11 @@ class FavouritesTest extends TestCase
             ->see($product['title']);
     }
 
+    /**
+     * Test user can delete product from favourite.
+     *
+     * @return void
+     */
     public function testUserCanDeleteProductFromFavourites()
     {
         $this->randomFavourite();

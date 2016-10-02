@@ -92,6 +92,8 @@ Route::group(
                 Route::get('/orders', 'AdminController@orders');
                 Route::get('/orders/{id}', 'AdminController@viewOrder');
                 Route::post('/orders', 'AdminController@updateOrderStatus');
+                Route::post('/users', 'AdminController@updateUserStatus');
+                Route::post('/payments', 'AdminController@processRefund');
                 Route::get('/reports', 'AdminController@reports');
                 Route::get('/settings', 'AdminController@settings');
                 Route::post('/settings', 'AdminController@updateSettings');

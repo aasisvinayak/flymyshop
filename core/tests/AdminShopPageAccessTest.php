@@ -1,22 +1,27 @@
 <?php
 
-
+/**
+ * Class AdminShopPageAccessTest
+ */
 class AdminShopPageAccessTest extends TestCase
 {
-    public function testSeeCurrentPages()
+    /**
+     * Test admin can see the current shop pages.
+     *
+     * @return void
+     */
+    public function testAdminCanSeeCurrentPages()
     {
         $this->adminLogin();
         $this->visit('/admin/pages')
             ->assertViewHas('pages');
     }
 
-    public function testListPages()
-    {
-        $this->adminLogin();
-        $this->visit('/admin/pages')
-            ->assertViewHas('pages');
-    }
-
+    /**
+     * Test admin can add a new shop page.
+     *
+     * @return void
+     */
     public function testAdminCanAddPage()
     {
         $this->adminLogin();
@@ -27,6 +32,11 @@ class AdminShopPageAccessTest extends TestCase
             ->seePageIs('/admin/pages');
     }
 
+    /**
+     * Test admin can edit can existing page.
+     *
+     * @return void
+     */
     public function testAdminCanEditPage()
     {
         $this->testAdminCanAddPage();
@@ -38,6 +48,11 @@ class AdminShopPageAccessTest extends TestCase
             ->see('Page has been updated');
     }
 
+    /**
+     * Test admin delete an existing page.
+     *
+     * @return void
+     */
     public function testAdminCanDeletePage()
     {
         $this->testAdminCanAddPage();

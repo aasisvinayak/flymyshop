@@ -1,8 +1,15 @@
 <?php
 
-
+/**
+ * Class AddressTest
+ */
 class AddressTest extends TestCase
 {
+    /**
+     * Test that user cannot submit address form without filling all the fields
+     *
+     * @return void
+     */
     public function testCannotAddAddressWihoutFillingAllFields()
     {
         $this->userLogin();
@@ -16,6 +23,11 @@ class AddressTest extends TestCase
             ->see('required');
     }
 
+    /**
+     * Test that user can add an address
+     *
+     * @return void
+     */
     public function testAddAddress()
     {
         $this->userLogin();
@@ -30,6 +42,11 @@ class AddressTest extends TestCase
             ->seePageIs('/account/addresses');
     }
 
+    /**
+     * Test that user can edit user's existing address
+     *
+     * @return void
+     */
     public function testEditAddress()
     {
         $this->testAddAddress();
@@ -43,6 +60,11 @@ class AddressTest extends TestCase
             ->see('Successfully updated address');
     }
 
+    /**
+     * Test that user can delete user's existing address
+     *
+     * @return void
+     */
     public function testDeleteAddress()
     {
         $this->testAddAddress();
@@ -52,28 +74,4 @@ class AddressTest extends TestCase
             ->seePageIs('account/addresses')
             ->see('Successfully deleted the entry!');
     }
-
-//    public function testMockAddressCreation()
-//    {
-//        $mock = Mockery::mock(\App\Http\Models\Address::class);
-//        $input = [
-//            'user_id' => '1',
-//            'address_id'=> 'badjhasbjhda',
-//            'address_l1' => 'Sample Test',
-//            'address_l2' => 'Test',
-//            'city' => 'Test',
-//            'state' => 'Test',
-//            'country' => 'Test',
-//            'postcode' => 'Test'
-//        ];
-//        $mock->shouldReceive('create')
-//            ->once()->with($input);
-//        $this->app->instance(\App\Http\Models\Address::class, $mock);
-//        $mock->create($input);
-//        $this->visit('account/addresses/')
-//            ->see('Sample Test');
-//
-//    }
-
-
 }

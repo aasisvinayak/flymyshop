@@ -1,6 +1,9 @@
 <?php
 
-
+/**
+ * Class AdminAccessTest
+ * 
+ */
 class AdminAccessTest extends TestCase
 {
     /**

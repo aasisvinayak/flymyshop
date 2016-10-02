@@ -4,6 +4,9 @@ use \Illuminate\Foundation\Testing\DatabaseTransactions;
 use \App\Http\Models\Product;
 use App\User;
 
+/**
+ * Class TestCase
+ */
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -126,7 +129,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function randomPurchase()
     {
-
         $this->expectsEvents(\App\Events\ProcessPayment::class);
         $this->expectsEvents(\App\Events\OrderPlaced::class);
         $this->userLogin();
@@ -148,7 +150,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->press('Update')
             ->seePageIs('account');
 
-        // $this->deleteSamplePaymentCard();
+        \App\Http\Controllers\PaymentCardController::deleteSamplePaymentCard();
 
     }
 }

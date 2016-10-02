@@ -33,15 +33,28 @@
                 </tr>
                 </thead>
 
-
+                <?php $i=0; ?>
                 @foreach($users as $item)
+                    <?php $i++; ?>
                     <tr>
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->status}}</td>
                         <td class="text-center">
-                            <a class='btn btn-danger btn-xs' href=" ">
-                                <span class="glyphicon glyphicon-edit"></span> Diable User </a>
+
+                            {{Form::open(array('action'=>"AdminController@updateUserStatus"))}}
+
+                            <input id="update-user-status-{{$i}}" type="hidden" name="id" value="{{$item->id}}">
+                            {{ Form::select('status', [
+                                           '1' => 'Enable User',
+                                           '0' => 'Disable User',
+                                           ]
+                                            ) }}
+
+                            <br> <br>
+                            {{Form::submit('Update', array('class' =>" btn-primary  btn-sm", "id" =>"update-user-status-btn-".$i ))}}
+
+                            {{Form::close()}}
                         </td>
                     </tr>
 

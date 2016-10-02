@@ -1,9 +1,16 @@
 <?php
 
-
+/**
+ * Class AdminSalesAccessTest
+ */
 class AdminSalesAccessTest extends TestCase
 {
-    public function testStatsAvailabe()
+    /**
+     * Test admin can view shop stats.
+     *
+     * @return void
+     */
+    public function testAdminCanViewShopStats()
     {
         $this->adminLogin();
         $this->visit('admin/reports')

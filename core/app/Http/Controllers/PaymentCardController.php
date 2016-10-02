@@ -104,7 +104,12 @@ class PaymentCardController extends Controller
     }
 
 
-
+    /**
+     * Add a sample payment card for testing
+     *  TODO: return the payment card id for code reuse if required
+     *
+     * @return void
+     */
     public static function addSamplePaymentCard()
     {
         $payment_card = new PaymentCard();
@@ -119,10 +124,16 @@ class PaymentCardController extends Controller
         $payment_card->save();
     }
 
-    public function deleteSamplePaymentCard()
+    /**
+     * Delete the sample card
+     * TODO: allow deletion by passing the id of the sample card.
+     *
+     * @return void
+     */
+    public static function deleteSamplePaymentCard()
     {
         $paymentCard= new \App\Http\Models\PaymentCard();
-        $paymentCard->destroy(2);
+        $paymentCard->destroy(1);
     }
 
 }

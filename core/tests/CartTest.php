@@ -1,10 +1,12 @@
 <?php
 
-
+/**
+ * Class CartTest
+ */
 class CartTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Verify that if the cart is empty the user gets redirected to homepage.
      *
      * @return void
      */
@@ -15,6 +17,11 @@ class CartTest extends TestCase
             ->see('Empty Cart!');
     }
 
+    /**
+     * Verify that user can add a product to cart.
+     *
+     * @return void
+     */
     public function testUserCanAddItemToCart()
     {
         $product=$this-> getSampleProduct();
@@ -24,6 +31,12 @@ class CartTest extends TestCase
             ->see($product['title']);
     }
 
+    /**
+     * Verify that user can update number of units of a product that is already
+     * in the cart.
+     *
+     * @return void
+     */
     public function testUserCanUpdateProductQuantityInCart()
     {
         $this->randomCart();
@@ -34,6 +47,11 @@ class CartTest extends TestCase
             ->seeInField('qty',2);
     }
 
+    /**
+     * Verify that user can remove a product from the cart.
+     *
+     * @return void
+     */
     public function testUserCanRemoveProductFromCart()
     {
         $this->randomCart();

@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class ShopTest
+ */
 class ShopTest extends TestCase
 {
     /**

@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class CategoryTest
+ */
 class CategoryTest extends TestCase
 {
 

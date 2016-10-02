@@ -1,8 +1,15 @@
 <?php
 
-
+/**
+ * Class CheckoutTest
+ */
 class CheckoutTest extends TestCase
 {
+    /**
+     * Verify that the checkout button is visible
+     *
+     * @return false
+     */
     public function testCheckoutButtonIsVisible()
     {
         $product = $this->getSampleProduct();
@@ -13,7 +20,12 @@ class CheckoutTest extends TestCase
             ->see('Checkout');
     }
 
-    public function testCheckoutFailsWithoutProfileInfo()
+    /**
+     * Verify that checkout requires user to login.
+     *
+     * @return void
+     */
+    public function testCheckoutFailsWithoutLogin()
     {
         $product = $this->getSampleProduct();
         //TODO: replace with Mock object
@@ -25,7 +37,12 @@ class CheckoutTest extends TestCase
             ->seePageIs('login');
     }
 
-    public function testCheckoutFailsWithoutLogin()
+    /**
+     * Verify that checkout requires user's profile info.
+     *
+     * @return void
+     */
+    public function testCheckoutFailsWithoutProfileInfo()
     {
         $this->userLogin();
         $product = $this->getSampleProduct();
@@ -37,6 +54,11 @@ class CheckoutTest extends TestCase
             ->seePageIs('account/profile/edit');
     }
 
+    /**
+     * Verify that checkout requires user to have at least one address on record
+     *
+     * @return void
+     */
     public function testCheckoutFailsWithoutAddress()
     {
         $this->userLogin();
@@ -54,8 +76,13 @@ class CheckoutTest extends TestCase
             ->seePageIs('account/addresses/create');
     }
 
-// TODO mockery, use formfill
+// TODO mockery to return the expected, use formfill
 
+    /**
+     * Verify that the user cannot checkout without a payment card on record.
+     *
+     * @return void
+     */
     public function testCheckoutFailsWithoutPaymentInfo()
     {
         $this->userLogin();
@@ -76,6 +103,11 @@ class CheckoutTest extends TestCase
 
     }
 
+    /**
+     * Test that checkout works smoothly if the requirements are met.
+     *
+     * @return void
+     */
     public function testCheckOut()
     {
         $this->expectsEvents(\App\Events\ProcessPayment::class);
@@ -99,6 +131,6 @@ class CheckoutTest extends TestCase
             ->press('Update')
             ->seePageIs('account');
 
-       // $this->deleteSamplePaymentCard();
+        \App\Http\Controllers\PaymentCardController::deleteSamplePaymentCard();
     }
 }

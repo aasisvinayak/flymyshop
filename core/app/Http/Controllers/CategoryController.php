@@ -101,7 +101,6 @@ final class CategoryController extends Controller
     {
         Category::findorFail($id)->update($request->all());
         $request->session()->flash('alert-success', 'Category name has been updated!');
-
         return redirect('admin/categories/');
     }
 

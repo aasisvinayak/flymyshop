@@ -1,18 +1,15 @@
 <?php
 
-
+/**
+ * Class ProductTest
+ */
 class ProductTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Verify that a sample product page is visible.
      *
      * @return void
      */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testProductPageIsViewable()
     {
         $product = $this->getSampleProduct();
@@ -20,6 +17,12 @@ class ProductTest extends TestCase
             ->see($product->title);
     }
 
+    /**
+     * Test that a product can be added to cart.
+     * TODO: move to cart check
+     *
+     * @return void
+     */
     public function testProductCanBeAddedToCart()
     {
         $product = $this->getSampleProduct();
@@ -29,6 +32,12 @@ class ProductTest extends TestCase
             ->seePageIs('/shop/cart');
     }
 
+    /**
+     * Verify that product can be added to favourites.
+     * TODO: move to favourites check
+     *
+     * @return void
+     */
     public function testProductCanBeAddedToFavourites()
     {
         $product = $this->getSampleProduct();

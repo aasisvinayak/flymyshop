@@ -90,7 +90,7 @@
                         Account
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-header">SETTINGS</li>
+
 
                         {{--TODO--}}
                         {{--<li class=""><a href="#">Notifications</a></li>--}}

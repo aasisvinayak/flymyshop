@@ -1,13 +1,11 @@
 <?php
 
-
+/**
+ * Class LoginTest
+ */
 class LoginTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+
     protected $user;
 
     /**

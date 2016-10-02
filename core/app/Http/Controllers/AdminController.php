@@ -8,7 +8,10 @@ use App\Http\Models\Product;
 use App\Http\Models\Setting;
 use App\User;
 use Carbon\Carbon;
+use Flymyshop\Helpers\ApplicationHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Stripe\Charge;
 use Stripe\Stripe;
 use View;
@@ -24,8 +27,11 @@ use View;
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
- class AdminController extends Controller
+class AdminController extends Controller
 {
+
+    use ApplicationHelper;
+
     /**
      * Display admin dashboard.
      *
@@ -58,6 +64,25 @@ use View;
     public function users()
     {
         $users = User::paginate(10);
+
+
+        foreach ($users as $item) {
+
+            if (is_null($item->status)) {
+                $item->status = 'User active';
+            } else {
+                switch ($item->status) {
+                    case 0:
+                        $item->status = 'User Inactive';
+                        break;
+                    case 1:
+                        $item->status = 'User Active';
+                        break;
+                    default:
+                        $item->status = 'Status Unavailable';
+                }
+            }
+        }
 
         return view('admin/users', compact('users'));
     }
@@ -135,8 +160,49 @@ use View;
     {
         $invoice = Invoice::findorFail($request->get('id'));
         $invoice->update(['status' => $request->get('status')]);
-
+        $request->session()->flash('alert-success', 'Order Status Updated!');
         return redirect('admin/orders');
+    }
+
+
+    /**
+     * Update status of the user.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function updateUserStatus(Request $request)
+    {
+        $shopUser = User::findorFail($request->get('id'));
+
+        if ($shopUser->id == Auth::user()->id) {
+            $request->session()->flash('alert-danger', 'Cannot disable admin (you) account!');
+            return redirect('admin/users');
+        } else {
+            $shopUser->update(['status' => (int)$request->get('status')]);
+            $request->session()->flash('alert-success', 'User Status Updated!');
+            return redirect('admin/users');
+        }
+
+    }
+
+
+    /**
+     * Process refund for charge and redirect to payments
+     *
+     * @param Request $request
+     * @return Redirect
+     */
+    public function processRefund(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        \Stripe\Refund::create(
+            array(
+                "charge" => $request->get('charge_id'),
+            )
+        );
+        return redirect('admin/payments');
     }
 
     /**
@@ -273,22 +339,40 @@ use View;
     }
 
     /**
-     * TODO: change to row by row approach (key->value) on database table settings.
+     * Settings view for FlyMyShop
      *
      * @return View
      */
     public function settings()
     {
-        $settings = Setting::findorFail(1);
-
+        $settings = Setting::all()->toArray();
         return view('admin/settings', compact('settings'));
     }
 
+
     /**
-     * TODO: update settings from admin panel than by manually editing .env.
+     * Update settings value in database and .env file.
+     *
+     * @param Request $request
+     *
+     * @return Redirect
      */
-    public function updateSettings()
+    public function updateSettings(Request $request)
     {
+        $settings = new Setting();
+        $config=$request->all();
+        unset($config['_token']);
+        $this->save($config);
+        foreach ($config as $key => $value) {
+            $item = $settings->row($key);
+            $itemAsArray = ($item->toArray());
+            if (count($itemAsArray) > 0) {
+                $row=Setting::findorFail($itemAsArray[0]['id']);
+                $row->update(array(  'value' => $value ));
+            }
+        }
+
+        return redirect('/admin/settings');
     }
 
     /**
@@ -307,13 +391,13 @@ use View;
             $num_padded = sprintf('%02d', $i);
             if ($i > $month) {
                 $year = $current->year;
-                $num_padded = ($year - 1).'-'.$num_padded;
+                $num_padded = ($year - 1) . '-' . $num_padded;
             } else {
-                $num_padded = $current->year.'-'.$num_padded;
+                $num_padded = $current->year . '-' . $num_padded;
             }
             array_key_exists($num_padded, $graph) ?
                 $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string) $num_padded] = 0;
+                $formattedGraph[(string)$num_padded] = 0;
         }
 
         return $formattedGraph;
@@ -332,7 +416,7 @@ use View;
         foreach ($months as $number) {
             $number = explode('-', $number);
             $mName = date('F', mktime(0, 0, 0, $number[1], 10));
-            array_push($monthNames, $number[0].'-'.$mName);
+            array_push($monthNames, $number[0] . '-' . $mName);
         }
 
         return $monthNames;
@@ -359,7 +443,7 @@ use View;
      *
      * @return array
      */
-     function generateReport()
+    function generateReport()
     {
         $graph = $this->salesGraphData();
         $stats = $this->stats();
@@ -377,22 +461,8 @@ use View;
         $monthNames = array_keys($data);
         $monthNames = $this->getMonthNamesFromNumbers($monthNames);
         $sumInArray = json_encode(array_values($data));
-        $graphY = 'var value_array = '.($sumInArray).";\n";
+        $graphY = 'var value_array = ' . ($sumInArray) . ";\n";
 
         return [compact('stats', 'graphY', 'graph', 'monthNames')];
     }
-
-     public function test1()
-     {
-         return $this->test2();
-
-     }
-
-     public function test2()
-     {
-         return 'blah';
-
-     }
-
-
 }

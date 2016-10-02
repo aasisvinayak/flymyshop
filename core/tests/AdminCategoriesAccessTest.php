@@ -4,7 +4,7 @@
 class AdminCategoriesAccessTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Test admin can view list of shop categories
      *
      * @return void
      */
@@ -15,6 +15,11 @@ class AdminCategoriesAccessTest extends TestCase
             ->assertViewHas('categories');
     }
 
+    /**
+     * Test admin can add a new category
+     *
+     * @return void
+     */
     public function testAdminCanAddCategory()
     {
         $this->adminLogin();
@@ -25,6 +30,11 @@ class AdminCategoriesAccessTest extends TestCase
             ->see('Category added!');
     }
 
+    /**
+     * Test that admin can edit can existing category
+     *
+     * @return void
+     */
     public function testAdminCanEditCategory()
     {
         $this->adminLogin();
@@ -36,6 +46,11 @@ class AdminCategoriesAccessTest extends TestCase
             ->see('Category name has been updated!');
     }
 
+    /**
+     * Test that admin can delete an existing category
+     *
+     * @return void
+     */
     public function testAdminCanDeleteCategory()
     {
         $this->adminLogin();
