@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the footer content
+ * Returns the footer content.
  * @return mixed
  */
 function fmc_footer()
@@ -35,7 +35,7 @@ function fms_plugins()
 
 function categories()
 {
-    return \App\Http\Controllers\CategoryController::getAllCategories();
+    return (array) \App\Http\Controllers\CategoryController::getAllCategories();
 }
 
 /**
@@ -47,7 +47,7 @@ function categories()
  */
 function products($take, $skip)
 {
-    return \App\Http\Controllers\ProductController::getPublishedProducts($take, $skip);
+    return (array) \App\Http\Controllers\ProductController::getPublishedProducts($take, $skip);
 }
 
 function featured_products()
@@ -69,14 +69,14 @@ function get_fms_version()
 }
 
 /**
- * Get user's favourites
+ * Get user's favourites.
  */
 function favourites()
 {
 }
 
 /**
- * Return csrf token
+ * Return csrf token.
  * @return \Illuminate\Support\HtmlString
  */
 function token()

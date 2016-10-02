@@ -6,8 +6,7 @@ use Flymyshop\Helpers\PluginHelper;
 use Illuminate\Support\Facades\Response;
 
 /**
- * Class PluginController
- * @package App\Http\Controllers
+ * Class PluginController.
  * @category AppControllers
  *
  * @author acev <aasisvinayak@gmail.com>
@@ -18,7 +17,7 @@ use Illuminate\Support\Facades\Response;
 class PluginController extends Controller
 {
     /**
-     * Returns a list of all the plugins in a view
+     * Returns a list of all the plugins in a view.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -28,21 +27,21 @@ class PluginController extends Controller
     }
 
     /**
-     * TODO
+     * TODO.
      */
     public function addNewPlugin()
     {
     }
 
     /**
-     * TODO
+     * TODO.
      */
     public function deletePlugin()
     {
     }
 
     /**
-     * Returns a list of plugins as json response
+     * Returns a list of plugins as json response.
      */
     public function pluginList(PluginHelper $pluginBasicHelper)
     {

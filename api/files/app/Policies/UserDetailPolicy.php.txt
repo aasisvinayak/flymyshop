@@ -22,7 +22,7 @@ class UserDetailPolicy
 
     public function update(User $user, UserDetail $userDetail)
     {
-        return  $user->id === $userDetail->user_id;
+        return  $user->id === (int) $userDetail->user_id;
     }
 
     public function show(User $user, UserDetail $userDetail)

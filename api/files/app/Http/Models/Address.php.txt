@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Address
- * Address model to store user's address information
- *
- * @package App\Http\Models
+ * Address model to store user's address information.
  */
 class Address extends Model
 {
@@ -22,7 +20,7 @@ class Address extends Model
     ];
 
     /**
-     * Get address object from address_id
+     * Get address object from address_id.
      *
      * @param $query
      * @param $slug
@@ -34,7 +32,7 @@ class Address extends Model
     }
 
     /**
-     * Each address belong to a user
+     * Each address belong to a user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

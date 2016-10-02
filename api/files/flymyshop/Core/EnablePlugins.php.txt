@@ -20,7 +20,7 @@ class EnablePlugins
         $pluginNames = new PluginHelper(); // getting list of all plugins
         $plugins = $pluginNames->getPluginNames();
         foreach ($plugins as $plugin) {
-            $reflector = new \ReflectionClass('Flymyshop\Plugins\\' . $plugin . '\\' . $plugin);
+            $reflector = new \ReflectionClass('Flymyshop\Plugins\\'.$plugin.'\\'.$plugin);
             $main = $reflector->getMethod('main');
             $methods = $reflector->getMethods();
             foreach ($methods as $method) {

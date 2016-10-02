@@ -8,7 +8,10 @@ use App\Http\Models\Product;
 use App\Http\Models\Setting;
 use App\User;
 use Carbon\Carbon;
+use Flymyshop\Helpers\ApplicationHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Stripe\Charge;
 use Stripe\Stripe;
 use View;
@@ -24,8 +27,10 @@ use View;
  *
  * @link https://github.com/aasisvinayak/flymyshop
  */
-final class AdminController extends Controller
+class AdminController extends Controller
 {
+    use ApplicationHelper;
+
     /**
      * Display admin dashboard.
      *
@@ -33,19 +38,20 @@ final class AdminController extends Controller
      */
     public function welcome()
     {
-        //TODO: account for previous year and change order by getting the full date
         $reportValues = $this->generateReport()[0];
+
         return view('admin/welcome', $reportValues);
     }
 
     /**
-     * Generate reports view
+     * Generate reports view.
      *
      * @return View
      */
     public function reports()
     {
         $reportValues = $this->generateReport()[0];
+
         return view('admin/reports', $reportValues);
     }
 
@@ -57,6 +63,25 @@ final class AdminController extends Controller
     public function users()
     {
         $users = User::paginate(10);
+
+
+        foreach ($users as $item) {
+            if (is_null($item->status)) {
+                $item->status = 'User active';
+            } else {
+                switch ($item->status) {
+                    case 0:
+                        $item->status = 'User Inactive';
+                        break;
+                    case 1:
+                        $item->status = 'User Active';
+                        break;
+                    default:
+                        $item->status = 'Status Unavailable';
+                }
+            }
+        }
+
         return view('admin/users', compact('users'));
     }
 
@@ -133,13 +158,55 @@ final class AdminController extends Controller
     {
         $invoice = Invoice::findorFail($request->get('id'));
         $invoice->update(['status' => $request->get('status')]);
+        $request->session()->flash('alert-success', 'Order Status Updated!');
 
         return redirect('admin/orders');
     }
 
     /**
+     * Update status of the user.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function updateUserStatus(Request $request)
+    {
+        $shopUser = User::findorFail($request->get('id'));
+
+        if ($shopUser->id == Auth::user()->id) {
+            $request->session()->flash('alert-danger', 'Cannot disable admin (you) account!');
+
+            return redirect('admin/users');
+        } else {
+            $shopUser->update(['status' => (int) $request->get('status')]);
+            $request->session()->flash('alert-success', 'User Status Updated!');
+
+            return redirect('admin/users');
+        }
+    }
+
+    /**
+     * Process refund for charge and redirect to payments.
+     *
+     * @param Request $request
+     * @return Redirect
+     */
+    public function processRefund(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        \Stripe\Refund::create(
+            [
+                'charge' => $request->get('charge_id'),
+            ]
+        );
+
+        return redirect('admin/payments');
+    }
+
+    /**
      * View individual order
-     * TODO: reuse code in account controller. Move to helper
+     * TODO: reuse code in account controller. Move to helper.
      *
      * @param int $id order_id
      *
@@ -176,9 +243,8 @@ final class AdminController extends Controller
         );
     }
 
-
     /**
-     * Get sales stats for admin pages
+     * Get sales stats for admin pages.
      *
      * @return array
      */
@@ -233,7 +299,7 @@ final class AdminController extends Controller
     }
 
     /**
-     * Generate data for the last one year
+     * Generate data for the last one year.
      *
      * @return mixed
      */
@@ -272,98 +338,117 @@ final class AdminController extends Controller
     }
 
     /**
-     * TODO: change to row by row approach (key->value) on database table settings.
+     * Settings view for FlyMyShop.
      *
      * @return View
      */
     public function settings()
     {
-        $settings = Setting::findorFail(1);
+        $settings = Setting::all()->toArray();
 
         return view('admin/settings', compact('settings'));
     }
 
     /**
-     * TODO: update settings from admin panel than by manually editing .env
+     * Update settings value in database and .env file.
+     *
+     * @param Request $request
+     *
+     * @return Redirect
      */
-    public function updateSettings()
+    public function updateSettings(Request $request)
     {
+        $settings = new Setting();
+        $config = $request->all();
+        unset($config['_token']);
+        $this->save($config);
+        foreach ($config as $key => $value) {
+            $item = $settings->row($key);
+            $itemAsArray = ($item->toArray());
+            if (count($itemAsArray) > 0) {
+                $row = Setting::findorFail($itemAsArray[0]['id']);
+                $row->update(['value' => $value]);
+            }
+        }
+
+        return redirect('/admin/settings');
     }
 
-
     /**
-     * Fill-in the missing months with revenue =0
+     * Fill-in the missing months with revenue =0.
      *
      * @param $graph
      * @return array
      */
     protected function getGraphWithCompleteValues($graph)
     {
-        $formattedGraph = array();
+        $formattedGraph = [];
         $current = Carbon::now();
-        $month=$current->month;
+        $month = $current->month;
 
         for ($i = 1; $i < 13; $i++) {
             $num_padded = sprintf('%02d', $i);
-            if ($i>$month) {
-                $year=$current->year;
-                $num_padded=($year-1)."-".$num_padded;
+            if ($i > $month) {
+                $year = $current->year;
+                $num_padded = ($year - 1).'-'.$num_padded;
             } else {
-                $num_padded=$current->year."-".$num_padded;
+                $num_padded = $current->year.'-'.$num_padded;
             }
             array_key_exists($num_padded, $graph) ?
                 $formattedGraph[$num_padded] = $graph[$num_padded] :
-                $formattedGraph[(string)$num_padded] = 0;
+                $formattedGraph[(string) $num_padded] = 0;
         }
+
         return $formattedGraph;
     }
 
     /**
-     * Convert month number to name
+     * Convert month number to name.
      *
      * @param $months
      * @return array
      */
     protected function getMonthNamesFromNumbers($months)
     {
-        $monthNames = array();
+        $monthNames = [];
 
         foreach ($months as $number) {
-            $number = explode("-", $number);
+            $number = explode('-', $number);
             $mName = date('F', mktime(0, 0, 0, $number[1], 10));
-            array_push($monthNames, $number[0]."-".$mName);
+            array_push($monthNames, $number[0].'-'.$mName);
         }
 
         return $monthNames;
     }
 
     /**
-     * Extract the sum key from the main array and create a sub-array
+     * Extract the sum key from the main array and create a sub-array.
      *
      * @param $fullGraph
      * @return array
      */
     protected function getSumArray($fullGraph)
     {
-        $valueArray = array();
+        $valueArray = [];
         foreach ($fullGraph as $item) {
             array_push($valueArray, $item['sum']);
         }
-        return ($valueArray);
+
+        return $valueArray;
     }
 
     /**
-     * Grab data for the last one year
+     * Grab data for the last one year.
      *
      * @return array
      */
-    protected function generateReport()
+    public function generateReport()
     {
         $graph = $this->salesGraphData();
         $stats = $this->stats();
         $fullGraph = $this->getGraphWithCompleteValues($graph);
         $months = array_keys($fullGraph);
-        $formattedMonthName=array();
+        $formattedMonthName = [];
 
         foreach ($months as $month) {
             array_push($formattedMonthName, Carbon::createFromFormat('Y-m', $month)->toDateString());
@@ -372,11 +457,12 @@ final class AdminController extends Controller
         $sumInArray = $this->getSumArray($fullGraph);
         $data = array_combine($formattedMonthName, $sumInArray);
         ksort($data);
-        $monthNames= array_keys($data);
+        $monthNames = array_keys($data);
         $monthNames = $this->getMonthNamesFromNumbers($monthNames);
-        $sumInArray= json_encode(array_values($data)) ;
-        $graphY = 'var value_array = ' . ($sumInArray) . ";\n";
-        return array(compact('stats', 'graphY', 'graph', 'monthNames'));
+        $sumInArray = json_encode(array_values($data));
+        $graphY = 'var value_array = '.($sumInArray).";\n";
+
+        return [compact('stats', 'graphY', 'graph', 'monthNames')];
     }
 }
 

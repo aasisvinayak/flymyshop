@@ -6,8 +6,7 @@ use App\Events\OrderPlaced;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Class SendOrderNotification
- * @package App\Listeners
+ * Class SendOrderNotification.
  */
 class SendOrderNotification
 {

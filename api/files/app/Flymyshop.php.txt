@@ -5,14 +5,12 @@ namespace App;
 use Illuminate\Foundation\Application;
 
 /**
- * Class Flymyshop
- * @package App
- * 
+ * Class Flymyshop.
  */
 class Flymyshop extends Application
 {
     /**
-     * Setting the public path for the application
+     * Setting the public path for the application.
      * @return string
      */
     public function publicPath()

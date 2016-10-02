@@ -6,15 +6,12 @@ use Illuminate\Support\Facades\File;
 
 /**
  * Class PluginHelper
- * Helper class for plugins and controllers
- *
- * @package Flymyshop\Helpers
+ * Helper class for plugins and controllers.
  */
 class PluginHelper
 {
-
     /**
-     * Get the names of all plugins in the plugins directory
+     * Get the names of all plugins in the plugins directory.
      *
      * @return array
      */

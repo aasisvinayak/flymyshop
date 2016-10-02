@@ -6,11 +6,9 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Class for creating plugin by running the artisan make:plugin command
+ * Class for creating plugin by running the artisan make:plugin command.
  *
  * Class CreatePlugin
- *
- * @package App\Console\Commands
  */
 class CreatePlugin extends Command
 {
@@ -68,7 +66,7 @@ class CreatePlugin extends Command
     }
 
     /**
-     * Fetch stub for plugin main class
+     * Fetch stub for plugin main class.
      *
      * @return string
      */
@@ -79,7 +77,7 @@ class CreatePlugin extends Command
     }
 
     /**
-     * Fetch all other stubs for creating plugin
+     * Fetch all other stubs for creating plugin.
      *
      * @return array
      */
@@ -94,7 +92,7 @@ class CreatePlugin extends Command
     }
 
     /**
-     * Create the class content for the main class
+     * Create the class content for the main class.
      *
      * @param string $name
      * @param string $stub

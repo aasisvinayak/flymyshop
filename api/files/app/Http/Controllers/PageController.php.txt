@@ -26,6 +26,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page ::paginate(10);
+
         return view('admin/pages', compact('pages'));
     }
 
@@ -52,6 +53,7 @@ class PageController extends Controller
         $page->status = 1;
         $page->page_id = str_random(50);
         $page->save();
+
         return redirect('admin/pages/');
     }
 
@@ -65,6 +67,7 @@ class PageController extends Controller
     public function show($id)
     {
         $page = Page::findorFail($id);
+
         return view('shop/page', compact('page'));
     }
 
@@ -78,6 +81,7 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Page::findorFail($id);
+
         return view('admin/edit-page', compact('page'));
     }
 
@@ -93,19 +97,23 @@ class PageController extends Controller
     {
         $page = Page::findorFail($id);
         $page->update($request->all());
+        $request->session()->flash('alert-success', 'Page has been updated');
+
         return redirect('admin/pages/');
     }
 
     /**
      * Remove the specified page from storage.
      *
+     * @param Request $request
      * @param int $id page id
-     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Page::findorFail($id)->delete();
+        $request->session()->flash('alert-danger', 'Page has been deleted!');
+
         return redirect('admin/pages/');
     }
 }

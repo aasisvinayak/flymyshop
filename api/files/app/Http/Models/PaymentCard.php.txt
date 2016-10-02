@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PaymentCard
- * PaymentCard model to save user payment card
- *
- * @package App\Http\Models
+ * PaymentCard model to save user payment card.
  */
 class PaymentCard extends Model
 {
@@ -17,8 +15,8 @@ class PaymentCard extends Model
     ];
 
     /**
-     * Each payment card belongs to a user
-     * 
+     * Each payment card belongs to a user.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -27,7 +25,7 @@ class PaymentCard extends Model
     }
 
     /**
-     * Get card object from card_id
+     * Get card object from card_id.
      *
      * @param $query
      * @param $slug

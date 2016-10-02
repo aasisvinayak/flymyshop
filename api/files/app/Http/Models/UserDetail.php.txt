@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserDetail
- * UserDetail model for profile
- *
- * @package App\Http\Models
+ * UserDetail model for profile.
  */
 class UserDetail extends Model
 {
@@ -20,7 +18,7 @@ class UserDetail extends Model
     ];
 
     /**
-     * Mutator for dob
+     * Mutator for dob.
      *
      * @param $value
      */
@@ -30,7 +28,7 @@ class UserDetail extends Model
     }
 
     /**
-     * Get profile from profile_id
+     * Get profile from profile_id.
      *
      * @param $query
      * @param $profile_id
@@ -42,7 +40,7 @@ class UserDetail extends Model
     }
 
     /**
-     * Each profile belongs to a user
+     * Each profile belongs to a user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

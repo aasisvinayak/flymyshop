@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class InvoiceItem
- * Model for individual items
- *
- * @package App\Http\Models
+ * Model for individual items.
  */
 class InvoiceItem extends Model
 {
     /**
-     * TODO: remove unused method
+     * TODO: remove unused method.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function invoice()
@@ -22,7 +20,7 @@ class InvoiceItem extends Model
     }
 
     /**
-     * Fetch number of products sold after $time
+     * Fetch number of products sold after $time.
      *
      * @param $query
      * @param $time

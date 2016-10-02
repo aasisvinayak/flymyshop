@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Product
- * Product model
- *
- * @package App\Http\Models
+ * Product model.
  */
 class Product extends Model
 {
@@ -28,7 +26,7 @@ class Product extends Model
     ];
 
     /**
-     * Accessor for price based on env config
+     * Accessor for price based on env config.
      *
      * @param $value
      * @return mixed
@@ -45,7 +43,7 @@ class Product extends Model
 
     /**
      * Get products by category_id
-     * TODO: Switch to relationship based fetching
+     * TODO: Switch to relationship based fetching.
      *
      * @param $query
      * @param $category_id
@@ -59,7 +57,7 @@ class Product extends Model
     }
 
     /**
-     * Get product using product_id
+     * Get product using product_id.
      *
      * @param $query
      * @param $slug
@@ -71,7 +69,7 @@ class Product extends Model
     }
 
     /**
-     * Returns latest 9 featured products
+     * Returns latest 9 featured products.
      *
      * @param $query
      * @return mixed
@@ -94,7 +92,7 @@ class Product extends Model
     }
 
     /**
-     * Returns featured products based on limit()
+     * Returns featured products based on limit().
      *
      * @param $query
      * @param $take
@@ -118,7 +116,7 @@ class Product extends Model
 
     /**
      * Fetch search results for products
-     * search by product title, make, description or details
+     * search by product title, make, description or details.
      *
      * @param $query
      * @param $search
@@ -134,7 +132,7 @@ class Product extends Model
     }
 
     /**
-     * Get price of the product from product_id
+     * Get price of the product from product_id.
      *
      * @param $query
      * @param $product_id
@@ -147,7 +145,7 @@ class Product extends Model
     }
 
     /**
-     * Get product details from product_id
+     * Get product details from product_id.
      *
      * @param $query
      * @param $product_id
@@ -160,7 +158,7 @@ class Product extends Model
     }
 
     /**
-     * Product belong a category
+     * Product belong a category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -170,7 +168,7 @@ class Product extends Model
     }
 
     /**
-     * A product has many product images
+     * A product has many product images.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

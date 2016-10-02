@@ -32,6 +32,7 @@ final class UserDetailController extends Controller
 
         if (count($profile) < 1) {
             Session::flash('message', 'Your profile is empty!');
+
             return redirect('account/profile/edit');
         } else {
             return view('account.profile.profile', compact('profile'));
@@ -61,6 +62,7 @@ final class UserDetailController extends Controller
         }
 
         Session::flash('alert-success', 'Profile updated');
+
         return redirect('account/profile');
     }
 
@@ -73,6 +75,7 @@ final class UserDetailController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile()->get();
+
         return view('account.profile.edit', compact('profile'));
     }
 
@@ -90,6 +93,7 @@ final class UserDetailController extends Controller
         $this->authorize('update', $profile);
         $profile->update($request->all());
         $request->session()->flash('alert-success', 'Profile updated');
+
         return redirect('account/profile');
     }
 }
