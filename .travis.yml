@@ -14,8 +14,10 @@ before_script:
   - cd core
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
+  - cd ..
   - composer self-update
   - composer install
+  - cd core
   - chmod -R 777 storage
   - php artisan key:generate --no-interaction
 
