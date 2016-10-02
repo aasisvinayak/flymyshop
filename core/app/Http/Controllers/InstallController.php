@@ -90,7 +90,7 @@ final class InstallController extends Controller
     public function installShop(InstallRequest $request)
     {
         echo 'Setting up database<br>'; // TODO: flush the echos while processing
-
+        Artisan::call('key:generate');
         $shopName = preg_replace('/\s+/', '_', $request->get('SHOP_NAME'));
         $env_update = $this->save([
             'DB_PASSWORD' => $request->get('DB_PASSWORD'),
