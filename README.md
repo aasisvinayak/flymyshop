@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/aasisvinayak/flymyshop.svg?branch=master)](https://travis-ci.org/aasisvinayak/flymyshop)
 [![Latest Stable Version](https://poser.pugx.org/aasisvinayak/shop/v/stable)](https://packagist.org/packages/aasisvinayak/shop)
 [![License](https://poser.pugx.org/aasisvinayak/shop/license)](https://packagist.org/packages/aasisvinayak/shop)
-<!--[![StyleCI](https://styleci.io/repos/66875598/shield)](https://styleci.io/repos/66875598)-->
+[![StyleCI](https://styleci.io/repos/66875598/shield)](https://styleci.io/repos/66875598)
+[![Total Downloads](https://poser.pugx.org/aasisvinayak/shop/d/total.svg)](https://packagist.org/packages/aasisvinayak/shop)
 
 
 # FlyMyShop
@@ -28,10 +29,14 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 - Newsletter support (Integrated MailChimp)
 - Multi-currency support
 
+## Official Documentation
+
+Documentation for the FlyMyShop can be found on the [official website](https://flymyshop.com/docs/).
+
 # Features
 
 - Add custom shop themes
-- Add plugins to extend the features (See master branch - v0.0.1 does not offer support for plugins)
+- Add plugins to extend the features
 - OS independent
 - Laravel based
 
@@ -39,7 +44,7 @@ FlyMyShop is a fully fledged e-commerce platform for online merchants.
 
 Please follow the steps below to install FlyMyShop on your web server
 
-a. Download [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.1/flymyshop_v0.0.1.zip) file
+a. Download [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.2/flymyshop-v0.0.2.zip) file
 b. Unzip and upload to your server
 c. Visit the public folder
 d. Follow the instructions

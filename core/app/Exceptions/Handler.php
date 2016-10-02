@@ -52,6 +52,7 @@ class Handler extends ExceptionHandler
         if ($e instanceof \RuntimeException) {
             if (strlen(env('APP_KEY')) < 20) {
                 Artisan::call('key:generate');
+
                 return redirect('/install');
             }
         }
