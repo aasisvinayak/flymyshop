@@ -59,12 +59,10 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php core/artisan key:generate",
             "php core/artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php core/artisan key:generate",
             "php core/artisan optimize"
         ]
     },
