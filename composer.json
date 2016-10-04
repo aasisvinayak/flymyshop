@@ -50,20 +50,20 @@
         "post-root-package-install": [
             "@composer update",
             "php -r \"copy('core/.env.example', 'core/.env');\"",
-            "php core/artisan key:generate",
-            "php core/artisan migrate",
-            "php core/artisan db:seed --no-interaction --class=UsersTableSeeder",
-            "php core/artisan db:seed --no-interaction --class=UserTypesTableSeeder",
-            "php core/artisan db:seed --no-interaction --class=CategoriesTableSeeder",
-            "php core/artisan db:seed --no-interaction --class=ProductsTableSeeder"
+            "php artisan key:generate",
+            "php artisan migrate",
+            "php artisan db:seed --no-interaction --class=UsersTableSeeder",
+            "php artisan db:seed --no-interaction --class=UserTypesTableSeeder",
+            "php artisan db:seed --no-interaction --class=CategoriesTableSeeder",
+            "php artisan db:seed --no-interaction --class=ProductsTableSeeder"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php core/artisan optimize"
+            "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php core/artisan optimize"
+            "php artisan optimize"
         ]
     },
     "config": {

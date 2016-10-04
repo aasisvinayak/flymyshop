@@ -268,7 +268,7 @@
                                     text: 'Sales Stats'
                                 },
                                 subtitle: {
-                                    text: 'For: Laravel Shop'
+                                    text: 'Flymyshop Snapshot'
                                 },
                                 xAxis: {
                                     categories:  month_array,

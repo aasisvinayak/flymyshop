@@ -21,7 +21,19 @@
                     <li><a href="/admin/reports"><span class="glyphicon glyphicon-user"></span> Reports</a></li>
                     <li><a href="/admin/payments"><span class="glyphicon glyphicon-user"></span> Manage Payments</a> </li>
                     <li><a href="/admin/pages"><span class="glyphicon glyphicon-user"></span> Shop Pages</a></li>
+                    <li><a href="/admin/plugins"><span class="glyphicon glyphicon-user"></span>Manage Plugins</a></li>
+                    <li><a href="/admin/themes"><span class="glyphicon glyphicon-user"></span> Manage Themes</a></li>
                     <li><a href="/admin/settings"><span class="glyphicon glyphicon-user"></span> Shop Settings</a></li>
+
+
+                   @if(is_array(get_admin_extra_menu()))
+                    @foreach(get_admin_extra_menu() as $item)
+
+
+                    @endforeach
+                    @endif
+
+
 
 
                     {{--TODO--}}

@@ -111,6 +111,13 @@ function token()
     return csrf_field();
 }
 
+
+function get_admin_extra_menu()
+{
+}
+
+
+
 /**
  * Return the data from DataContainer
  *

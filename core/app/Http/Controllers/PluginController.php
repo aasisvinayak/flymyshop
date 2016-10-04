@@ -39,10 +39,10 @@ class PluginController extends Controller
     /**
      * Fetch the master.zip from github and add to the plugin directory.
      *
-     * @param Request $request
+     * @param PluginRequest $request
      * @return Response
      */
-    public function processAddPlugin(Request $request)
+    public function processAddPlugin(PluginRequest $request)
     {
         $url = (string)$request->get('url');
         $zipURL = $url . "/archive/master.zip";
@@ -51,15 +51,15 @@ class PluginController extends Controller
         if (strlen($gitName) < 1) {
             $gitName = $urlParts[count($urlParts) - 2];
         }
-        $pluginName = str_replace('fms_', '', $gitName);
-        $pluginName = str_replace('_plugin', '', $pluginName);
-        $fmsPluginNameArray = explode('_', $pluginName);
+
+        preg_match('/fms_(.*?)_plugin/', $gitName, $pluginName);
+
+        $fmsPluginNameArray = explode('_', $pluginName[1]);
         $fmsPluginName = "";
 
         foreach ($fmsPluginNameArray as $namePart) {
             $fmsPluginName = $fmsPluginName . ucfirst($namePart);
         }
-
 
         if (!$this->checkPluginExists($fmsPluginName)) {
 
@@ -67,53 +67,29 @@ class PluginController extends Controller
             $url = $zipURL;
             $zipFile = base_path('flymyshop/plugins/' . $fmsPluginName . '.zip');
 
-            fopen($zipFile, "w");
-            $gitZipfile = fopen($url, "rb");
-
-            if ($gitZipfile) {
-                $pluginZip = fopen($zipFile, "a");
-
-                if ($pluginZip)
-                    while (!feof($gitZipfile)) {
-                        fwrite($pluginZip, fread($gitZipfile, 1024 * 8), 1024 * 8);
-                    }
+            $contents = file_get_contents($url);
+            $bytes_written = File::put($zipFile, $contents);
+            if ($bytes_written === false)
+            {
+                die("Failed to install. Please check that Flymyshop has write permissions!");
             }
 
-            if ($gitZipfile) {
-                fclose($gitZipfile);
+            File::makeDirectory($destFolder);
+
+            $zip = new \ZipArchive;
+            if ($zip->open($zipFile) === TRUE) {
+                for($i = 0; $i < $zip->numFiles; $i++) {
+                    $filename = $zip->getNameIndex($i);
+                    $fileinfo = pathinfo($filename);
+                    copy("zip://".$zipFile."#".$filename, $destFolder.$fileinfo['basename']);
+                }
+                $zip->close();
+
+                File::delete($zipFile);
+
+            } else {
+                echo 'Failed to install. Please check that Flymyshop has write permissions!';
             }
-
-            if ($pluginZip) {
-                fclose($pluginZip);
-            }
-
-
-//            $zip = zip_open($zipFile);
-//            if ($zip) {
-//                while ($zip_entry = zip_read($zip)) {
-//                    $fp = fopen($destFolder, "w");
-//                    if (zip_entry_open($zip, $zip_entry, "r")) {
-//                        $buf = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-//                        fwrite($fp, "$buf");
-//                        zip_entry_close($zip_entry);
-//                        fclose($fp);
-//                    }
-//                }
-//                zip_close($zip);
-//            }
-
-//            $zip = new \ZipArchive;
-//
-//            File::makeDirectory($destFolder);
-//
-//            if ($zip->open($zipFile, \ZipArchive::CREATE) === TRUE) {
-//                $zip->extractTo($destFolder);
-//                $zip->close();
-//                echo $fmsPluginName. ' Plugin installed';
-//                File::delete($zipFile);
-//            } else {
-//                echo 'Failed to unzip! Please check Flymyshop has write permissions';
-//            }
 
 
         } else {
@@ -122,10 +98,32 @@ class PluginController extends Controller
 
     }
 
-    public function deletePlugin()
+    /**
+     * Delete an existing plugin
+     *
+     * @param Request $request
+     */
+    public function deletePlugin(Request $request)
+    {
+        $pluginName=$request->get('name');
+        File::deleteDirectory(base_path('flymyshop/plugins/'.$pluginName));
+    }
+
+    public function enablePlugin()
     {
     }
 
+    public function disablePlugin()
+    {
+    }
+
+
+    /**
+     * Check plugin is already installed by looking for the directory
+     *
+     * @param $name
+     * @return bool
+     */
     public function checkPluginExists($name)
     {
         $pluginHelper = new PluginHelper();

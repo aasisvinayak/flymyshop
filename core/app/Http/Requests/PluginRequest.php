@@ -22,10 +22,7 @@ class PluginRequest extends Request
     public function rules()
     {
         return [
-            'url' => [
-//                'required|active_url' => 'Invalid URL', //TODO
-                'required' => 'Invalid URL',
-            ],
+            'url' =>'required|active_url',
         ];
     }
 }
