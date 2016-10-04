@@ -181,3 +181,5 @@ $now = $now->year;
                 Cloud Limited</a></p></section>
 
 </div>
+
+<?php //var_dump(categories());?>

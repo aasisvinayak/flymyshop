@@ -30,7 +30,7 @@ class PaymentCardController extends Controller
     {
         $user = Auth::user();
         $payment_cards = $user->payment_cards->all();
-
+        
         return view('account.payment.index', compact('payment_cards'));
     }
 

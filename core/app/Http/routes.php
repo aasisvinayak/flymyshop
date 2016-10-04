@@ -100,6 +100,10 @@ Route::group(
                 Route::get('/stocks', 'ProductController@stocks');
                 Route::post('/stocks', 'ProductController@updateStock');
                 Route::post('/product_status', 'ProductController@updateProductStatus');
+                Route::get('/plugins', 'PluginController@index');
+                Route::get('/plugin_list', 'PluginController@pluginList');
+                Route::get('/add_plugin', 'PluginController@addNewPlugin');
+                Route::post('/add_plugin', 'PluginController@processAddPlugin');
             }
         );
 
@@ -111,7 +115,6 @@ Route::group(
         Route::get('pages/{title}/{page_id}', 'ShopController@page');
         Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
         Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-        Route::get('/plugins', 'PluginController@index');
-        Route::get('/plugin_list', 'PluginController@pluginList');
+
     }
 );

@@ -8,21 +8,10 @@
     <div id="plugins">
 
         <ul>
-
-            <li v-for="item in plugins">
-                @{{ item }}
-            </li>
+            @foreach(fms_plugins() as $plugin)
+                <li>{{$plugin}}</li>
+            @endforeach
 
         </ul>
-
-
-
-
-
     </div>
-
-    <script src="/js/vendor.js"></script>
-    <script src="/js/app.js"></script>
-
-
 @stop

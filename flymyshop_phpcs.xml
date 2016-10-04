@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="FmsStandard">
+    <description>Additional Coding Standards for Fly My Shop</description>
+    <rule ref="PEAR">
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNoCapital" />
+    </rule>
+</ruleset>
