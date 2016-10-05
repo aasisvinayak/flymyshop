@@ -119,6 +119,5 @@ Route::group(
         Route::get('pages/{title}/{page_id}', 'ShopController@page');
         Route::get('auth/facebook', 'Auth\AuthController@redirectToProvider');
         Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-
     }
 );

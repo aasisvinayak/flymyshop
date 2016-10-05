@@ -5,13 +5,11 @@ namespace  App\Http\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Plugin
- * @package App\Http\Models
- *
+ * Class Plugin.
  */
 class Plugin extends Model
 {
-    protected $fillable= [
+    protected $fillable = [
         'name',
         'plugin_version',
         'plugin_author',
@@ -19,7 +17,6 @@ class Plugin extends Model
         'plugin_description',
         'plugin_table',
         'plugin_config',
-        'status'
+        'status',
     ];
-    
 }

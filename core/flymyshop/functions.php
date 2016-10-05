@@ -19,7 +19,7 @@ function fmc_footer()
 }
 
 /**
- * Return the header content
+ * Return the header content.
  * @return mixed
  */
 function fmc_header()
@@ -28,35 +28,38 @@ function fmc_header()
 }
 
 /**
- * Return array of FlyMyShop themes
+ * Return array of FlyMyShop themes.
  *
  * @return array
  */
 function fms_themes()
 {
     $themes = new \Flymyshop\Helpers\ThemeHelper();
+
     return $themes->getThemes();
 }
 
 /**
- * Return FMS plugins as an array
+ * Return FMS plugins as an array.
  *
  * @return array
  */
 function fms_plugins()
 {
-    $plugins= new \Flymyshop\Helpers\PluginHelper();
+    $plugins = new \Flymyshop\Helpers\PluginHelper();
+
     return $plugins->getPluginNames();
 }
 
 /**
- * Return list of all categories
+ * Return list of all categories.
  *
  * @return array
  */
 function categories()
 {
-    $categories= \App\Http\Controllers\CategoryController::getAllCategories()->toArray();
+    $categories = \App\Http\Controllers\CategoryController::getAllCategories()->toArray();
+
     return $categories;
 }
 
@@ -119,7 +122,7 @@ function get_admin_extra_menu()
 
 
 /**
- * Return the data from DataContainer
+ * Return the data from DataContainer.
  *
  * @param $key
  * @return mixed
@@ -134,4 +137,3 @@ function getData($key)
         }
     }
 }
-
