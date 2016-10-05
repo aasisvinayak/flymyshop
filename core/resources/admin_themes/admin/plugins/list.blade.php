@@ -1,6 +1,6 @@
 @extends('admin-layouts.admin')
 @section('title')
-    Plugin List         <a style="float: right;" class="btn btn-success btn-lg" href="/admin/add_plugin">Add Plugin</a>
+    Plugins List         <a style="float: right;" class="btn btn-success btn-lg" href="/admin/add_plugin">Add Plugin</a>
     <br> <br>
 @stop
 
@@ -11,10 +11,12 @@
 
 
         <ul>
-            @foreach(fms_plugins() as $plugin)
-                <li>{{$plugin}}</li>
+            @foreach($plugins as $plugin)
+                <li>{{$plugin->name}}</li>
             @endforeach
 
         </ul>
+
+        {{ $plugins->links() }}
     </div>
 @stop

@@ -104,6 +104,9 @@ Route::group(
                 Route::get('/plugin_list', 'PluginController@pluginList');
                 Route::get('/add_plugin', 'PluginController@addNewPlugin');
                 Route::post('/add_plugin', 'PluginController@processAddPlugin');
+                Route::get('/themes', 'ThemeController@index');
+                Route::get('/add_theme', 'ThemeController@addNewTheme');
+                Route::post('/add_theme', 'ThemeController@processAddTheme');
             }
         );
 

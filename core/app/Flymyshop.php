@@ -2,6 +2,7 @@
 
 namespace App;
 
+use RuntimeException;
 use Illuminate\Foundation\Application;
 
 /**
@@ -16,5 +17,20 @@ class Flymyshop extends Application
     public function publicPath()
     {
         return $this->basePath.DIRECTORY_SEPARATOR.'/../public';
+    }
+
+    /**
+     * Over-ride function
+     * TODO: add checks
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        if (! is_null($this->namespace)) {
+            return $this->namespace;
+        }
+
+        $this->namespace = "App\\";
     }
 }

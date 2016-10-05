@@ -1,4 +1,5 @@
-name: default
-description: The default theme for shop
-author: acev
+theme_name: default
+theme_version: 0.3
+theme_description: The default theme for FlyMyShop
+theme_author: acev
 

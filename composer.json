@@ -55,7 +55,10 @@
             "php artisan db:seed --no-interaction --class=UsersTableSeeder",
             "php artisan db:seed --no-interaction --class=UserTypesTableSeeder",
             "php artisan db:seed --no-interaction --class=CategoriesTableSeeder",
-            "php artisan db:seed --no-interaction --class=ProductsTableSeeder"
+            "php artisan db:seed --no-interaction --class=ProductsTableSeeder",
+            "php artisan db:seed --no-interaction --class=SettingsTableSeeder",
+            "php artisan db:seed --no-interaction --class=PluginsTableSeeder",
+            "php artisan db:seed --no-interaction --class=ThemesTableSeeder"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",

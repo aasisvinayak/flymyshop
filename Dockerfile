@@ -46,14 +46,15 @@ RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.ph
 
 RUN cd /var/www/html/;composer install
 
-RUN cd /var/www/html/core;php artisan key:generate
-RUN cd /var/www/html/core;php artisan migrate
-RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=UsersTableSeeder
-RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
-RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
-RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=ProductsTableSeeder
-RUN cd /var/www/html/core;php artisan db:seed --no-interaction --class=SettingsTableSeeder
-
+RUN cd /var/www/html;php artisan key:generate
+RUN cd /var/www/html;php artisan migrate
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UsersTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=UserTypesTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=CategoriesTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ProductsTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=SettingsTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=PluginsTableSeeder
+RUN cd /var/www/html;php artisan db:seed --no-interaction --class=ThemesTableSeeder
 
 COPY core/docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

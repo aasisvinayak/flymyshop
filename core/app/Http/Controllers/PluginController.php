@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Plugin;
 use App\Http\Requests\PluginRequest;
 use Flymyshop\Helpers\PluginHelper;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class PluginController extends Controller
      */
     public function index()
     {
-        return view('admin/plugins/list');
+        $plugins= Plugin::paginate(10);
+        return view('admin/plugins/list', compact('plugins'));
     }
 
 
