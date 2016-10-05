@@ -1,7 +1,5 @@
 <?php
 
-// var_dump( env('DB_CONNECTION'));
-
 Route::get('install', 'InstallController@index');
 Route::post('install', 'InstallController@installShop');
 Route::get('install/step-2', 'InstallController@postInstall');
@@ -104,9 +102,12 @@ Route::group(
                 Route::get('/plugin_list', 'PluginController@pluginList');
                 Route::get('/add_plugin', 'PluginController@addNewPlugin');
                 Route::post('/add_plugin', 'PluginController@processAddPlugin');
+                Route::post('/change_plugin_status', 'PluginController@changePluginStatus');
+                Route::post('/delete_plugin', 'PluginController@deletePlugin');
                 Route::get('/themes', 'ThemeController@index');
                 Route::get('/add_theme', 'ThemeController@addNewTheme');
                 Route::post('/add_theme', 'ThemeController@processAddTheme');
+                Route::post('/delete_plugin', 'ThemeController@deleteTheme');
             }
         );
 

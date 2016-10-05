@@ -2,6 +2,7 @@
 
 namespace Flymyshop\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 /**
@@ -25,5 +26,15 @@ class PluginHelper
         }
 
         return $plugins;
+    }
+
+    /**
+     * Return array of enabled plugins!
+     *
+     * @return mixed
+     */
+    public function getEnabledPlugins()
+    {
+        return DB::table('plugins')->select('name')->where('status', '=', 1)->get();
     }
 }

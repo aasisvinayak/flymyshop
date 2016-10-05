@@ -8,6 +8,7 @@ use Flymyshop\Helpers\PluginHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class PluginController.
@@ -27,7 +28,7 @@ class PluginController extends Controller
      */
     public function index()
     {
-        $plugins= Plugin::paginate(10);
+        $plugins = Plugin::paginate(10);
         return view('admin/plugins/list', compact('plugins'));
     }
 
@@ -71,8 +72,7 @@ class PluginController extends Controller
 
             $contents = file_get_contents($url);
             $bytes_written = File::put($zipFile, $contents);
-            if ($bytes_written === false)
-            {
+            if ($bytes_written === false) {
                 die("Failed to install. Please check that Flymyshop has write permissions!");
             }
 
@@ -80,23 +80,49 @@ class PluginController extends Controller
 
             $zip = new \ZipArchive;
             if ($zip->open($zipFile) === TRUE) {
-                for($i = 0; $i < $zip->numFiles; $i++) {
+                for ($i = 0; $i < $zip->numFiles; $i++) {
                     $filename = $zip->getNameIndex($i);
                     $fileinfo = pathinfo($filename);
-                    copy("zip://".$zipFile."#".$filename, $destFolder.$fileinfo['basename']);
+                    copy("zip://" . $zipFile . "#" . $filename, $destFolder . $fileinfo['basename']);
                 }
                 $zip->close();
 
                 File::delete($zipFile);
 
+                $ymlContent=File::get($destFolder."plugin.yml");
+                $pluginYaml= Yaml::parse($ymlContent);
+
+                $plugin=  Plugin::create(
+                    array(
+                        'name' => $pluginYaml['plugin_name'],
+                        'plugin_version' => $pluginYaml['plugin_version'],
+                        'plugin_author' => $pluginYaml['plugin_author'],
+                        'plugin_support_email' => $pluginYaml['plugin_support_email'],
+                        'plugin_description' => $pluginYaml['plugin_description'],
+                        'plugin_table' => "",
+                        'plugin_config' => ""
+                    )
+                );
+
+                $plugin->status = 1;
+                $plugin->save();
+
+                $request->session()->flash('alert-success', 'Installed and enabled plugin!');
+
+
+
             } else {
-                echo 'Failed to install. Please check that Flymyshop has write permissions!';
+
+                $request->session()->flash('alert-danger', 'Failed to install. Please check that Flymyshop has write permissions!');
             }
 
 
         } else {
-            echo "You have already installed this plugin!";
+            $request->session()->flash('alert-danger', 'You have already installed this plugin!!');
+
         }
+
+        return redirect('/admin/plugins');
 
     }
 
@@ -107,16 +133,34 @@ class PluginController extends Controller
      */
     public function deletePlugin(Request $request)
     {
-        $pluginName=$request->get('name');
-        File::deleteDirectory(base_path('flymyshop/plugins/'.$pluginName));
+        $plugin = Plugin::findorFail($request->get('id'));
+        File::deleteDirectory(base_path('flymyshop/plugins/' . $plugin->name));
+        $plugin->delete();
+        $request->session()->flash('alert-success', 'Plugin deleted!');
+
+        return redirect('/admin/plugins');
     }
 
-    public function enablePlugin()
+    /**
+     * Toggle status of the plugin
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function changePluginStatus(Request $request)
     {
-    }
+        $plugin = Plugin::findorFail($request->get('id'));
+        $plugin->update(
+            array(
+                'status' => (int)$request->get('status'),
+            )
+        );
 
-    public function disablePlugin()
-    {
+        (int)$request->get('status') == 1? $status="enabled": $status="disbabled";
+        $request->session()->flash('alert-success', 'Plugin status '.$status);
+
+        return redirect('/admin/plugins');
     }
 
 

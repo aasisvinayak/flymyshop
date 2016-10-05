@@ -81,19 +81,32 @@
             {{Form::label($settings[15]['title'],'Website URL')}}
             {{Form::text($settings[15]['title'],$settings[15]['value'],array('class'=>'form-control'))}}
 
-            {{Form::label($settings[16]['title'],'THEME_FOLDER')}}
-            {{Form::text($settings[16]['title'],$settings[16]['value'],array('class'=>'form-control'))}}
+            {{Form::label($settings[16]['title'],'Shop Theme')}}
+{{--            {{Form::text($settings[16]['title'],$settings[16]['value'],array('class'=>'form-control'))}}--}}
+
+            <?php
+
+                $options=array();
+                foreach (fms_themes() as $theme){
+                    $options[$theme]=$theme;
+                }
 
 
-            {{Form::label($settings[17]['title'],'TAX_RATE')}}
+            ?>
+
+            {{ Form::select($settings[16]['title'], $options, null,array('class'=>'form-control'))}}
+
+
+
+            {{Form::label($settings[17]['title'],'Tax Rate')}}
             {{Form::text($settings[17]['title'],$settings[17]['value'],array('class'=>'form-control'))}}
 
 
-            {{Form::label($settings[18]['title'],'CURRENCY_SYMBOL')}}
+            {{Form::label($settings[18]['title'],'Currency Symbol')}}
             {{Form::text($settings[18]['title'],$settings[18]['value'],array('class'=>'form-control'))}}
 
 
-            {{Form::label($settings[19]['title'],'SHIPPING_CHARGE')}}
+            {{Form::label($settings[19]['title'],'Shipping/Delivery Charge')}}
             {{Form::text($settings[19]['title'],$settings[19]['value'],array('class'=>'form-control'))}}
 
 
@@ -103,13 +116,13 @@
             <h2>Marketing Settings</h2>
 
 
-            {{Form::label($settings[20]['title'],'SPARKPOST_SECRET')}}
+            {{Form::label($settings[20]['title'],'SPARKPOST SECRET')}}
             {{Form::text($settings[20]['title'],$settings[20]['value'],array('class'=>'form-control'))}}
 
-            {{Form::label($settings[21]['title'],'MAILCHIMP_APIKEY')}}
+            {{Form::label($settings[21]['title'],'MAILCHIMP APIKEY')}}
             {{Form::text($settings[21]['title'],$settings[21]['value'],array('class'=>'form-control'))}}
 
-            {{Form::label($settings[22]['title'],'MAILCHIMP_LIST_ID')}}
+            {{Form::label($settings[22]['title'],'MAILCHIMP LIST ID')}}
             {{Form::text($settings[22]['title'],$settings[22]['value'],array('class'=>'form-control'))}}
 
 

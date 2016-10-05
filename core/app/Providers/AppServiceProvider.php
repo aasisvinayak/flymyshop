@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Flymyshop\Core\EnablePlugins;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,9 +29,13 @@ class AppServiceProvider extends ServiceProvider
             return 'files';
         });
 
-        new EnablePlugins();
+
+        if (Schema::hasTable('plugins')) {
+            new EnablePlugins();
+        }
+
     }
 }
 
-require base_path().'/flymyshop/functions.php';
-require base_path().'/flymyshop/hooks.php';
+require base_path() . '/flymyshop/functions.php';
+require base_path() . '/flymyshop/hooks.php';

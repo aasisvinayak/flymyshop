@@ -30,4 +30,5 @@ script:
   - php artisan db:seed --no-interaction --class=PluginsTableSeeder
   - php artisan db:seed --no-interaction --class=ThemesTableSeeder
   - php artisan serve --port=8000 --host=localhost &
+  - cd core
   - vendor/bin/phpunit

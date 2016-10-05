@@ -12,7 +12,7 @@ class ThemesTableSeeder extends Seeder
     public function run()
     {
         DB::table('themes')->insert([
-            'name'    => 'Default',
+            'name'    => 'default',
             'theme_version'    => '0.3',
             'theme_description'    => 'Vue based theme for FlyMyShop',
             'theme_author'    => 'acev',
@@ -20,7 +20,7 @@ class ThemesTableSeeder extends Seeder
         ]);
 
         DB::table('themes')->insert([
-            'name'    => 'Vue',
+            'name'    => 'vue',
             'theme_version'    => '0.1',
             'theme_description'    => 'The default theme for FlyMyShop',
             'theme_author'    => 'acev',

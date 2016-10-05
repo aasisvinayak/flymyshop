@@ -1,7 +1,6 @@
 <?php
 
 namespace Flymyshop\Core;
-
 use Flymyshop\Containers\HookContainer;
 use Flymyshop\Helpers\PluginHelper;
 
@@ -16,11 +15,14 @@ class EnablePlugins
      */
     public function __construct()
     {
+
         $hookContainer = HookContainer::instance(); // getting HookContainer instance
         $pluginNames = new PluginHelper(); // getting list of all plugins
-        $plugins = $pluginNames->getPluginNames();
+        $plugins = $pluginNames->getEnabledPlugins();
+
         foreach ($plugins as $plugin) {
-            $reflector = new \ReflectionClass('Flymyshop\Plugins\\'.$plugin.'\\'.$plugin);
+            $plugin=(array)$plugin;
+            $reflector = new \ReflectionClass('Flymyshop\Plugins\\'.$plugin['name'].'\\'.$plugin['name']);
             $main = $reflector->getMethod('main');
             $methods = $reflector->getMethods();
             foreach ($methods as $method) {

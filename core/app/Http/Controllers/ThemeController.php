@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Models\Theme;
 use Flymyshop\Helpers\ApplicationHelper;
 use Flymyshop\Helpers\ThemeHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class ThemeController.
@@ -20,12 +22,22 @@ class ThemeController extends Controller
 
     use ApplicationHelper;
 
-
+    /**
+     * List of themes.
+     *
+     * @return mixed
+     */
     public function index()
     {
-
-        return view('admin/themes/list');
+        $themes = Theme::paginate(10);
+        return view('admin/themes/list', compact('themes'));
     }
+
+    /**
+     * Form to add a new theme.
+     *
+     * @return mixed
+     */
     public function addNewTheme()
     {
         return view('admin/themes/add');
@@ -81,32 +93,58 @@ class ThemeController extends Controller
                 File::deleteDirectory(public_path('themes/').$unzipDirName);
                 File::delete($zipFile);
 
+                $ymlContent=File::get($destFolder."/theme.yaml");
+                $pluginYaml= Yaml::parse($ymlContent);
+
+                $theme=  Theme::create(
+                    array(
+                        'name' => $pluginYaml['theme_name'],
+                        'theme_version' => $pluginYaml['theme_version'],
+                        'theme_author' => $pluginYaml['theme_description'],
+                        'theme_description' => $pluginYaml['theme_author'],
+                    )
+                );
+
+                $theme->status = 0;
+                $theme->save();
+                $request->session()->flash('alert-success', 'Theme installed successfully!');
+
+                return redirect('/admin/themes');
+
             } else {
-                echo 'Failed to install. Please check that FlyMyShop has write permissions!';
+                $request->session()->flash('alert-danger', 'Failed to install. Please check that FlyMyShop has write permissions!');
             }
 
 
         } else {
-            echo "You have already installed this theme!";
+            $request->session()->flash('alert-danger', 'You have already installed this theme!');
         }
     }
 
-    public function enableTheme()
+
+    /**
+     * Delete an existing theme
+     * DB entry and files are deleted
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteTheme(Request $request)
     {
+        $theme = Theme::findorFail($request->get('id'));
+        File::deleteDirectory(public_path('themes/' . $theme->name));
+        $theme->delete();
+        $request->session()->flash('alert-success', 'Theme deleted!');
+
+        return redirect('/admin/themes');
     }
 
-    public function disableTheme()
-    {
-    }
-
-    public function deleteTheme()
-    {
-    }
-
-    public function themes()
-    {
-    }
-
+    /**
+     * Check whether the theme exists by scanning the theme folder.
+     *
+     * @param $name
+     * @return bool
+     */
     public function checkThemeExists($name)
     {
         $themeHelper = new ThemeHelper();

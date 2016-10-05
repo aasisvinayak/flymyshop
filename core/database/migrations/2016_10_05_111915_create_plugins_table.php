@@ -16,7 +16,7 @@ class CreatePluginsTable extends Migration
             $table->increments('id');
             $table->string('name', 255);
             $table->string('plugin_version', 255)->nullable();
-            $table->string('author_name', 255)->nullable();
+            $table->string('plugin_author', 255)->nullable();
             $table->string('plugin_support_email', 255)->nullable();
             $table->string('plugin_description', 255)->nullable();
             $table->string('plugin_table', 255)->nullable();
