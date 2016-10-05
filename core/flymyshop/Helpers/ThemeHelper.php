@@ -5,7 +5,7 @@ namespace Flymyshop\Helpers;
 use Illuminate\Support\Facades\File;
 
 /**
- * Theme PluginHelper
+ * Theme PluginHelper.
  *
  * Helper class for themes and controllers.
  */
@@ -19,8 +19,8 @@ class ThemeHelper
     public function getThemes()
     {
         $themeList = File::directories(public_path('/themes/'));
-        $themes= [];
-        
+        $themes = [];
+
         foreach ($themeList as $theme) {
             array_push($themes, ucfirst(basename($theme)));
         }

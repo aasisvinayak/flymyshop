@@ -33,9 +33,8 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('plugins')) {
             new EnablePlugins();
         }
-
     }
 }
 
-require base_path() . '/flymyshop/functions.php';
-require base_path() . '/flymyshop/hooks.php';
+require base_path().'/flymyshop/functions.php';
+require base_path().'/flymyshop/hooks.php';

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Models\Theme;
 use Flymyshop\Helpers\ApplicationHelper;
 use Flymyshop\Helpers\ThemeHelper;
@@ -19,7 +20,6 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ThemeController extends Controller
 {
-
     use ApplicationHelper;
 
     /**
@@ -30,6 +30,7 @@ class ThemeController extends Controller
     public function index()
     {
         $themes = Theme::paginate(10);
+
         return view('admin/themes/list', compact('themes'));
     }
 
@@ -44,15 +45,14 @@ class ThemeController extends Controller
     }
 
     /**
-     *
-     * //TODO: reuse code
+     * //TODO: reuse code.
      *
      * @param Request $request
      */
     public function processAddTheme(Request $request)
     {
-        $url = (string)$request->get('url');
-        $zipURL = $url . "/archive/master.zip";
+        $url = (string) $request->get('url');
+        $zipURL = $url.'/archive/master.zip';
         $urlParts = (explode('/', $url));
         $gitName = end($urlParts);
         if (strlen($gitName) < 1) {
@@ -62,47 +62,44 @@ class ThemeController extends Controller
         preg_match('/fms_(.*?)_theme/', $gitName, $pluginName);
 
         $fmsThemeNameArray = explode('_', $pluginName[1]);
-        $fmsThemeName = "";
+        $fmsThemeName = '';
 
         foreach ($fmsThemeNameArray as $namePart) {
-            $fmsThemeName = $fmsThemeName . ucfirst($namePart);
+            $fmsThemeName = $fmsThemeName.ucfirst($namePart);
         }
 
-        if (!$this->checkThemeExists($fmsThemeName)) {
-
-            $destFolder = public_path('themes/') . $fmsThemeName . "/";
+        if (! $this->checkThemeExists($fmsThemeName)) {
+            $destFolder = public_path('themes/').$fmsThemeName.'/';
             $url = $zipURL;
-            $zipFile = public_path('themes/' . $fmsThemeName . '.zip');
+            $zipFile = public_path('themes/'.$fmsThemeName.'.zip');
 
             $contents = file_get_contents($url);
             $bytes_written = File::put($zipFile, $contents);
-            if ($bytes_written === false)
-            {
-                die("Failed to install. Please check that FlyMyShop has write permissions!");
+            if ($bytes_written === false) {
+                die('Failed to install. Please check that FlyMyShop has write permissions!');
             }
 
             File::makeDirectory($destFolder);
 
             $zip = new \ZipArchive;
-            if ($zip->open($zipFile) === TRUE) {
-
+            if ($zip->open($zipFile) === true) {
                 $zip->extractTo(public_path('themes/'));
-                $unzipDirName= trim($zip->getNameIndex(0), '/');
+                $unzipDirName = trim($zip->getNameIndex(0), '/');
                 $zip->close();
                 File::copyDirectory(public_path('themes/').$unzipDirName, $destFolder);
                 File::deleteDirectory(public_path('themes/').$unzipDirName);
                 File::delete($zipFile);
 
-                $ymlContent=File::get($destFolder."/theme.yaml");
-                $pluginYaml= Yaml::parse($ymlContent);
+                $ymlContent = File::get($destFolder.'/theme.yaml');
+                $pluginYaml = Yaml::parse($ymlContent);
 
-                $theme=  Theme::create(
-                    array(
+                $theme = Theme::create(
+                    [
                         'name' => $pluginYaml['theme_name'],
                         'theme_version' => $pluginYaml['theme_version'],
                         'theme_author' => $pluginYaml['theme_description'],
                         'theme_description' => $pluginYaml['theme_author'],
-                    )
+                    ]
                 );
 
                 $theme->status = 0;
@@ -110,21 +107,17 @@ class ThemeController extends Controller
                 $request->session()->flash('alert-success', 'Theme installed successfully!');
 
                 return redirect('/admin/themes');
-
             } else {
                 $request->session()->flash('alert-danger', 'Failed to install. Please check that FlyMyShop has write permissions!');
             }
-
-
         } else {
             $request->session()->flash('alert-danger', 'You have already installed this theme!');
         }
     }
 
-
     /**
      * Delete an existing theme
-     * DB entry and files are deleted
+     * DB entry and files are deleted.
      *
      * @param Request $request
      * @return mixed
@@ -132,7 +125,7 @@ class ThemeController extends Controller
     public function deleteTheme(Request $request)
     {
         $theme = Theme::findorFail($request->get('id'));
-        File::deleteDirectory(public_path('themes/' . $theme->name));
+        File::deleteDirectory(public_path('themes/'.$theme->name));
         $theme->delete();
         $request->session()->flash('alert-success', 'Theme deleted!');
 
@@ -149,7 +142,7 @@ class ThemeController extends Controller
     {
         $themeHelper = new ThemeHelper();
         $themes = $themeHelper->getThemes();
-        return (in_array($name, $themes)) ? true : false;
 
+        return (in_array($name, $themes)) ? true : false;
     }
 }

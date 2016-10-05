@@ -29,15 +29,14 @@ class PluginController extends Controller
     public function index()
     {
         $plugins = Plugin::paginate(10);
+
         return view('admin/plugins/list', compact('plugins'));
     }
-
 
     public function addNewPlugin()
     {
         return view('admin/plugins/add');
     }
-
 
     /**
      * Fetch the master.zip from github and add to the plugin directory.
@@ -47,8 +46,8 @@ class PluginController extends Controller
      */
     public function processAddPlugin(PluginRequest $request)
     {
-        $url = (string)$request->get('url');
-        $zipURL = $url . "/archive/master.zip";
+        $url = (string) $request->get('url');
+        $zipURL = $url.'/archive/master.zip';
         $urlParts = (explode('/', $url));
         $gitName = end($urlParts);
         if (strlen($gitName) < 1) {
@@ -58,83 +57,74 @@ class PluginController extends Controller
         preg_match('/fms_(.*?)_plugin/', $gitName, $pluginName);
 
         $fmsPluginNameArray = explode('_', $pluginName[1]);
-        $fmsPluginName = "";
+        $fmsPluginName = '';
 
         foreach ($fmsPluginNameArray as $namePart) {
-            $fmsPluginName = $fmsPluginName . ucfirst($namePart);
+            $fmsPluginName = $fmsPluginName.ucfirst($namePart);
         }
 
-        if (!$this->checkPluginExists($fmsPluginName)) {
-
-            $destFolder = base_path('flymyshop/plugins/') . $fmsPluginName . "/";
+        if (! $this->checkPluginExists($fmsPluginName)) {
+            $destFolder = base_path('flymyshop/plugins/').$fmsPluginName.'/';
             $url = $zipURL;
-            $zipFile = base_path('flymyshop/plugins/' . $fmsPluginName . '.zip');
+            $zipFile = base_path('flymyshop/plugins/'.$fmsPluginName.'.zip');
 
             $contents = file_get_contents($url);
             $bytes_written = File::put($zipFile, $contents);
             if ($bytes_written === false) {
-                die("Failed to install. Please check that Flymyshop has write permissions!");
+                die('Failed to install. Please check that Flymyshop has write permissions!');
             }
 
             File::makeDirectory($destFolder);
 
             $zip = new \ZipArchive;
-            if ($zip->open($zipFile) === TRUE) {
+            if ($zip->open($zipFile) === true) {
                 for ($i = 0; $i < $zip->numFiles; $i++) {
                     $filename = $zip->getNameIndex($i);
                     $fileinfo = pathinfo($filename);
-                    copy("zip://" . $zipFile . "#" . $filename, $destFolder . $fileinfo['basename']);
+                    copy('zip://'.$zipFile.'#'.$filename, $destFolder.$fileinfo['basename']);
                 }
                 $zip->close();
 
                 File::delete($zipFile);
 
-                $ymlContent=File::get($destFolder."plugin.yml");
-                $pluginYaml= Yaml::parse($ymlContent);
+                $ymlContent = File::get($destFolder.'plugin.yml');
+                $pluginYaml = Yaml::parse($ymlContent);
 
-                $plugin=  Plugin::create(
-                    array(
+                $plugin = Plugin::create(
+                    [
                         'name' => $pluginYaml['plugin_name'],
                         'plugin_version' => $pluginYaml['plugin_version'],
                         'plugin_author' => $pluginYaml['plugin_author'],
                         'plugin_support_email' => $pluginYaml['plugin_support_email'],
                         'plugin_description' => $pluginYaml['plugin_description'],
-                        'plugin_table' => "",
-                        'plugin_config' => ""
-                    )
+                        'plugin_table' => '',
+                        'plugin_config' => '',
+                    ]
                 );
 
                 $plugin->status = 1;
                 $plugin->save();
 
                 $request->session()->flash('alert-success', 'Installed and enabled plugin!');
-
-
-
             } else {
-
                 $request->session()->flash('alert-danger', 'Failed to install. Please check that Flymyshop has write permissions!');
             }
-
-
         } else {
             $request->session()->flash('alert-danger', 'You have already installed this plugin!!');
-
         }
 
         return redirect('/admin/plugins');
-
     }
 
     /**
-     * Delete an existing plugin
+     * Delete an existing plugin.
      *
      * @param Request $request
      */
     public function deletePlugin(Request $request)
     {
         $plugin = Plugin::findorFail($request->get('id'));
-        File::deleteDirectory(base_path('flymyshop/plugins/' . $plugin->name));
+        File::deleteDirectory(base_path('flymyshop/plugins/'.$plugin->name));
         $plugin->delete();
         $request->session()->flash('alert-success', 'Plugin deleted!');
 
@@ -142,7 +132,7 @@ class PluginController extends Controller
     }
 
     /**
-     * Toggle status of the plugin
+     * Toggle status of the plugin.
      *
      * @param Request $request
      *
@@ -152,20 +142,19 @@ class PluginController extends Controller
     {
         $plugin = Plugin::findorFail($request->get('id'));
         $plugin->update(
-            array(
-                'status' => (int)$request->get('status'),
-            )
+            [
+                'status' => (int) $request->get('status'),
+            ]
         );
 
-        (int)$request->get('status') == 1? $status="enabled": $status="disbabled";
+        (int) $request->get('status') == 1 ? $status = 'enabled' : $status = 'disbabled';
         $request->session()->flash('alert-success', 'Plugin status '.$status);
 
         return redirect('/admin/plugins');
     }
 
-
     /**
-     * Check plugin is already installed by looking for the directory
+     * Check plugin is already installed by looking for the directory.
      *
      * @param $name
      * @return bool
@@ -174,8 +163,8 @@ class PluginController extends Controller
     {
         $pluginHelper = new PluginHelper();
         $plugins = $pluginHelper->getPluginNames();
-        return (in_array($name, $plugins)) ? true : false;
 
+        return (in_array($name, $plugins)) ? true : false;
     }
 
     /**

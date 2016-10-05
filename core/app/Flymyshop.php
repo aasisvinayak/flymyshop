@@ -2,7 +2,6 @@
 
 namespace App;
 
-use RuntimeException;
 use Illuminate\Foundation\Application;
 
 /**
@@ -21,7 +20,7 @@ class Flymyshop extends Application
 
     /**
      * Over-ride function
-     * TODO: add checks
+     * TODO: add checks.
      *
      * @return string
      */
@@ -31,6 +30,6 @@ class Flymyshop extends Application
             return $this->namespace;
         }
 
-        $this->namespace = "App\\";
+        $this->namespace = 'App\\';
     }
 }

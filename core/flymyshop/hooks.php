@@ -3,14 +3,13 @@
 /**
  * Hook to modify the product object.
  * Called when a product is viewed.
- *
  */
 function productHook()
 {
 }
 
 /**
- * interrupting productHook
+ * interrupting productHook.
  */
 function i_productHook()
 {
@@ -38,7 +37,7 @@ function orderHook(\App\Http\Models\Invoice $order)
 }
 
 /**
- * Interrupting order hook
+ * Interrupting order hook.
  *
  * @param \App\Http\Models\Invoice $order
  */
@@ -80,6 +79,3 @@ function pageHook(\App\Http\Models\Page $page)
 function menuHook()
 {
 }
-
-
-

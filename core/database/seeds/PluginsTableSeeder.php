@@ -43,7 +43,5 @@ class PluginsTableSeeder extends Seeder
             'plugin_config'    => '',
             'status'    => 1,
         ]);
-
-
     }
 }
