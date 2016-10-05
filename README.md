@@ -44,7 +44,7 @@ Documentation for the FlyMyShop can be found on the [official website](https://f
 
 Please follow the steps below to install FlyMyShop on your web server
 
-a. Download [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.2/flymyshop-v0.0.2.zip) file
+a. Download [this zip](https://github.com/aasisvinayak/flymyshop/releases/download/v0.0.3/flymyshop-v0.0.3.zip) file
 b. Unzip and upload to your server
 c. Visit the public folder
 d. Follow the instructions

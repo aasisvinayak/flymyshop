@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Flymyshop\Core\EnablePlugins;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,11 +31,15 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        if (Schema::hasTable('plugins')) {
-            new EnablePlugins();
+        if (DB::connection()->getDatabaseName()) {
+            if (Schema::hasTable('plugins')) {
+                new EnablePlugins();
+            }
         }
+
+
     }
 }
 
-require base_path().'/flymyshop/functions.php';
-require base_path().'/flymyshop/hooks.php';
+require base_path() . '/flymyshop/functions.php';
+require base_path() . '/flymyshop/hooks.php';
