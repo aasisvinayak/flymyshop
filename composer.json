@@ -48,8 +48,8 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@composer update",
             "php -r \"copy('core/.env.example', 'core/.env');\"",
+            "@composer update",
             "php artisan key:generate",
             "php artisan migrate",
             "php artisan db:seed --no-interaction --class=UsersTableSeeder",
@@ -62,6 +62,7 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php -r \"copy('core/.env.example', 'core/.env');\"",
             "php artisan optimize"
         ],
         "post-update-cmd": [
